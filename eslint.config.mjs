@@ -1,4 +1,3 @@
-import eslintConfigPrettier from "eslint-config-prettier/flat";
 import perfectionist from "eslint-plugin-perfectionist";
 import { FlatCompat } from "@eslint/eslintrc";
 import tseslint from "typescript-eslint";
@@ -18,8 +17,7 @@ const eslintConfig = [
   react.configs.flat.recommended,
   react.configs.flat["jsx-runtime"],
   perfectionist.configs["recommended-line-length"],
-  eslintConfigPrettier,
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
   {
     rules: {
       "@typescript-eslint/no-unused-vars": [
