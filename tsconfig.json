@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -19,16 +20,15 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/app/*"],
-      "@api/*": ["./src/api/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/components/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@custom-types/*": ["./src/types/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@public/*": ["./public/*"],
-      "@store/*": ["./src/store/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@app/*": ["app/*"],
+      "@api/*": ["api/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@custom-types/*": ["types/*"],
+      "@hooks/*": ["hooks/*"],
+      "@store/*": ["store/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
