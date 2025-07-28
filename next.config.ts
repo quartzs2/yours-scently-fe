@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
         rule.test instanceof RegExp && rule.test.test?.(".svg"),
     );
 
+    if (!fileLoaderRule) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        "SVG file loader rule not found. SVG imports may not be processed correctly.",
+      );
+      return config;
+    }
+
     config.module.rules.push(
       // Reapply the existing rule, but only for svg imports ending in ?url
       {
