@@ -26,9 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html className={suit.className} lang="ko">
-      <Header />
-      <body>{children}</body>
-      <Footer />
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
