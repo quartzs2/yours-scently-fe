@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="h-[322px] bg-[#4F555E] px-[320px] py-[80px] text-sm text-white">
+    <footer className="h-[322px] bg-[#4F555E] px-[320px] py-[80px] text-sm">
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row">
         {/* 왼쪽: 로고 및 아이콘 */}
         <div className="space-y-6">
@@ -19,22 +19,22 @@ export default function Footer() {
           {/* SNS 아이콘 */}
           <div className="mt-[56px] flex gap-4">
             <IconButton
-              iconClassName="text-[#FAFAFA]"
+              iconClassName="text-bg-default"
               aria-label="kakao"
               As={KakaoLogo}
             />
             <IconButton
-              iconClassName="text-[#FAFAFA]"
+              iconClassName="text-bg-default"
               aria-label="blog"
               As={BlogLogo}
             />
             <IconButton
-              iconClassName="text-[#FAFAFA]"
+              iconClassName="text-bg-default"
               aria-label="youtube"
               As={YoutubeLogo}
             />
             <IconButton
-              iconClassName="text-[#FAFAFA]"
+              iconClassName="text-bg-default"
               aria-label="instagram"
               As={InstagramLogo}
             />
@@ -42,9 +42,9 @@ export default function Footer() {
         </div>
 
         {/* 오른쪽: 텍스트 정보 */}
-        <div className="space-y-4 text-sm text-gray-200">
+        <div className="text-button-1 space-y-4 text-bg-default">
           {/* 링크 */}
-          <div className="flex flex-wrap gap-6 font-medium">
+          <div className="flex flex-wrap gap-6">
             <Link className="hover:underline" href="#">
               개인정보처리방침
             </Link>
@@ -57,7 +57,7 @@ export default function Footer() {
           </div>
 
           {/* 회사 정보 */}
-          <div className="mt-[73.5px] space-y-1 text-gray-300">
+          <div className="text-button-1 mt-[73.5px] space-y-1 text-bg-default">
             <p>
               대표자: 임재민 | 사업자 등록번호: 123-45-67891 | 통신판매업
               신고번호: 2020-경기판교-37256
