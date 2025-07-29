@@ -1,6 +1,6 @@
 import { Search, LogIn, Menu } from "lucide-react";
 import IconButton from "@components/ui/IconButton";
-import Logo from "@assets/logo.svg";
+import Logo from "@assets/logo/logo-gray.svg";
 import Link from "next/link";
 
 const Header = () => {

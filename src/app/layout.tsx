@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import Header from "@components/common/Header";
 import "@app/globals.css";
+import Footer from "@components/common/Footer";
 import localFont from "next/font/local";
 
 export const metadata: Metadata = {
@@ -25,10 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html className={suit.className} lang="ko">
-      <body>
-        <Header />
-        {children}
-      </body>
+      <Header />
+      <body>{children}</body>
+      <Footer />
     </html>
   );
 }
