@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-main: #4f555e;
+  --color-primary-Light: #72777F;
+  --color-primary-Dark: #2F333A;
+
+  --color-secondary-main: #A27CB2;
+  --color-secondary-Light: #BC9FD0;
+  --color-secondary-Dark: #865F97;
+
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #5C5C5C;
+  --color-text-disabled: #B0B0B0;
+
+  --color-bg-default: #FAFAFA;
+  --color-bg-subtle: #F5F5F5;
+  --color-bg-overlay: #1A1A1A50;
+
+  --color-border-default: #CBCBCB;
+
+  --color-system-error: #E53935;
+  --color-system-warning: #F9A825;
+  --color-system-success: #43A047;
+  --color-system-info: #1E88E5;
+}
+
+
+@layer components {
+  .h1-weight-700 {
+    @apply font-bold text-[6rem] leading-[1.6] tracking-[-0.03em];
+  }
+  .h2-weight-700 {
+    @apply font-bold text-[3.5rem] leading-[1.6] tracking-[-0.03em];
+  }
+  .h3-weight-700 {
+    @apply font-suit font-bold text-[3rem] leading-[1.4] tracking-[-0.03em];
+  }
+  .h4-weight-600 {
+    @apply font-suit font-semibold text-[2.5rem] leading-[1.4] tracking-[-0.03em];
+  }
+  .subTitle1-weight-500 {
+    @apply font-suit font-medium text-[2rem] leading-[1.4] tracking-[-0.03em];
+  }
+  .subTitle2-weight-500 {
+    @apply font-suit font-medium text-[1.5rem] leading-[1.4] tracking-[-0.03em];
+  }
+  .body1-weight-400 {
+    @apply font-suit font-normal text-[1.5rem] leading-[1.3] tracking-[-0.03em];
+  }
+  .body2-weight-400 {
+    @apply font-suit font-normal text-[0.875rem] leading-[1.2] tracking-[-0.03em];
+  }
+  .button1-weight-500 {
+    @apply font-suit font-medium text-[1rem] leading-[1.3] tracking-[-0.03em];
+  }
+  .button2-weight-500 {
+    @apply font-suit font-normal text-[0.875rem] leading-[1.3] tracking-[-0.03em];
+  }
+  .Caption-weight-300 {
+    @apply font-suit font-light text-[0.75rem] leading-[1.2] tracking-[-0.03em];
+  }
+  .Overline-weight-300 {
+    @apply font-suit font-light text-[0.625rem] leading-[1.2] tracking-[-0.03em];
+  }
+}
