@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="h-[322px] bg-[#4F555E] px-[320px] py-[80px] text-sm">
+    <footer className="h-[322px] bg-[#4F555E] px-[320px] py-[80px]">
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row">
         {/* 왼쪽: 로고 및 아이콘 */}
         <div className="space-y-6">
@@ -45,19 +45,22 @@ export default function Footer() {
         <div className="text-button-1 space-y-4 text-bg-default">
           {/* 링크 */}
           <div className="flex flex-wrap gap-6">
-            <Link className="hover:underline" href="#">
+            {/* TODO: 나중에 실제 링크 추가 */}
+            <Link className="hover:underline" href="/">
               개인정보처리방침
             </Link>
-            <Link className="hover:underline" href="#">
+            {/* TODO: 나중에 실제 링크 추가 */}
+            <Link className="hover:underline" href="/">
               이용약관
             </Link>
-            <Link className="hover:underline" href="#">
+            {/* TODO: 나중에 실제 링크 추가 */}
+            <Link className="hover:underline" href="/">
               고객센터
             </Link>
           </div>
 
           {/* 회사 정보 */}
-          <div className="text-button-1 mt-[73.5px] space-y-1 text-bg-default">
+          <div className="text-button-1 mt-[73.5px] space-y-1">
             <p>
               대표자: 임재민 | 사업자 등록번호: 123-45-67891 | 통신판매업
               신고번호: 2020-경기판교-37256
