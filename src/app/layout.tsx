@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
-import localFont from "next/font/local";
+import Header from "@components/common/Header";
 import "@app/globals.css";
+import localFont from "next/font/local";
 
 export const metadata: Metadata = {
   description: "취향에 맞는 향수를 추천해주는 향수 쇼핑몰",
@@ -23,8 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={suit.className} lang="en">
-      <body>{children}</body>
+    <html className={suit.className} lang="ko">
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
