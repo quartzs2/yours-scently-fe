@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
 @theme {
+  /* 높이 값 */
+  --height-header: 80px;
+
+  /* 너비 값 */
+  --width-container: 1280px;
+  --width-container-md: 1024px;
+  --width-container-sm: 768px;
+
+  /* 색상 값 */
   --color-primary-main: #4f555e;
 }

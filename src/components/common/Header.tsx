@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="flex h-[80px] items-center justify-center">
-      <div className="flex w-[1280px] items-center justify-between">
+    <header className="flex h-[var(--height-header)] items-center justify-center">
+      <div className="flex w-full max-w-[var(--width-container)] items-center justify-between sm:max-w-[var(--width-container-sm)] md:max-w-[var(--width-container-md)]">
         {/* 헤더 좌측 섹션 */}
         <IconButton
           iconClassName="text-primary-main"
@@ -21,25 +21,14 @@ const Header = () => {
           {/* 헤더 우측 섹션 */}
           <IconButton
             iconClassName="text-primary-main"
-            aria-label="로그인"
-            As={LogIn}
-          />
-          <IconButton
-            iconClassName="text-primary-main"
             aria-label="검색"
             As={Search}
           />
-
-          {/* <IconButton
-            iconClassName="text-primary-main"
-            As={ShoppingCart}
-            aria-label="장바구니"
-          />
           <IconButton
             iconClassName="text-primary-main"
-            aria-label="마이페이지"
-            As={CircleUser}
-          /> */}
+            aria-label="로그인"
+            As={LogIn}
+          />
         </div>
       </div>
     </header>

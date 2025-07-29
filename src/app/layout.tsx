@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={suit.className} lang="en">
+    <html className={suit.className} lang="ko">
       <body>
         <Header />
         {children}
