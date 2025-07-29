@@ -38,7 +38,10 @@ const IconButton = ({
 
   return (
     <button
-      className={cn("flex items-center justify-center", className)}
+      className={cn(
+        "flex cursor-pointer items-center justify-center",
+        className,
+      )}
       aria-label={ariaLabel}
       onClick={onClick}
       ref={ref}
