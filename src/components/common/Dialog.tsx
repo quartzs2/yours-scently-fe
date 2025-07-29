@@ -1,23 +1,23 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Z_INDEX } from "@constants/zIndex";
 import { cn } from "@utils/cn";
 
 type DialogProps = {
   children: React.ReactNode;
+  onClose?: () => void;
   isOverlay?: boolean;
   className?: string;
   zIndex?: number;
 };
 
 /**
- * 다이얼로그 컴포넌트
+ * Dialog 컴포넌트
  * @param isOverlay - 배경 오버레이 표시 여부
- * @param className - 다이얼로그 컴포넌트의 클래스 이름
- * @param children - 다이얼로그 컴포넌트의 자식 요소
+ * @param className - Dialog 컴포넌트의 클래스 이름
+ * @param children - Dialog 컴포넌트의 자식 요소
  *
- * @returns 다이얼로그 컴포넌트
+ * @returns Dialog 컴포넌트
  *
  * @example
  * <Dialog>
@@ -31,12 +31,11 @@ const Dialog = ({
   isOverlay = true,
   className,
   children,
+  onClose,
 }: DialogProps) => {
-  const router = useRouter();
-
   const handleDismiss = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      router.back();
+      onClose?.();
     }
   };
 
@@ -50,7 +49,13 @@ const Dialog = ({
       }}
       onClick={handleDismiss}
     >
-      <div className={cn("rounded-lg bg-white p-4", className)}>{children}</div>
+      <div
+        className={cn("rounded-lg bg-white p-4", className)}
+        aria-modal="true"
+        role="dialog"
+      >
+        {children}
+      </div>
     </div>
   );
 };
