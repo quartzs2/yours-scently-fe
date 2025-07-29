@@ -1,0 +1,74 @@
+import InstagramLogo from "@assets/icons/footer/icon-sns-instagram.svg";
+import YoutubeLogo from "@assets/icons/footer/icon-sns-youtube.svg";
+import KakaoLogo from "@assets/icons/footer/icon-sns-kakao.svg";
+import BlogLogo from "@assets/icons/footer/icon-sns-blog.svg";
+import IconButton from "@components/ui/IconButton";
+import Logo from "@assets/logo/logo-white.svg";
+import Link from "next/link";
+
+export default function Footer() {
+  return (
+    <footer className="h-[322px] bg-[#4F555E] px-[320px] py-[80px] text-sm text-white">
+      <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row">
+        {/* 왼쪽: 로고 및 아이콘 */}
+        <div className="space-y-6">
+          <Link href="/">
+            <Logo />
+          </Link>
+
+          {/* SNS 아이콘 */}
+          <div className="mt-[56px] flex gap-4">
+            <IconButton
+              iconClassName="text-[#FAFAFA]"
+              aria-label="kakao"
+              As={KakaoLogo}
+            />
+            <IconButton
+              iconClassName="text-[#FAFAFA]"
+              aria-label="blog"
+              As={BlogLogo}
+            />
+            <IconButton
+              iconClassName="text-[#FAFAFA]"
+              aria-label="youtube"
+              As={YoutubeLogo}
+            />
+            <IconButton
+              iconClassName="text-[#FAFAFA]"
+              aria-label="instagram"
+              As={InstagramLogo}
+            />
+          </div>
+        </div>
+
+        {/* 오른쪽: 텍스트 정보 */}
+        <div className="space-y-4 text-sm text-gray-200">
+          {/* 링크 */}
+          <div className="flex flex-wrap gap-6 font-medium">
+            <Link className="hover:underline" href="#">
+              개인정보처리방침
+            </Link>
+            <Link className="hover:underline" href="#">
+              이용약관
+            </Link>
+            <Link className="hover:underline" href="#">
+              고객센터
+            </Link>
+          </div>
+
+          {/* 회사 정보 */}
+          <div className="mt-[73.5px] space-y-1 text-gray-300">
+            <p>
+              대표자: 임재민 | 사업자 등록번호: 123-45-67891 | 통신판매업
+              신고번호: 2020-경기판교-37256
+            </p>
+            <p>
+              주소: 경기도 성남시 시흥동 27 201호 | 이메일:
+              kdigital@naturesm.co.kr | 전화: 070-4099-6219
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
