@@ -4,10 +4,14 @@ import { cn } from "@utils/cn";
 import React from "react";
 
 export type IconButtonProps = (
-  | (Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
+  | ({
+      ref?: React.RefObject<HTMLAnchorElement>;
       href: LinkProps["href"];
-    })
-  | (React.ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined })
+    } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">)
+  | ({
+      ref?: React.RefObject<HTMLButtonElement>;
+      href?: undefined;
+    } & React.ButtonHTMLAttributes<HTMLButtonElement>)
 ) &
   BaseProps;
 
@@ -27,6 +31,7 @@ type BaseProps = {
  * @param className - tailwind 클래스
  * @param As - 아이콘 컴포넌트
  * @param props - 버튼 속성
+ * @param ref - 버튼/링크 참조
  *
  * @example
  * 버튼으로 사용
@@ -41,6 +46,7 @@ const IconButton = ({
   className,
   iconSize,
   href,
+  ref,
   As,
   ...props
 }: IconButtonProps) => {
@@ -59,6 +65,7 @@ const IconButton = ({
         aria-label={ariaLabel}
         href={href}
         {...linkProps}
+        ref={ref as React.RefObject<HTMLAnchorElement>}
       >
         <Icon className={iconClassName} size={iconSize} As={As} />
       </Link>
@@ -73,6 +80,7 @@ const IconButton = ({
         "flex cursor-pointer items-center justify-center",
         className,
       )}
+      ref={ref as React.RefObject<HTMLButtonElement>}
       aria-label={ariaLabel}
       {...buttonProps}
     >
