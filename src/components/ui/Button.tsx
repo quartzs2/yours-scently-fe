@@ -53,16 +53,6 @@ const buttonStyles = cva(
   },
 );
 
-/**
- * @typedef  ButtonProps
- * @property  children - 버튼 내부에 렌더링될 내용 (텍스트, 아이콘 등).
- * @property  버튼의 크기를 정의합니다.
- * @property  버튼의 모서리 모양을 정의합니다.
- * @property 버튼의 시각적 테마를 정의합니다.
- * @property Tailwind CSS와 같은 추가적인 CSS 클래스를 적용합니다.
- * @property  버튼 DOM 요소에 대한 ref입니다.
- * @extends 모든 표준 HTML `<button>` 속성을 상속받습니다.
- */
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   ref?: React.Ref<HTMLButtonElement>;
 } & VariantProps<typeof buttonStyles>;
