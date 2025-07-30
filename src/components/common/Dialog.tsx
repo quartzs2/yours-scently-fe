@@ -50,7 +50,8 @@ const Dialog = ({
       onClick={handleDismiss}
     >
       <div
-        className={cn("rounded-lg bg-white p-4", className)}
+        className={cn("rounded-lg bg-white p-4 select-none", className)}
+        onClick={(e) => e.stopPropagation()}
         aria-modal="true"
         role="dialog"
       >
