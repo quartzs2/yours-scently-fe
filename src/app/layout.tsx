@@ -21,14 +21,18 @@ const suit = localFont({
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html className={suit.className} lang="ko">
       <body>
-        <Header />
+        {/* TODO: 로그인 상태 처리 로직 추가 후 수정 */}
+        <Header isLoggedIn={true} />
         {children}
+        {modal}
         <Footer />
       </body>
     </html>
