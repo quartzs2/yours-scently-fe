@@ -20,6 +20,7 @@ type BaseProps = {
   iconClassName?: string;
   "aria-label": string;
   As: IconProps["As"];
+  id?: string;
 };
 
 /**
@@ -47,6 +48,7 @@ const IconButton = ({
   iconSize,
   href,
   ref,
+  id,
   As,
   ...props
 }: IconButtonProps) => {
@@ -66,6 +68,7 @@ const IconButton = ({
         href={href}
         {...linkProps}
         ref={ref as React.RefObject<HTMLAnchorElement>}
+        id={id}
       >
         <Icon className={iconClassName} size={iconSize} As={As} />
       </Link>
@@ -82,6 +85,7 @@ const IconButton = ({
       )}
       ref={ref as React.RefObject<HTMLButtonElement>}
       aria-label={ariaLabel}
+      id={id}
       {...buttonProps}
     >
       <Icon className={iconClassName} size={iconSize} As={As} />
