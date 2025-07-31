@@ -20,6 +20,7 @@ type BaseProps = {
   iconClassName?: string;
   "aria-label": string;
   As: IconProps["As"];
+  id?: string;
 };
 
 /**
