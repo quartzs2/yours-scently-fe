@@ -24,7 +24,7 @@ import React from "react";
  */
 const buttonStyles = cva(
   // 기본 스타일: 인라인 플렉스, 중앙 정렬, 폰트 두께, 트랜지션, 비활성화 시 커서/투명도
-  "inline-flex items-center justify-center font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50",
+  "inline-flex cursor-pointer items-center justify-center font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       size: {

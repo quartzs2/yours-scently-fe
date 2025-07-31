@@ -1,5 +1,12 @@
-import { Search, LogIn, Menu } from "lucide-react";
+import {
+  CircleUserRound,
+  ShoppingCart,
+  Search,
+  LogIn,
+  Menu,
+} from "lucide-react";
 import IconButton from "@components/ui/IconButton";
+import { TRIGGER_ID } from "@constants/triggers";
 import Logo from "@assets/logo/logo-gray.svg";
 import { URLS } from "@constants/urls";
 import Link from "next/link";
@@ -26,13 +33,25 @@ const Header = ({ isLoggedIn }: HeaderProps) => {
         </Link>
         <div className="flex items-center gap-6">
           {/* 헤더 우측 섹션 */}
+          <IconButton
+            iconClassName={ICON_STYLE}
+            aria-label="ai 추천 검색"
+            href={URLS.AI_SEARCH}
+            As={Search}
+          />
           {isLoggedIn ? (
             <>
               <IconButton
                 iconClassName={ICON_STYLE}
-                aria-label="ai 추천 검색"
-                href={URLS.AI_SEARCH}
-                As={Search}
+                aria-label="장바구니"
+                As={ShoppingCart}
+              />
+              <IconButton
+                id={TRIGGER_ID.MY_PAGE_ICON_TRIGGER}
+                iconClassName={ICON_STYLE}
+                href={URLS.MY_PAGE_MODAL}
+                As={CircleUserRound}
+                aria-label="마이페이지"
               />
             </>
           ) : (

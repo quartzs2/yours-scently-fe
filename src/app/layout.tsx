@@ -21,9 +21,11 @@ const suit = localFont({
 
 export default function RootLayout({
   children,
+  subModal,
   modal,
 }: Readonly<{
   children: React.ReactNode;
+  subModal: React.ReactNode;
   modal: React.ReactNode;
 }>) {
   return (
@@ -33,6 +35,7 @@ export default function RootLayout({
         <Header isLoggedIn={true} />
         {children}
         {modal}
+        {subModal}
         <Footer />
       </body>
     </html>

@@ -4,6 +4,7 @@ import { Z_INDEX } from "@constants/zIndex";
 import { cn } from "@utils/cn";
 
 type DialogProps = {
+  style?: React.CSSProperties;
   children: React.ReactNode;
   onClose?: () => void;
   isOverlay?: boolean;
@@ -32,6 +33,7 @@ const Dialog = ({
   className,
   children,
   onClose,
+  style,
 }: DialogProps) => {
   const handleDismiss = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -54,6 +56,7 @@ const Dialog = ({
         onClick={(e) => e.stopPropagation()}
         aria-modal="true"
         role="dialog"
+        style={style}
       >
         {children}
       </div>
