@@ -26,7 +26,7 @@ export type ActionButtonProps = VariantProps<typeof actionButtonVariants> &
  * 선택 상태에 따라 스타일이 달라지는 버튼입니다.
  * 예: 필터 탭, 정렬 버튼 등에 사용됩니다.
  *
- * 전체석택, 선택삭제
+ * 전체선택, 선택삭제
  *
  * @param selected - 버튼이 선택된 상태인지 여부 (true/false)
  * @param text - 버튼에 표시할 텍스트
