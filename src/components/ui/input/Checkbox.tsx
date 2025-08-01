@@ -11,48 +11,70 @@ export type CheckboxProps = {
   id: string;
 };
 
+const checkboxTypeClasses: Record<string, string> = {
+  checkbox2:
+    "custom-checkbox rounded-full border-2 border-[var(--color-primary-main)] checked:bg-[var(--color-primary-main)]",
+  checkbox1:
+    "custom-checkbox rounded border-2 border-[var(--color-primary-main)] checked:bg-[var(--color-primary-main)]",
+  heart: "custom-heart-checkbox",
+} as const;
+
 /**
  * @example
  * // 부모 컴포넌트에서 Checkbox 컴포넌트를 사용하는 예시입니다.
  * // 아래 코드를 복사하여 바로 사용해볼 수 있습니다.
  *
- * const [isChecked, setIsChecked] = useState(false);
- * const [isLiked, setIsLiked] = useState(false);
+ * import { useState } from "react";
  *
- * * const handleCheckboxChange = (event) => {
- * setIsChecked(event.target.checked);
- * };
- * * const handleHeartChange = (event) => {
- * setIsLiked(event.target.checked);
- * };
+ * const ExampleCheckboxGroup = () => {
+ *   const [isChecked, setIsChecked] = useState(false);
+ *   const [isChecked2, setIsChecked2] = useState(false);
+ *   const [isLiked, setIsLiked] = useState(false);
  *
- * <Checkbox
- *   className="m-2 h-[24px] w-[24px]"
- *   onChange={handleCheckboxChange}
- *   checked={isChecked}
- *   type="checkbox1"
- *   label="약관에 동의합니다"
- *   name="name"
- *   id="id"
- * />
- * <Checkbox
- *   className="m-2 h-[24px] w-[24px]"
- *   onChange={handleCheckboxChange}
- *   checked={isChecked}
- *   type="checkbox2"
- *   label="약관에 동의합니다"
- *   name="name"
- *   id="id"
- * />
- * <Checkbox
- *   className="m-2 h-[24px] w-[24px]"
- *   onChange={handleCheckboxChange}
- *   checked={isChecked}
- *   label="찜하기" // 또는 없어도됨
- *   type="heart"
- *   name="name"
- *   id="id"
- * />
+ *   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+ *     setIsChecked(event.target.checked);
+ *   };
+ *
+ *   const handleCheckbox2Change = (event: React.ChangeEvent<HTMLInputElement>) => {
+ *     setIsChecked2(event.target.checked);
+ *   };
+ *
+ *   const handleHeartChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+ *     setIsLiked(event.target.checked);
+ *   };
+ *
+ *   return (
+ *     <>
+ *       <Checkbox
+ *         className="m-2 h-[24px] w-[24px]"
+ *         onChange={handleCheckboxChange}
+ *         checked={isChecked}
+ *         type="checkbox1"
+ *         label="약관에 동의합니다"
+ *         name="checkbox1"
+ *         id="checkbox1"
+ *       />
+ *       <Checkbox
+ *         className="m-2 h-[24px] w-[24px]"
+ *         onChange={handleCheckbox2Change}
+ *         checked={isChecked2}
+ *         type="checkbox2"
+ *         label="약관에 동의합니다"
+ *         name="checkbox2"
+ *         id="checkbox2"
+ *       />
+ *       <Checkbox
+ *         className="m-2 h-[24px] w-[24px]"
+ *         onChange={handleHeartChange}
+ *         checked={isLiked}
+ *         label="찜하기"
+ *         type="heart"
+ *         name="heart"
+ *         id="heart"
+ *       />
+ *     </>
+ *   );
+ * };
  */
 const Checkbox = ({
   labelClassName,
@@ -65,29 +87,25 @@ const Checkbox = ({
   id,
 }: CheckboxProps) => {
   return (
-    <>
-      <div className="flex items-center">
-        <input
-          className={cn(
-            "cursor-pointer appearance-none",
-            className,
-            type === "checkbox1" &&
-              "custom-checkbox rounded border-2 border-[var(--color-primary-main)] checked:bg-[var(--color-primary-main)]",
-            type === "checkbox2" &&
-              "custom-checkbox rounded-full border-2 border-[var(--color-primary-main)] checked:bg-[var(--color-primary-main)]",
-            type === "heart" && "custom-heart-checkbox",
-          )}
-          onChange={onChange}
-          checked={checked}
-          type="checkbox"
-          name={name}
-          id={id}
-        />
+    <div className="flex items-center">
+      <input
+        className={cn(
+          "h-[24px] w-[24px] cursor-pointer appearance-none",
+          checkboxTypeClasses[type] || "",
+          className,
+        )}
+        onChange={onChange}
+        checked={checked}
+        type="checkbox"
+        name={name}
+        id={id}
+      />
+      {label && (
         <label className={cn(labelClassName)} htmlFor={id}>
           {label}
         </label>
-      </div>
-    </>
+      )}
+    </div>
   );
 };
 
