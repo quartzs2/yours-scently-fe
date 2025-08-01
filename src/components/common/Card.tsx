@@ -1,9 +1,11 @@
 "use client";
 
 import IconButton from "@components/ui/IconButton";
+import { Tag } from "@components/ui/tabs";
 import { Heart } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
+import { cn } from "@utils/cn";
 
 export type CardProps = {
   imageUrl?: string;
@@ -15,21 +17,36 @@ export type CardProps = {
 const ICON_HEART_STYLE = "absolute top-2 right-2 border-primary-main";
 const FALLBACK_IMAGE = "/fallback-image.svg";
 
+/** Card 컴포넌트
+ * @param tags - 문자열 배열. []로 설정한 이유는 부모 컴포넌트에서 tags를 전달하지 않아도 오류 없이 작동하도록하기 위함.
+ * @param imageUrl - 카드에 표시할 이미지 경로
+ * @param price - 숫자 타입의 가격
+ * @param name - 상품 이름 또는 카드 제목 역할
+ *
+ * @example
+ * <Card
+ *   tags={['타이틀 이름름','타이틀 이름2']}
+ *   imageUrl="/images/product.png"
+ *   price={19990}
+ *   name="상품 이름"
+ * />
+ */
+
 const Card = ({ tags = [], imageUrl, price, name }: CardProps) => {
   const [imgSrc, setImgSrc] = useState(imageUrl);
-  const isFallback = FALLBACK_IMAGE;
 
   return (
     <div className="w-[250px]">
       {/* 이미지 & 하트 */}
       <div className="relative mb-2 flex h-[250px] w-full items-center justify-center overflow-hidden rounded-lg border border-border-default">
         <Image
-          style={{ objectFit: isFallback ? "contain" : "cover" }}
+          className={cn(
+            imageUrl ? "obeject-contain h-full w-full" : "object-cover",
+          )}
           onError={() => setImgSrc(FALLBACK_IMAGE)}
-          src={imgSrc ?? "/fallback-image.svg"}
-          height={isFallback ? 80 : undefined}
-          width={isFallback ? 80 : undefined}
-          fill={!isFallback}
+          src={imgSrc ?? FALLBACK_IMAGE}
+          height={120}
+          width={120}
           alt={name}
         />
 
@@ -43,15 +60,9 @@ const Card = ({ tags = [], imageUrl, price, name }: CardProps) => {
       {/* 카드 하단 부분 */}
       <div className="rounded-lg border border-border-default">
         {/* 태그 */}
-        {/* TODO: 추후 태그 컴포넌트로 변경*/}
         <div className="flex flex-wrap gap-1 px-3 py-2">
           {tags.map((tag, i) => (
-            <span
-              className="text-caption rounded-full border border-primary-main px-2 py-1"
-              key={`${tag}-${i}`}
-            >
-              {tag}
-            </span>
+            <Tag key={`${tag}-${i}`} text={tag} deletable size="sm" />
           ))}
         </div>
         {/* 본문 */}
