@@ -1,6 +1,5 @@
 import Input from "@components/ui/input/Input";
 import { formatTime } from "@utils/timeUtils";
-import { cn } from "@utils/cn";
 import React from "react";
 
 type AuthCodeProps = {
@@ -24,7 +23,7 @@ type AuthCodeProps = {
  * const ParentComponent = () => {
  * const [authCode, setAuthCode] = useState('');
  * const [phoneNumber, setPhoneNumber] = useState('');
- * const [timeLeft, startTimer] = useTimer();
+ * const {timeLeft, startTimer} = useTimer();
  *
  * const handleSendCode = () => {
  * // 인증번호 전송 로직을 여기에 작성
@@ -74,7 +73,7 @@ export default function AuthCodeInput({
         type="text"
       />
       {timeLeft > 0 && (
-        <div className="absolute top-1/2 right-4 min-w-[36px] -translate-y-1/2 text-[14px] text-[var(--color-system-error)]">
+        <div className="absolute top-1/2 right-4 min-w-[36px] -translate-y-1/2 text-[14px] text-system-error">
           {formatTime(timeLeft)}
         </div>
       )}

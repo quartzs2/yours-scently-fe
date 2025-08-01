@@ -30,7 +30,7 @@ export const ValidationMessage = ({
 }: ValidationMessageProps) => {
   if (isValid === false) {
     return (
-      <p className="text-body-2 absolute top-full left-0 mt-1 text-[var(--color-system-error)]">
+      <p className="text-body-2 absolute top-full left-0 mt-1 text-system-error">
         {errorMessage}
       </p>
     );
@@ -38,7 +38,7 @@ export const ValidationMessage = ({
 
   if (isValid === true && validMessage) {
     return (
-      <p className="text-body-2 absolute top-full left-0 mt-1 text-[var(--color-system-success)]">
+      <p className="text-body-2 absolute top-full left-0 mt-1 text-system-success">
         {validMessage}
       </p>
     );

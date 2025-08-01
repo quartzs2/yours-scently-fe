@@ -13,9 +13,9 @@ export type CheckboxProps = {
 
 const checkboxTypeClasses: Record<string, string> = {
   checkbox2:
-    "custom-checkbox rounded-full border-2 border-[var(--color-primary-main)] checked:bg-[var(--color-primary-main)]",
+    "custom-checkbox rounded-full border-2 border-primary-main checked:bg-primary-main",
   checkbox1:
-    "custom-checkbox rounded border-2 border-[var(--color-primary-main)] checked:bg-[var(--color-primary-main)]",
+    "custom-checkbox rounded border-2 border-primary-main checked:bg-primary-main",
   heart: "custom-heart-checkbox",
 } as const;
 

@@ -12,7 +12,7 @@ export type InputProps = {
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">;
 
 const inputStyle = cva(
-  "text-[16px] border rounded p-4 border-[var(--color-border-default)] focus:border-[var(--color-primary-main)] focus:outline-none focus:ring-0",
+  "text-[16px] border rounded p-4 border-border-default focus:border-primary-main focus:outline-none focus:ring-0",
   {
     variants: {
       inputType: {
@@ -59,10 +59,8 @@ const Input = ({
   ...props
 }: InputProps) => {
   const baseInputClass = cn(inputStyle({ inputType: type }), className, {
-    "border-[var(--color-system-success)] focus:border-[var(--color-system-success)]":
-      isValid === true,
-    "border-[var(--color-system-error)] focus:border-[var(--color-system-error)]":
-      isValid === false,
+    "border-system-success focus:border-system-success": isValid === true,
+    "border-system-error focus:border-system-error": isValid === false,
   });
 
   return (
