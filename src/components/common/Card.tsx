@@ -62,7 +62,7 @@ const Card = ({ tags = [], imageUrl, price, name }: CardProps) => {
         {/* 태그 */}
         <div className="flex flex-wrap gap-1 px-3 py-2">
           {tags.map((tag, i) => (
-            <Tag key={`${tag}-${i}`} text={tag} deletable size="sm" />
+            <Tag key={`${tag}-${i}`} text={tag} size="sm" />
           ))}
         </div>
         {/* 본문 */}
