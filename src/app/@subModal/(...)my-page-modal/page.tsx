@@ -60,6 +60,7 @@ export default function MyPageModal() {
         top: `${modalPosition.top}px`,
         position: "absolute",
       }}
+      triggerId={TRIGGER_ID.MY_PAGE_ICON_TRIGGER}
       onClose={handleClose}
       isOverlay={false}
     >
