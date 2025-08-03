@@ -62,7 +62,6 @@ export default function MyPageModal() {
       }}
       triggerId={TRIGGER_ID.MY_PAGE_ICON_TRIGGER}
       onClose={handleClose}
-      isOverlay={false}
     >
       <div className="flex flex-col gap-6">
         {/* TODO: 로그인 기능 추가 후 유저 이름 표시 */}

@@ -44,7 +44,6 @@ export default function AISearchModal() {
       triggerId={TRIGGER_ID.AI_SEARCH_ICON_TRIGGER}
       zIndex={Z_INDEX.MODAL}
       onClose={handleClose}
-      isOverlay={false}
     >
       <div className="flex flex-col items-center">
         <div className="flex h-[80px] w-full items-center">

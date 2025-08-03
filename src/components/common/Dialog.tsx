@@ -8,7 +8,6 @@ type DialogProps = {
   style?: React.CSSProperties;
   children: React.ReactNode;
   onClose?: () => void;
-  isOverlay?: boolean;
   className?: string;
   triggerId?: string;
   zIndex?: number;

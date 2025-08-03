@@ -44,14 +44,8 @@ const Header = ({ isLoggedIn }: HeaderProps) => {
         <div className="flex flex-1 items-center justify-end gap-6">
           {/* 헤더 우측 섹션 */}
           <IconButton
-            onClick={
-              isAiSearchModalOpen
-                ? () => {
-                    router.back();
-                  }
-                : undefined
-            }
             href={isAiSearchModalOpen ? undefined : URLS.AI_SEARCH}
+            onClick={isAiSearchModalOpen ? router.back : undefined}
             id={TRIGGER_ID.AI_SEARCH_ICON_TRIGGER}
             iconClassName={ICON_STYLE}
             aria-label="ai 추천 검색"
@@ -66,14 +60,8 @@ const Header = ({ isLoggedIn }: HeaderProps) => {
                 As={ShoppingCart}
               />
               <IconButton
-                onClick={
-                  isMyPageModalOpen
-                    ? () => {
-                        router.back();
-                      }
-                    : undefined
-                }
                 href={isMyPageModalOpen ? undefined : URLS.MY_PAGE_MODAL}
+                onClick={isMyPageModalOpen ? router.back : undefined}
                 id={TRIGGER_ID.MY_PAGE_ICON_TRIGGER}
                 iconClassName={ICON_STYLE}
                 As={CircleUserRound}
