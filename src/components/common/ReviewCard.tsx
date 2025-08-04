@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import Image from "next/image";
 
@@ -14,6 +15,7 @@ type ReviewCardProps = {
   writer: string;
   date: string;
 };
+const FALLBACK_IMAGE = "/fallback-image.svg";
 
 /** ReviewCard 컴포넌트
  *
@@ -52,21 +54,28 @@ const ReviewCard = ({
   writer,
   date,
 }: ReviewCardProps) => {
+  const [mainImgSrc, setMainImgSrc] = useState(imageUrl || FALLBACK_IMAGE);
+  const [productImgSrc, setProductImgSrc] = useState(
+    productImage || FALLBACK_IMAGE,
+  );
+
+  useEffect(() => {
+    setMainImgSrc(imageUrl || FALLBACK_IMAGE);
+    setProductImgSrc(productImage || FALLBACK_IMAGE);
+  }, [imageUrl, productImage]);
+
   return (
     <div className="h-[457px] w-[280px] space-y-2 overflow-hidden rounded-xl border border-border-default">
       {/* 리뷰 이미지 */}
       <div className="h-[214px] w-full">
-        {imageUrl ? (
-          <Image
-            className="h-full w-full object-cover"
-            src={imageUrl}
-            alt="리뷰 이미지"
-            height={140}
-            width={250}
-          />
-        ) : (
-          <div className="h-full w-full bg-gray-200" />
-        )}
+        <Image
+          onError={() => setMainImgSrc(FALLBACK_IMAGE)}
+          className="h-full w-full object-cover"
+          src={mainImgSrc}
+          alt="리뷰 이미지"
+          height={140}
+          width={250}
+        />
       </div>
 
       {/* 별점, 리뷰, 날짜/작성자, 상품 정보 */}
@@ -100,17 +109,14 @@ const ReviewCard = ({
         {/* 상품 정보 */}
         <div className="flex items-center space-x-4 pt-1">
           <div className="bg-subtle h-[80px] w-[80px] overflow-hidden rounded-md">
-            {productImage ? (
-              <Image
-                className="h-full w-full object-cover"
-                src={productImage}
-                alt="상품 이미지"
-                height={40}
-                width={40}
-              />
-            ) : (
-              <div className="h-full w-full bg-bg-subtle" />
-            )}
+            <Image
+              onError={() => setProductImgSrc(FALLBACK_IMAGE)}
+              className="h-full w-full object-cover"
+              src={productImgSrc}
+              alt="상품 이미지"
+              height={40}
+              width={40}
+            />
           </div>
           <div>
             <div className="text-primary text-text-body-2">{productName}</div>

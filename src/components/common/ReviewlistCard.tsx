@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Tag } from "@components/ui/tabs";
 import { Star } from "lucide-react";
 import Image from "next/image";
@@ -13,6 +14,8 @@ type ReviewListCardProps = {
   writer: string;
   date: string;
 };
+
+const FALLBACK_IMAGE = "/fallback-image.svg";
 
 /** ReviewListCard 컴포넌트
  * 
@@ -45,21 +48,24 @@ const ReviewListCard = ({
   writer,
   date,
 }: ReviewListCardProps) => {
+  const [imgSrc, setImgSrc] = useState(imageUrl || FALLBACK_IMAGE);
+
+  useEffect(() => {
+    setImgSrc(imageUrl || FALLBACK_IMAGE);
+  }, [imageUrl]);
+
   return (
     <div className="bg-subtle flex w-full items-start space-x-4 rounded-xl p-4">
       {/* 좌측 썸네일 */}
       <div className="bg-subtle h-[170px] w-[170px] flex-shrink-0 overflow-hidden rounded-xl">
-        {imageUrl ? (
-          <Image
-            className="h-full w-full object-cover"
-            src={imageUrl}
-            alt="리뷰 이미지"
-            height={70}
-            width={70}
-          />
-        ) : (
-          <div className="h-full w-full bg-bg-subtle" />
-        )}
+        <Image
+          onError={() => setImgSrc(FALLBACK_IMAGE)}
+          className="h-full w-full object-cover"
+          src={imgSrc}
+          alt="리뷰 이미지"
+          height={170}
+          width={170}
+        />
       </div>
 
       {/* 우측 텍스트 내용 */}

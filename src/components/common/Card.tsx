@@ -1,20 +1,20 @@
 "use client";
 
-import IconButton from "@components/ui/IconButton";
+import Checkbox from "@components/ui/input/Checkbox";
 import { Tag } from "@components/ui/tabs";
-import { Heart } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@utils/cn";
 
 export type CardProps = {
+  handleHeartChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   imageUrl?: string;
+  isLiked: boolean;
   tags?: string[];
   price: number;
   name: string;
 };
 
-const ICON_HEART_STYLE = "absolute top-2 right-2 border-primary-main";
 const FALLBACK_IMAGE = "/fallback-image.svg";
 
 /** Card 컴포넌트
@@ -22,6 +22,8 @@ const FALLBACK_IMAGE = "/fallback-image.svg";
  * @param imageUrl - 카드에 표시할 이미지 경로
  * @param price - 숫자 타입의 가격
  * @param name - 상품 이름 또는 카드 제목 역할
+ * @param isLiked - 사용자가 이 상품에 '좋아요'를 눌렀는지 여부
+ * @param handleHeartChange - 좋아요(하트) 상태가 변경될 때 호출되는 콜백 함수
  *
  * @example
  * <Card
@@ -29,16 +31,33 @@ const FALLBACK_IMAGE = "/fallback-image.svg";
  *   imageUrl="/images/product.png"
  *   price={19990}
  *   name="상품 이름"
+ *   isLiked={true}
+ *   handleHeartChange={(e) => {}}
  * />
  */
 
-const Card = ({ tags = [], imageUrl, price, name }: CardProps) => {
+const Card = ({
+  handleHeartChange,
+  tags = [],
+  imageUrl,
+  isLiked,
+  price,
+  name,
+}: CardProps) => {
   const [imgSrc, setImgSrc] = useState(imageUrl);
 
   return (
     <div className="w-[250px]">
       {/* 이미지 & 하트 */}
       <div className="relative mb-2 flex h-[250px] w-full items-center justify-center overflow-hidden rounded-lg border border-border-default">
+        <Checkbox
+          className="absolute top-[16px] right-[16px] m-2 h-[32px] w-[32px]"
+          onChange={handleHeartChange}
+          checked={isLiked}
+          type="heart"
+          name="heart"
+          id="heart"
+        />
         <Image
           className={cn(
             imageUrl ? "obeject-contain h-full w-full" : "object-cover",
@@ -48,12 +67,6 @@ const Card = ({ tags = [], imageUrl, price, name }: CardProps) => {
           height={120}
           width={120}
           alt={name}
-        />
-
-        <IconButton
-          iconClassName={ICON_HEART_STYLE}
-          aria-label="좋아요 버튼"
-          As={Heart}
         />
       </div>
 
