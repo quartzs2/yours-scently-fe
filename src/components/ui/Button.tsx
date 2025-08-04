@@ -11,7 +11,7 @@ import React from "react";
  * - `sm`: 소형 버튼 (80px x 34px, text-button-2)
  * - `md`: 중간 버튼 (120px x 40px, text-button-1)
  * - `lg`: 대형 버튼 (160px x 48px, text-button-1)
- * - `xl`: 초대형 버튼 (224px x 56px, text-button-1)
+ * - `xl`: 초대형 버튼 (160px x 56px, text-button-1)
  * - `2xl`: 더 큰 버튼 (328px x 48px, text-button-1)
  * - `3xl`: 가장 큰 버튼 (420px x 48px, text-button-1)
  * @property variants.theme - 버튼의 색상 테마를 정의합니다.
@@ -32,7 +32,7 @@ const buttonStyles = cva(
         "3xl": "w-[420px] h-[48px] text-button-1",
         md: "w-[120px] h-[40px] text-button-1",
         lg: "w-[160px] h-[48px] text-button-1",
-        xl: "w-[224px] h-[56px] text-button-1",
+        xl: "w-[160px] h-[56px] text-button-1",
         sm: "w-[80px] h-[34px] text-button-2",
       },
       theme: {
