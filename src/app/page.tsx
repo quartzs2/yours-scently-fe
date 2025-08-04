@@ -2,7 +2,7 @@ import PersonalizedProducts from "@components/feature/main/PersonalizedProducts"
 import PromoBanner from "@components/feature/main/PromoBanner";
 import BestReviews from "@components/feature/main/BestReviews";
 import MainBanner from "@components/feature/main/MainBanner";
-import SubBanner from "@components/feature//main/SubBanner";
+import SubBanner from "@components/feature/main/SubBanner";
 
 export default function Home() {
   return (

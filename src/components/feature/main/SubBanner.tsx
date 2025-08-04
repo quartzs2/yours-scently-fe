@@ -1,8 +1,8 @@
+// 서브배너
 import SubBannerSampleImg from "@assets/images/sub-banner-sample-img.png";
 import SubBannerPromoImg from "@assets/images/sub-banner-promo-img.png";
 import SubBannerBgImg from "@assets/images/sub-banner-bg-img.png";
 import Button from "@components/ui/Button";
-// 서브배너
 import Image from "next/image";
 
 export default function SubBanner() {
@@ -21,7 +21,7 @@ export default function SubBanner() {
           <h2 className="text-subtitle-2">
             지금 가장 사랑받는 향, 여기에 다 있어요
           </h2>
-          <div className="text-body-1 text-color-text-secondary line-clamp-3 text-text-secondary">
+          <div className="text-body-1 line-clamp-3 text-text-secondary">
             <p>꾸준히 사랑받는 베스트 향수부터</p>
             <p>이번 달 새롭게 출시된 신상 향기까지.</p>
             <p>당신의 취향을 저격할 선택은?</p>
@@ -42,7 +42,6 @@ export default function SubBanner() {
                 alt="SUMMER 향기전 최대 25% OFF"
                 className="object-cover"
                 src={SubBannerPromoImg}
-                priority
                 fill
               />
               <div className="text-caption absolute top-4/5 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 text-center font-bold text-white">
@@ -57,16 +56,13 @@ export default function SubBanner() {
                 src={SubBannerSampleImg}
                 className="object-cover"
                 alt="샘플 신청 배너"
-                priority
                 fill
               />
               <div className="text-caption absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 text-center font-bold text-white">
                 <p className="pb-2">당신의 취향에 맞는 향, 먼저 경험해보세요</p>
-                <div>
-                  <Button shape="pill" size="sm">
-                    바로가기
-                  </Button>
-                </div>
+                <Button shape="pill" size="sm">
+                  바로가기
+                </Button>
               </div>
             </div>
           </div>
