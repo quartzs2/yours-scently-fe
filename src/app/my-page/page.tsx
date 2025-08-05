@@ -1,13 +1,12 @@
 "use client";
 
+import { mockReviewCards } from "@app/my-page/mocks/mockReviewCard";
 import MypageCard from "@components/feature/my-page/MypageCard";
+import { cardMockData } from "@app/my-page/mocks/mockCard";
 import ReviewCard from "@components/common/ReviewCard";
 import { ChevronRight } from "lucide-react";
 import Card from "@components/common/Card";
 import Icon from "@components/ui/Icon";
-
-import { mockReviewCards } from "./mocks/mockReviewCard";
-import { cardMockData } from "./mocks/mockCard";
 
 type OrderStatusItem = {
   key: "delivered" | "pending" | "shipped" | "ready" | "paid";
@@ -56,7 +55,7 @@ export default function MyPage() {
       <div className="mt-[80px] mb-[32px] flex w-full items-center justify-between">
         <div className="flex items-center gap-2">
           <h2 className="text-subtitle-1 text-text-primary">주문 배송 조회</h2>
-          <span className="text-subtile-2 text-text-secondary">
+          <span className="text-subtitle-2 text-text-secondary">
             (최근 1개월)
           </span>
         </div>
@@ -95,9 +94,7 @@ export default function MyPage() {
           {cardMockData.map((card, id) => (
             <div key={`${card.name} - ${id}`} className="shrink-0">
               <Card
-                handleHeartChange={(e) => {
-                  console.log(e);
-                }}
+                handleHeartChange={() => {}}
                 imageUrl={card.imageUrl}
                 isLiked={card.isLiked}
                 price={card.price}
@@ -116,11 +113,11 @@ export default function MyPage() {
         </div>
         <div className="flex gap-2 overflow-hidden">
           {mockReviewCards.map((card, id) => (
-            <div key={`${card.productName} - ${id}`} className="shirnk-0">
+            <div key={`${card.productName} - ${id}`} className="shrink-0">
               <ReviewCard
                 productPrice={card.productPrice}
+                productImage={card.productImage}
                 productName={card.productName}
-                productImage={card.imageUrl}
                 imageUrl={card.imageUrl}
                 timeAgo={card.timeAgo}
                 rating={card.rating}
