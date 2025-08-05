@@ -71,7 +71,7 @@ const MypageCard = ({
         <div className="mb-1 flex items-center justify-between">
           <div className="text-body-1 sm:text-body-2 xs:text-caption flex items-center gap-2 font-medium text-white">
             {title}
-            <Tag text={brand ?? ""} size="sm" />
+            {brand && <Tag text={brand} size="sm" />}
           </div>
           <p className="text-body-2 sm:text-caption mt-1 text-bg-default">
             {date}
