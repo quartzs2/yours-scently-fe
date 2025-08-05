@@ -81,7 +81,7 @@ const PhoneInput = ({
 
   return (
     <div className="relative">
-      <div className="mb-5 flex items-center">
+      <div className="flex items-center">
         {phoneValues.map((val, index) => (
           <React.Fragment key={index}>
             <Input

@@ -24,7 +24,7 @@ import React from "react";
  */
 const buttonStyles = cva(
   // 기본 스타일: 인라인 플렉스, 중앙 정렬, 폰트 두께, 트랜지션, 비활성화 시 커서/투명도
-  "inline-flex cursor-pointer items-center justify-center font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50",
+  "border inline-flex cursor-pointer items-center justify-center font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       size: {
@@ -37,8 +37,8 @@ const buttonStyles = cva(
       },
       theme: {
         light:
-          "bg-bg-default text-primary-main border border-primary-main hover:bg-bg-subtle hover:text-primary-dark hover:border-primary-dark",
-        dark: "bg-primary-main text-bg-default hover:bg-primary-dark hover:text-bg-default",
+          "border-primary-main bg-bg-default text-primary-main hover:border-primary-dark hover:bg-bg-subtle hover:text-primary-dark",
+        dark: "border-transparent bg-primary-main text-bg-default hover:bg-primary-dark hover:text-bg-default",
       },
       shape: {
         rounded: "rounded-md",
