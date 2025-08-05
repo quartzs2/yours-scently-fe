@@ -56,11 +56,11 @@ type AuthCodeProps = {
  * };
  * ```
  */
-export default function AuthCodeInput({
+const AuthCodeInput = ({
   onCodeChange,
   codeValue,
   timeLeft,
-}: AuthCodeProps) {
+}: AuthCodeProps) => {
   return (
     <div className="relative">
       <Input
@@ -79,4 +79,8 @@ export default function AuthCodeInput({
       )}
     </div>
   );
-}
+};
+
+AuthCodeInput.displayName = "AuthCodeInput";
+
+export default AuthCodeInput;
