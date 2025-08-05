@@ -49,7 +49,12 @@ export default function RegisterModal() {
                 placeholder="닉네임을 입력해주세요."
                 type="text"
               />
-              <Button className="w-[112px]" theme={"light"} size={"2xl"}>
+              <Button
+                className="w-[112px]"
+                aria-label="중복 확인"
+                theme={"light"}
+                size={"2xl"}
+              >
                 중복 확인
               </Button>
             </div>
@@ -88,7 +93,12 @@ export default function RegisterModal() {
                 placeholder="이메일을 입력해주세요."
                 type="email"
               />
-              <Button className="w-[112px]" theme={"light"} size={"2xl"}>
+              <Button
+                className="w-[112px]"
+                aria-label="인증코드전송"
+                theme={"light"}
+                size={"2xl"}
+              >
                 인증코드전송
               </Button>
             </div>
@@ -98,7 +108,12 @@ export default function RegisterModal() {
                 placeholder="전송된 코드를 입력해주세요."
                 type="text"
               />
-              <Button className="w-[112px]" theme={"light"} size={"2xl"}>
+              <Button
+                className="w-[112px]"
+                aria-label="인증코드확인"
+                theme={"light"}
+                size={"2xl"}
+              >
                 인증코드확인
               </Button>
             </div>
@@ -109,7 +124,12 @@ export default function RegisterModal() {
             <div className="flex flex-col gap-4">
               <div className="flex gap-3">
                 <PhoneInput values={["", "", ""]} onChange={() => {}} />
-                <Button className="w-[112px]" theme={"light"} size={"2xl"}>
+                <Button
+                  className="w-[112px]"
+                  aria-label="인증코드전송"
+                  theme={"light"}
+                  size={"2xl"}
+                >
                   인증코드전송
                 </Button>
               </div>
@@ -119,7 +139,12 @@ export default function RegisterModal() {
                   placeholder="전송된 코드를 입력해주세요."
                   type="text"
                 />
-                <Button className="w-[112px]" theme={"light"} size={"2xl"}>
+                <Button
+                  className="w-[112px]"
+                  aria-label="인증코드확인"
+                  theme={"light"}
+                  size={"2xl"}
+                >
                   인증코드확인
                 </Button>
               </div>
@@ -139,7 +164,12 @@ export default function RegisterModal() {
               type="password"
             />
           </div>
-          <Button className="w-full shrink-0" type="submit" size={"2xl"}>
+          <Button
+            className="w-full shrink-0"
+            aria-label="가입하기"
+            type="submit"
+            size={"2xl"}
+          >
             가입하기
           </Button>
         </form>

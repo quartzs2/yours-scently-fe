@@ -1,4 +1,5 @@
 import { VariantProps, cva } from "class-variance-authority";
+import Link, { LinkProps } from "next/link";
 import { cn } from "@utils/cn";
 import React from "react";
 
@@ -53,9 +54,19 @@ const buttonStyles = cva(
   },
 );
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  ref?: React.Ref<HTMLButtonElement>;
-} & VariantProps<typeof buttonStyles>;
+export type ButtonProps = (
+  | ({
+      ref?: React.RefObject<HTMLAnchorElement>;
+      href: LinkProps["href"];
+    } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">)
+  | ({
+      ref?: React.RefObject<HTMLButtonElement>;
+      href?: undefined;
+    } & React.ButtonHTMLAttributes<HTMLButtonElement>)
+) &
+  VariantProps<typeof buttonStyles> & {
+    "aria-label"?: string;
+  };
 
 /**
  * 재사용 가능한 Button 컴포넌트입니다.
@@ -63,14 +74,14 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
  * 모든 표준 HTML `<button>` 속성을 상속받아 유연하게 사용할 수 있습니다.
  * ref prop을 직접 받아 버튼 DOM 요소에 전달합니다.
  *
- * @param 버튼 컴포넌트에 전달되는 props입니다.
- * @param `buttonStyles`에 의해 생성된 클래스 외에 추가적으로 적용될 CSS 클래스입니다.
- * @param 버튼 내부에 렌더링될 React 노드입니다.
- * @param 버튼의 시각적 테마입니다.
- * @param 버튼의 모서리 모양입니다.
- * @param 버튼의 크기입니다.
- * @param 나머지 모든 표준 HTML `<button>` 속성들이 포함됩니다 (예: `onClick`, `type`, `disabled` 등).
- * @param ref - 버튼 DOM 요소에 대한 ref입니다.
+ * @param className `buttonStyles`에 의해 생성된 클래스 외에 추가적으로 적용될 CSS 클래스입니다.
+ * @param children 버튼 내부에 렌더링될 React 노드입니다.
+ * @param theme 버튼의 시각적 테마입니다.
+ * @param shape 버튼의 모서리 모양입니다.
+ * @param size 버튼의 크기입니다.
+ * @param href 버튼의 링크 주소입니다.
+ * @param ref 버튼 DOM 요소에 대한 ref입니다.
+ * @param props 나머지 모든 표준 HTML `<button>` 속성들이 포함됩니다 (예: `onClick`, `type`, `disabled` 등).
  *
  * @returns 스타일과 동작이 적용된 button 엘리먼트를 반환합니다.
  *
@@ -98,19 +109,43 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
  * </Button>
  */
 const Button = ({
+  "aria-label": ariaLabel,
   className,
   children,
   theme,
   shape,
   size,
+  href,
   ref,
   ...props
 }: ButtonProps) => {
+  if (href) {
+    const linkProps = props as Omit<
+      React.AnchorHTMLAttributes<HTMLAnchorElement>,
+      "href"
+    >;
+
+    return (
+      <Link
+        className={cn(buttonStyles({ theme, shape, size }), className)}
+        aria-label={ariaLabel}
+        href={href}
+        {...linkProps}
+        ref={ref as React.RefObject<HTMLAnchorElement>}
+      >
+        {children}
+      </Link>
+    );
+  }
+
+  const buttonProps = props as React.ButtonHTMLAttributes<HTMLButtonElement>;
+
   return (
     <button
       className={cn(buttonStyles({ theme, shape, size }), className)}
-      ref={ref}
-      {...props}
+      ref={ref as React.RefObject<HTMLButtonElement>}
+      aria-label={ariaLabel}
+      {...buttonProps}
     >
       {children}
     </button>
