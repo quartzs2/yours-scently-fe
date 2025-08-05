@@ -11,7 +11,7 @@ import React from "react";
  * - `sm`: 소형 버튼 (80px x 34px, text-button-2)
  * - `md`: 중간 버튼 (120px x 40px, text-button-1)
  * - `lg`: 대형 버튼 (160px x 48px, text-button-1)
- * - `xl`: 초대형 버튼 (224px x 56px, text-button-1)
+ * - `xl`: 초대형 버튼 (160px x 56px, text-button-1)
  * - `2xl`: 더 큰 버튼 (328px x 48px, text-button-1)
  * - `3xl`: 가장 큰 버튼 (420px x 48px, text-button-1)
  * @property variants.theme - 버튼의 색상 테마를 정의합니다.
@@ -24,7 +24,7 @@ import React from "react";
  */
 const buttonStyles = cva(
   // 기본 스타일: 인라인 플렉스, 중앙 정렬, 폰트 두께, 트랜지션, 비활성화 시 커서/투명도
-  "inline-flex cursor-pointer items-center justify-center font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50",
+  "border inline-flex cursor-pointer items-center justify-center font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       size: {
@@ -32,13 +32,13 @@ const buttonStyles = cva(
         "3xl": "w-[420px] h-[48px] text-button-1",
         md: "w-[120px] h-[40px] text-button-1",
         lg: "w-[160px] h-[48px] text-button-1",
-        xl: "w-[224px] h-[56px] text-button-1",
+        xl: "w-[160px] h-[56px] text-button-1",
         sm: "w-[80px] h-[34px] text-button-2",
       },
       theme: {
         light:
-          "bg-bg-default text-primary-main border border-primary-main hover:bg-bg-subtle hover:text-primary-dark hover:border-primary-dark",
-        dark: "bg-primary-main text-bg-default hover:bg-primary-dark hover:text-bg-default",
+          "border-primary-main bg-bg-default text-primary-main hover:border-primary-dark hover:bg-bg-subtle hover:text-primary-dark",
+        dark: "border-transparent bg-primary-main text-bg-default hover:bg-primary-dark hover:text-bg-default",
       },
       shape: {
         rounded: "rounded-md",

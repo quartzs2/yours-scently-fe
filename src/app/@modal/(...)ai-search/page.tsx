@@ -2,6 +2,7 @@
 
 import AISearchResult from "@components/feature/ai-search-modal/AISearchResult";
 import { useDebounce } from "@hooks/useDebounce";
+import { TRIGGER_ID } from "@constants/triggers";
 import Dialog from "@components/common/Dialog";
 import { Z_INDEX } from "@constants/zIndex";
 import { useRouter } from "next/navigation";
@@ -36,13 +37,13 @@ export default function AISearchModal() {
     <Dialog
       className={cn(
         "border border-border-default bg-bg-default",
-        "absolute top-[120px] rounded-2xl p-0",
+        "absolute top-[120px] left-[50%] translate-x-[-50%] rounded-2xl p-0",
         "xl:min-w-[var(--width-container-md)]",
         { "border-primary-main": isTyping },
       )}
+      triggerId={TRIGGER_ID.AI_SEARCH_ICON_TRIGGER}
       zIndex={Z_INDEX.MODAL}
       onClose={handleClose}
-      isOverlay={false}
     >
       <div className="flex flex-col items-center">
         <div className="flex h-[80px] w-full items-center">

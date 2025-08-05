@@ -60,15 +60,17 @@ export default function MyPageModal() {
         top: `${modalPosition.top}px`,
         position: "absolute",
       }}
+      triggerId={TRIGGER_ID.MY_PAGE_ICON_TRIGGER}
       onClose={handleClose}
-      isOverlay={false}
     >
       <div className="flex flex-col gap-6">
         {/* TODO: 로그인 기능 추가 후 유저 이름 표시 */}
         <div className="text-button-1 flex justify-center">유어스 센틀리님</div>
         <div className="flex gap-2">
           {/* TODO: 로그아웃, 마이 페이지 기능 추가 후 링크 이동 추가 */}
+
           <Button>마이 페이지</Button>
+
           <Button theme="light">로그아웃</Button>
         </div>
       </div>
