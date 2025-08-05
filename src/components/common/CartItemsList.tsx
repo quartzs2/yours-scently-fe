@@ -4,9 +4,9 @@ import Checkbox from "@components/ui/input/Checkbox";
 import CartCard from "@components/common/CartCard";
 import { type CartItemType } from "@app/cart/page";
 import Button from "@components/ui/Button";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
-type CartItemProps = {
+type CartItemListProps = {
   setCartItems: React.Dispatch<React.SetStateAction<CartItemType[]>>;
   cartItems: CartItemType[];
 };
@@ -34,11 +34,12 @@ type CartItemProps = {
  *   setCartItems={setCartItems}
  * />
  */
-const CartItemList = ({ setCartItems, cartItems }: CartItemProps) => {
+const CartItemList = ({ setCartItems, cartItems }: CartItemListProps) => {
   const [checkedIds, setCheckedIds] = useState<Set<number>>(new Set());
   const allChecked =
     cartItems.length > 0 && checkedIds.size === cartItems.length;
   const selectedOrders = checkedIds.size;
+  const SHIPPING_FEE = 3000;
 
   const handleQuantityChange = (id: number, type: "increase" | "decrease") => {
     setCartItems((prev) =>
@@ -85,13 +86,17 @@ const CartItemList = ({ setCartItems, cartItems }: CartItemProps) => {
     }
   };
 
-  const totalPrice = cartItems
-    .filter((item) => checkedIds.has(item.id))
-    .reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalPrice = useMemo(() => {
+    return cartItems
+      .filter((item) => checkedIds.has(item.id))
+      .reduce((total, item) => total + item.price * item.quantity, 0);
+  }, [cartItems, checkedIds]);
 
-  const totalShipping = cartItems
-    .filter((item) => checkedIds.has(item.id))
-    .reduce((total) => total + 3000, 0);
+  const totalShipping = useMemo(() => {
+    return cartItems
+      .filter((item) => checkedIds.has(item.id))
+      .reduce((total, _item) => total + SHIPPING_FEE, 0);
+  }, [cartItems, checkedIds]);
 
   const totalPaymentAmount = totalPrice + totalShipping;
 
@@ -119,7 +124,6 @@ const CartItemList = ({ setCartItems, cartItems }: CartItemProps) => {
         <p className="text-button-1 border-l border-text-disabled pl-2 text-text-disabled">
           선택삭제
         </p>
-        <p className=""></p>
       </div>
       {cartItems.map((item) => (
         <div className="flex w-full flex-wrap justify-between" key={item.id}>
@@ -183,7 +187,7 @@ const CartItemList = ({ setCartItems, cartItems }: CartItemProps) => {
           </div>
           <div className="my-6 flex h-[50px] w-full flex-none items-center justify-center bg-bg-subtle text-[20px] text-primary-main">
             {(item.price * item.quantity).toLocaleString()}원 + 배송비 3,000원 ={" "}
-            {(item.price * item.quantity + 3000).toLocaleString()}원
+            {(item.price * item.quantity + SHIPPING_FEE).toLocaleString()}원
           </div>
         </div>
       ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import CartItem from "@components/common/CartItemsList";
+import CartItemList from "@components/common/CartItemsList";
 import { useState } from "react";
 
 export type CartItemType = {
@@ -50,7 +50,7 @@ const Cart = () => {
       <p className="text-subtitle-1 py-5">장바구니</p>
 
       <div className="flex w-full flex-col justify-between">
-        <CartItem setCartItems={setCartItems} cartItems={cartItems}></CartItem>
+        <CartItemList setCartItems={setCartItems} cartItems={cartItems} />
       </div>
     </div>
   );
