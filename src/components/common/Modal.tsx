@@ -15,23 +15,28 @@ const Modal = ({
   onClose,
 }: ModalProps) => {
   useEffect(() => {
-    if (isModalOpen) {
-      const scrollY = window.scrollY;
-      const originalBodyStyle = document.body.style.cssText;
+    const scrollY = window.scrollY;
 
-      document.body.style.cssText = `
-        position: fixed;
-        top: -${scrollY}px;
-        overflow-y: scroll; 
-        width: 100%;
-      `;
+    const originalStyle = {
+      overflowY: document.body.style.overflowY,
+      position: document.body.style.position,
+      width: document.body.style.width,
+      top: document.body.style.top,
+    };
 
-      return () => {
-        document.body.style.cssText = originalBodyStyle;
-        window.scrollTo(0, scrollY);
-      };
-    }
-  }, [isModalOpen]);
+    Object.assign(document.body.style, {
+      top: `-${scrollY}px`,
+      overflowY: "scroll",
+      position: "fixed",
+      width: "100%",
+    });
+
+    return () => {
+      const scrollYForRestore = document.body.style.top;
+      Object.assign(document.body.style, originalStyle);
+      window.scrollTo(0, parseInt(scrollYForRestore || "0", 10) * -1);
+    };
+  }, []);
 
   if (!isModalOpen) {
     return null;
@@ -43,7 +48,7 @@ const Modal = ({
       style={{ zIndex }}
       onClick={onClose}
     >
-      <div>{children}</div>
+      <div onClick={(e) => e.stopPropagation()}>{children}</div>
     </div>
   );
 };

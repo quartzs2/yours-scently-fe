@@ -29,7 +29,7 @@ export default function RegisterModal() {
       >
         <Logo className="self-center" aria-label="logo" />
         <div className="text-body-1 mt-8">회원가입</div>
-        <div className="mt-6 flex h-[400px] flex-col gap-10 overflow-y-scroll">
+        <form className="mt-6 flex h-[400px] flex-col gap-10 overflow-y-scroll">
           {/* 이름 */}
           <div className="flex flex-col gap-2">
             <div className="text-body-2 text-text-primary">이름</div>
@@ -37,6 +37,7 @@ export default function RegisterModal() {
               className="h-[48px] w-full"
               placeholder="이름을 입력해주세요."
               type="text"
+              id="name"
             />
           </div>
           {/* 닉네임 */}
@@ -138,10 +139,10 @@ export default function RegisterModal() {
               type="password"
             />
           </div>
-          <Button className="w-full shrink-0" size={"2xl"}>
+          <Button className="w-full shrink-0" type="submit" size={"2xl"}>
             가입하기
           </Button>
-        </div>
+        </form>
       </Dialog>
     </Modal>
   );

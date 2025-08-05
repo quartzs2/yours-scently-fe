@@ -21,17 +21,25 @@ export default function LoginPage() {
           </button>
         </div>
       </div>
-      <div className="flex w-[328px] flex-col gap-4">
+      <form className="flex w-[328px] flex-col gap-4">
         <div className="flex flex-col gap-3">
           <Input
             placeholder="아이디 (example@gmail.com)"
             className="w-full"
+            aria-label="아이디"
             type="email"
           />
-          <Input className="w-full" placeholder="비밀번호" type="password" />
+          <Input
+            className="w-full"
+            placeholder="비밀번호"
+            aria-label="비밀번호"
+            type="password"
+          />
         </div>
-        <Button size={"2xl"}>일반회원 로그인</Button>
-      </div>
+        <Button type="submit" size={"2xl"}>
+          일반회원 로그인
+        </Button>
+      </form>
     </div>
   );
 }
