@@ -69,10 +69,10 @@ const MypageCard = ({
       {/* 설명 박스 */}
       <div className="xs:p-2 absolute right-4 bottom-4 left-4 z-10 rounded-2xl bg-primary-light/50 p-4 sm:p-3">
         <div className="mb-1 flex items-center justify-between">
-          <p className="text-body-1 sm:text-body-2 xs:text-caption flex items-center gap-2 font-medium text-white">
+          <div className="text-body-1 sm:text-body-2 xs:text-caption flex items-center gap-2 font-medium text-white">
             {title}
-            <Tag text={brand ?? ""} size="sm" />
-          </p>
+            {brand && <Tag text={brand} size="sm" />}
+          </div>
           <p className="text-body-2 sm:text-caption mt-1 text-bg-default">
             {date}
           </p>
