@@ -93,7 +93,7 @@ const ReviewCard = ({
         </div>
 
         {/* 리뷰 텍스트 */}
-        <p className="text-text-body-2 line-clamp-2 leading-tight text-text-primary">
+        <p className="text-text-body-2 line-clamp-2 h-10 leading-tight text-text-primary">
           {review}
         </p>
 
@@ -108,7 +108,7 @@ const ReviewCard = ({
 
         {/* 상품 정보 */}
         <div className="flex items-center space-x-4 pt-1">
-          <div className="bg-subtle h-[80px] w-[80px] overflow-hidden rounded-md">
+          <div className="bg-subtle h-[80px] w-[80px] shrink-0 overflow-hidden rounded-md">
             <Image
               onError={() => setProductImgSrc(FALLBACK_IMAGE)}
               className="h-full w-full object-cover"
@@ -119,7 +119,9 @@ const ReviewCard = ({
             />
           </div>
           <div>
-            <div className="text-primary text-text-body-2">{productName}</div>
+            <div className="text-primary text-text-body-2 line-clamp-1">
+              {productName}
+            </div>
             <div className="text-text-button-1 font-semibold">
               {Number(productPrice).toLocaleString()}원
             </div>

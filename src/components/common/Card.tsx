@@ -47,7 +47,7 @@ const Card = ({
   const [imgSrc, setImgSrc] = useState(imageUrl);
 
   return (
-    <div className="w-[250px]">
+    <div className="w-[308px]">
       {/* 이미지 & 하트 */}
       <div className="relative mb-2 flex h-[250px] w-full items-center justify-center overflow-hidden rounded-lg border border-border-default">
         <Checkbox
