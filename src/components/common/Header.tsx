@@ -54,11 +54,13 @@ const Header = ({ isLoggedIn }: HeaderProps) => {
           {isLoggedIn ? (
             <>
               {/* TODO: 장바구니 기능 추가 후 링크 이동 추가 */}
-              <IconButton
-                iconClassName={ICON_STYLE}
-                aria-label="장바구니"
-                As={ShoppingCart}
-              />
+              <Link href={URLS.CART}>
+                <IconButton
+                  iconClassName={ICON_STYLE}
+                  aria-label="장바구니"
+                  As={ShoppingCart}
+                />
+              </Link>
               <IconButton
                 href={isMyPageModalOpen ? undefined : URLS.MY_PAGE_MODAL}
                 onClick={isMyPageModalOpen ? router.back : undefined}

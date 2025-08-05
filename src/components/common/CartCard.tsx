@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 type CartItemCardProps = {
-  handleCheckboxChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCheckboxChange: (id: number) => void;
   isChecked: boolean;
   imageUrl?: string;
   tags?: string[];
   brand: string;
   name: string;
+  id: number;
 };
 
 const FALLBACK_IMAGE = "/fallback-image.svg";
@@ -46,6 +47,7 @@ const CartCard = ({
   imageUrl,
   brand,
   name,
+  id,
 }: CartItemCardProps) => {
   const [imgSrc, setImgSrc] = useState(imageUrl || FALLBACK_IMAGE);
 
@@ -53,16 +55,16 @@ const CartCard = ({
     setImgSrc(imageUrl && imageUrl.trim() !== "" ? imageUrl : FALLBACK_IMAGE);
   }, [imageUrl]);
   return (
-    <div className="flex w-full max-w-md items-start gap-3 rounded-md border p-3">
+    <div className="flex w-full max-w-md items-start gap-3 rounded-md p-3">
       {/* 이미지 + 체크박스*/}
       <div className="relative h-[112px] w-[112px] flex-shrink-0 rounded border border-border-default">
         <Checkbox
           className="absolute top-[4px] left-[4px] h-[24px] w-[24px]"
-          onChange={handleCheckboxChange}
+          onChange={() => handleCheckboxChange(id)}
+          name={`checkbox-${id}`}
+          id={`checkbox-${id}`}
           checked={isChecked}
           type="checkbox1"
-          name="checkbox1"
-          id="checkbox1"
         />
         <Image
           className="h-full w-full rounded object-cover"
