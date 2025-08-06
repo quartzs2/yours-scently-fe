@@ -1,47 +1,47 @@
+// src/components/common/card-swiper/CardSwiper.tsx
 "use client";
 
-import { CardSwiperProps } from "@components/common/card-swiper/CardSwiper.types";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { SwiperSlide, Swiper } from "swiper/react";
-import Card from "@components/common/Card";
+import Card from "@components/common/card/Card";
 import { cn } from "@utils/cn";
+
+import type { CardSwiperProps } from "./CardSwiper.types";
 
 const CardSwiper = ({
   withNavigation = false,
   withPagination = false,
-  slidesPerView = 4,
   spaceBetween = 10,
-  className,
+  autoplay = true,
+  className = "",
   items,
 }: CardSwiperProps) => {
   return (
     <div className={cn("relative w-full", className)}>
       <Swiper
+        autoplay={
+          autoplay
+            ? {
+                disableOnInteraction: false,
+                delay: 3000,
+              }
+            : false
+        }
         breakpoints={{
-          1024: {
-            slidesPerView: 4,
-          },
-          320: {
-            slidesPerView: 2,
-          },
-          640: {
-            slidesPerView: 3,
-          },
-        }}
-        autoplay={{
-          disableOnInteraction: false,
-          delay: 3000, // 3초마다 자동 슬라이드
+          1024: { slidesPerView: 4 },
+          320: { slidesPerView: 2 },
+          640: { slidesPerView: 3 },
         }}
         pagination={withPagination ? { clickable: true } : false}
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={spaceBetween}
         navigation={withNavigation}
       >
-        {items.map((item, index) => (
-          <SwiperSlide key={`card-slide-${index}`}>
+        {items.map((item) => (
+          <SwiperSlide key={item.id}>
             <Card {...item} />
           </SwiperSlide>
         ))}

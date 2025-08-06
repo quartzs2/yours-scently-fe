@@ -2,18 +2,17 @@
 
 import type { ReviewSwiperProps } from "@components/common/review-swiper/ReviewSwiper.types";
 
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import ReviewCard from "@components/common/review-card/ReviewCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import ReviewCard from "@components/common/ReviewCard";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { cn } from "@utils/cn";
 
 const ReviewSwiper = ({
   withNavigation = false,
   withPagination = false,
-  slidesPerView = 4.5,
   spaceBetween = 10,
   autoplay = true,
   className,
