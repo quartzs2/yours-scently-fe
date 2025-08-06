@@ -5,6 +5,7 @@ import Dialog from "@components/common/Dialog";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";
+import { URLS } from "@constants/urls";
 import { cn } from "@utils/cn";
 
 const DISTANCE_FROM_ICON = 40;
@@ -48,6 +49,10 @@ export default function MyPageModal() {
     return () => window.removeEventListener("resize", updatePosition);
   }, []);
 
+  useEffect(() => {
+    router.prefetch(URLS.MY_PAGE);
+  }, [router]);
+
   return (
     <Dialog
       className={cn(
@@ -67,11 +72,18 @@ export default function MyPageModal() {
         {/* TODO: 로그인 기능 추가 후 유저 이름 표시 */}
         <div className="text-button-1 flex justify-center">유어스 센틀리님</div>
         <div className="flex gap-2">
-          {/* TODO: 로그아웃, 마이 페이지 기능 추가 후 링크 이동 추가 */}
-
-          <Button>마이 페이지</Button>
-
-          <Button theme="light">로그아웃</Button>
+          <Button
+            onClick={() => {
+              window.location.href = URLS.MY_PAGE;
+            }}
+            aria-label="마이 페이지 이동"
+          >
+            마이 페이지
+          </Button>
+          {/* TODO: 로그아웃 기능 추가 후 동작 추가 */}
+          <Button aria-label="로그아웃" theme="light">
+            로그아웃
+          </Button>
         </div>
       </div>
     </Dialog>

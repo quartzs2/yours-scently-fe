@@ -36,7 +36,7 @@ export default function LoginPage() {
             type="password"
           />
         </div>
-        <Button type="submit" size={"2xl"}>
+        <Button aria-label="일반회원 로그인" type="submit" size={"2xl"}>
           일반회원 로그인
         </Button>
       </form>
