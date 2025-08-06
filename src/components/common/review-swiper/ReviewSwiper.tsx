@@ -1,0 +1,53 @@
+"use client";
+
+import type { ReviewSwiperProps } from "@components/common/review-swiper/ReviewSwiper.types";
+
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import ReviewCard from "@components/common/ReviewCard";
+import { SwiperSlide, Swiper } from "swiper/react";
+import { cn } from "@utils/cn";
+
+const ReviewSwiper = ({
+  withNavigation = false,
+  withPagination = false,
+  slidesPerView = 4.5,
+  spaceBetween = 10,
+  autoplay = true,
+  className,
+  items,
+}: ReviewSwiperProps) => {
+  return (
+    <div className={cn("relative w-full", className)}>
+      <Swiper
+        autoplay={
+          autoplay
+            ? {
+                disableOnInteraction: false,
+                delay: 3000,
+              }
+            : false
+        }
+        breakpoints={{
+          1024: { slidesPerView: 4.5 },
+          320: { slidesPerView: 2 },
+          640: { slidesPerView: 3 },
+        }}
+        pagination={withPagination ? { clickable: true } : false}
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={spaceBetween}
+        navigation={withNavigation}
+      >
+        {items.map((item, index) => (
+          <SwiperSlide key={`review-slide-${index}`}>
+            <ReviewCard {...item} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+};
+
+export default ReviewSwiper;
