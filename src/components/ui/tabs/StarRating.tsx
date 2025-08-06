@@ -29,6 +29,12 @@ const StarRating = ({
   className,
   rating,
 }: StarRatingProps) => {
+  const starIconProps = {
+    stroke: "currentColor",
+    strokeWidth: 1.5,
+    size: size,
+  };
+
   const stars = Array.from({ length: maxRating }, (_, index) => {
     const fillPercentage = Math.max(0, Math.min(100, (rating - index) * 100));
 
@@ -39,22 +45,18 @@ const StarRating = ({
         key={index}
       >
         <Star
+          {...starIconProps}
           className={cn(emptyColor, "absolute top-0 left-0")}
-          stroke="currentColor"
-          strokeWidth={1.5}
-          fill={"none"}
-          size={size}
+          fill="none"
         />
         <div
           style={{ width: `${fillPercentage}%`, height: size }}
           className="absolute top-0 left-0 overflow-hidden"
         >
           <Star
+            {...starIconProps}
             className={cn(filledColor, "absolute top-0 left-0")}
-            stroke="currentColor"
             fill="currentColor"
-            strokeWidth={1.5}
-            size={size}
           />
         </div>
       </div>
