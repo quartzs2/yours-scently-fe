@@ -1,4 +1,4 @@
-import { CardProps } from "@components/common/Card";
+import { CardProps } from "@custom-types/MainCard.type";
 
 export const cardMockData: CardProps[] = [
   {
@@ -7,6 +7,7 @@ export const cardMockData: CardProps[] = [
     tags: ["플로럴", "데일리"],
     name: "라튤립 오 드 퍼퓸",
     isLiked: false,
+    id: "card-1",
     price: 12900,
   },
   {
@@ -15,6 +16,7 @@ export const cardMockData: CardProps[] = [
     name: "우드 세이지 앤 씨 솔트",
     tags: ["시트러스", "프레시"],
     isLiked: true,
+    id: "card-2",
     price: 24900,
   },
   {
@@ -23,6 +25,7 @@ export const cardMockData: CardProps[] = [
     imageUrl: "/globe.svg",
     name: "르 라보 상탈 33",
     isLiked: false,
+    id: "card-3",
     price: 31900,
   },
   {
@@ -31,6 +34,7 @@ export const cardMockData: CardProps[] = [
     tags: ["관능적", "강렬함"],
     name: "톰 포드 블랙 오키드",
     isLiked: true,
+    id: "card-4",
     price: 18900,
   },
   {
@@ -39,6 +43,7 @@ export const cardMockData: CardProps[] = [
     tags: ["관능적", "강렬함"],
     name: "가나다라마바사",
     isLiked: true,
+    id: "card-5",
     price: 32900,
   },
 ];

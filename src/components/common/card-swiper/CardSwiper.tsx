@@ -7,7 +7,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Card from "@components/common/card-component/card";
+import Card from "@components/common/card-component/MainCard";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { cn } from "@utils/cn";
 

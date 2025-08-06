@@ -1,4 +1,3 @@
-// src/components/common/card/Card.type.ts
 export type CardProps = {
   handleHeartChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   imageUrl?: string;

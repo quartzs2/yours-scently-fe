@@ -1,5 +1,5 @@
 // src/components/common/card-swiper/CardSwiper.types.ts
-import type { CardProps } from "@custom-types/Card.type";
+import type { CardProps } from "@custom-types/MainCard.type";
 
 export type CardSwiperProps = {
   withNavigation?: boolean;

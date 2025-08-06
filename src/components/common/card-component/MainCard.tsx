@@ -1,6 +1,6 @@
 "use client";
 
-import type { CardProps } from "@custom-types/Card.type";
+import type { CardProps } from "@custom-types/MainCard.type";
 
 import Checkbox from "@components/ui/input/Checkbox";
 import { Tag } from "@components/ui/tabs";
