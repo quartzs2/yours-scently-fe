@@ -1,4 +1,4 @@
-import type { ReviewCardProps } from "@components/common/review-card/ReviewCard.types";
+import type { ReviewCardProps } from "@custom-types/ReviewCard.types";
 
 export type ReviewSwiperProps = {
   items: ReviewCardProps[];

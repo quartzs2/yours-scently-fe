@@ -1,21 +1,10 @@
 "use client";
 
+import type { ReviewCardProps } from "@custom-types/ReviewCard.types";
+
 import { useEffect, useState, useMemo } from "react";
 import { StarHalf, Star } from "lucide-react";
 import Image from "next/image";
-
-export type ReviewCardProps = {
-  productImage?: string;
-  productPrice: string;
-  productName: string;
-  imageUrl?: string;
-  timeAgo: string;
-  rating: number;
-  review: string;
-  writer: string;
-  date: string;
-};
-
 const FALLBACK_IMAGE = "/fallback-image.svg";
 
 /**

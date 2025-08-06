@@ -1,13 +1,12 @@
-// src/components/common/card/Card.tsx
 "use client";
+
+import type { CardProps } from "@custom-types/Card.type";
 
 import Checkbox from "@components/ui/input/Checkbox";
 import { Tag } from "@components/ui/tabs";
 import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@utils/cn";
-
-import type { CardProps } from "./Card.type";
 
 const FALLBACK_IMAGE = "/fallback-image.svg";
 

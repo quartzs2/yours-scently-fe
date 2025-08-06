@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReviewSwiperProps } from "@components/common/review-swiper/ReviewSwiper.types";
+import type { ReviewSwiperProps } from "@custom-types/ReviewSwiper.types";
 
 import ReviewCard from "@components/common/review-card/ReviewCard";
 import "swiper/css";
