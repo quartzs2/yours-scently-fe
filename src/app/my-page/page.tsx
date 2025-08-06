@@ -1,11 +1,12 @@
 "use client";
 
 import { mockReviewCards } from "@app/my-page/mocks/mockReviewCard";
+import ReviewCard from "@components/common/review-card/ReviewCard";
+// import는 알파벳 순서로 정렬
+import MainCard from "@components/common/card-component/MainCard";
 import MypageCard from "@components/feature/my-page/MypageCard";
 import { cardMockData } from "@app/my-page/mocks/mockCard";
-import ReviewCard from "@components/common/ReviewCard";
 import { ChevronRight } from "lucide-react";
-import Card from "@components/common/Card";
 import Icon from "@components/ui/Icon";
 
 type OrderStatusItem = {
@@ -27,7 +28,6 @@ export default function MyPage() {
       <span className="text-subtitle-1 mt-[80px] mb-[32px] w-full text-text-primary">
         마이페이지
       </span>
-      {/* 마이페이지 카드 임포트 */}
 
       <div className="justify-around-between flex w-full gap-2">
         <MypageCard nickname="양단비" type="user" />
@@ -49,8 +49,6 @@ export default function MyPage() {
           brand="샤넬"
         />
       </div>
-
-      {/*주문/배송 조회*/}
 
       <div className="mt-[80px] mb-[32px] flex w-full items-center justify-between">
         <div className="flex items-center gap-2">
@@ -87,19 +85,19 @@ export default function MyPage() {
         {/* 찜한 목록 */}
         <div className="mt-[80px] mb-[32px] flex items-center justify-between">
           <h2 className="text-subtitle-1 font-semibold">찜한 목록</h2>
-
           <p className="text-subtitle-2 text-text-secondary">더보기 &gt;</p>
         </div>
         <div className="mb-12 flex gap-2 overflow-hidden">
-          {cardMockData.map((card, id) => (
-            <div key={`${card.name} - ${id}`} className="shrink-0">
-              <Card
+          {cardMockData.map((card) => (
+            <div className="shrink-0" key={card.id}>
+              <MainCard
                 handleHeartChange={() => {}}
                 imageUrl={card.imageUrl}
                 isLiked={card.isLiked}
                 price={card.price}
                 tags={card.tags}
                 name={card.name}
+                id={card.id}
               />
             </div>
           ))}
@@ -108,12 +106,11 @@ export default function MyPage() {
         {/* 나의 리뷰 */}
         <div className="mt-[80px] mb-[32px] flex items-center justify-between">
           <h2 className="text-subtitle-1 font-semibold">내가 쓴 리뷰</h2>
-
           <p className="text-subtitle-2 text-text-secondary">더보기 &gt;</p>
         </div>
         <div className="flex gap-2 overflow-hidden">
-          {mockReviewCards.map((card, id) => (
-            <div key={`${card.productName} - ${id}`} className="shrink-0">
+          {mockReviewCards.map((card) => (
+            <div className="shrink-0" key={card.id}>
               <ReviewCard
                 productPrice={card.productPrice}
                 productImage={card.productImage}
@@ -124,6 +121,7 @@ export default function MyPage() {
                 review={card.review}
                 writer={card.writer}
                 date={card.date}
+                id={card.id}
               />
             </div>
           ))}
