@@ -20,7 +20,6 @@ type StarRatingProps = {
  * @example
  * <StarRating rating={4.5} />
  */
-
 const StarRating = ({
   filledColor = "text-system-warning",
   emptyColor = "text-system-warning",
@@ -73,5 +72,7 @@ const StarRating = ({
     </div>
   );
 };
+
+StarRating.displayName = "StarRating";
 
 export default StarRating;
