@@ -5,13 +5,12 @@ import {
   registerSchema,
 } from "@app/login/@modal/(.)register/schema";
 import BirthDateSection from "@components/feature/register/BirthDateSection";
-import { FormState, register } from "@app/login/@modal/(.)register/actions";
 import NicknameSection from "@components/feature/register/NicknameSection";
 import PasswordSection from "@components/feature/register/PasswordSection";
 import GenderSection from "@components/feature/register/GenderSection";
 import EmailSection from "@components/feature/register/EmailSection";
-import PhoneSection from "@components/feature/register/PhoneSection";
 import NameSection from "@components/feature/register/NameSection";
+import { register } from "@app/login/@modal/(.)register/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useActionState, useEffect } from "react";
 import Dialog from "@components/common/Dialog";
@@ -24,22 +23,19 @@ import { cn } from "@utils/cn";
 export default function RegisterModal() {
   const router = useRouter();
 
-  const [state, formAction] = useActionState(
-    async (prevState: FormState, formData: FormData) => {
-      return await register(formData);
-    },
-    {
-      success: false,
-      message: "",
-    },
-  );
+  const [state, formAction] = useActionState(register, {
+    success: false,
+    message: "",
+  });
 
   const form = useForm<RegisterSchema>({
     defaultValues: {
+      isEmailVerified: false,
+      verificationCode: "",
+      passwordConfirm: "",
       phoneNumber: "",
-      gender: "male",
+      gender: "MALE",
       birthDate: "",
-      password2: "",
       nickname: "",
       password: "",
       email: "",
@@ -47,14 +43,6 @@ export default function RegisterModal() {
     },
     resolver: zodResolver(registerSchema),
   });
-
-  const onSubmit = (data: RegisterSchema) => {
-    const formData = new FormData();
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-    formAction(formData);
-  };
 
   useEffect(() => {
     if (state.success) {
@@ -93,15 +81,14 @@ export default function RegisterModal() {
         <div className="text-body-1 mt-8">회원가입</div>
         <form
           className="mt-6 flex h-[400px] flex-col gap-10 overflow-y-scroll"
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(formAction)}
         >
-          <NameSection />
-          <NicknameSection />
-          <BirthDateSection />
-          <GenderSection />
-          <EmailSection />
-          <PhoneSection />
-          <PasswordSection />
+          <NameSection form={form} />
+          <NicknameSection form={form} />
+          <BirthDateSection form={form} />
+          <GenderSection form={form} />
+          <EmailSection form={form} />
+          <PasswordSection form={form} />
           <Button className="w-full shrink-0" type="submit" size={"2xl"}>
             가입하기
           </Button>

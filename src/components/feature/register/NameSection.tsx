@@ -1,7 +1,14 @@
+import { RegisterSchema } from "@app/login/@modal/(.)register/schema";
+import { UseFormReturn } from "react-hook-form";
 import Input from "@components/ui/input/Input";
 import React from "react";
 
-const NameSection = () => {
+const NameSection = ({ form }: { form: UseFormReturn<RegisterSchema> }) => {
+  const {
+    formState: { errors },
+    register,
+  } = form;
+
   return (
     <div className="flex flex-col gap-2">
       <div className="text-body-2 text-text-primary">이름</div>
@@ -10,6 +17,9 @@ const NameSection = () => {
         placeholder="이름을 입력해주세요."
         type="text"
         id="name"
+        {...register("name")}
+        isValid={errors.name ? false : undefined}
+        errorMessage={errors.name?.message}
       />
     </div>
   );
