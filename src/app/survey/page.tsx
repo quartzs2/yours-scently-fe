@@ -10,30 +10,32 @@ import IntroPage from "@components/feature/survey/IntroPage";
 import ScentMood from "@components/feature/survey/ScentMood";
 import { useState } from "react";
 
+const nextStepMap: Record<SurveyStep, SurveyStep> = {
+  recommendations: "recommendations",
+  keywords: "recommendations",
+  scentMood: "intensity",
+  intensity: "occasion",
+  occasion: "keywords",
+  intro: "scentMood",
+};
+
+const prevStepMap: Record<SurveyStep, SurveyStep> = {
+  recommendations: "keywords",
+  intensity: "scentMood",
+  occasion: "intensity",
+  keywords: "occasion",
+  scentMood: "intro",
+  intro: "intro",
+};
+
 export default function SurveyPage() {
   const [step, setStep] = useState<SurveyStep>("intro");
 
   const goToNextStep = () => {
-    const nextStepMap: Record<SurveyStep, SurveyStep> = {
-      recommendations: "recommendations",
-      keywords: "recommendations",
-      scentMood: "intensity",
-      intensity: "occasion",
-      occasion: "keywords",
-      intro: "scentMood",
-    };
     setStep((prev) => nextStepMap[prev]);
   };
 
   const goToPrevStep = () => {
-    const prevStepMap: Record<SurveyStep, SurveyStep> = {
-      recommendations: "keywords",
-      intensity: "scentMood",
-      occasion: "intensity",
-      keywords: "occasion",
-      scentMood: "intro",
-      intro: "intro",
-    };
     setStep((prev) => prevStepMap[prev]);
   };
 

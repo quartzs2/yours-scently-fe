@@ -9,15 +9,15 @@ interface ScentMoodProps {
   onNext: () => void;
 }
 
-export default function ScentMood({ onBack, onNext }: ScentMoodProps) {
-  const moodOptions = [
-    "상쾌한 느낌",
-    "따뜻하고 포근한 느낌",
-    "로맨틱하고 부드러운 느낌",
-    "에너지 넘치고 활기찬 느낌",
-    "신비롭고 매혹적인 느낌",
-  ];
+const moodOptions = [
+  "상쾌한 느낌",
+  "따뜻하고 포근한 느낌",
+  "로맨틱하고 부드러운 느낌",
+  "에너지 넘치고 활기찬 느낌",
+  "신비롭고 매혹적인 느낌",
+];
 
+export default function ScentMood({ onBack, onNext }: ScentMoodProps) {
   const [selected, setSelected] = useState<number | null>(null);
 
   const handleChange =

@@ -9,18 +9,18 @@ interface OccasionQuestionProps {
   onNext: () => void;
 }
 
+const occasions = [
+  { main: "매일 부담 없이 사용하는", sub: "데일리용" },
+  { main: "업무나 공부에 몰입하고 싶은", sub: "집중할 때" },
+  { main: "편안하게 휴식하고 싶은", sub: "잠들기 전" },
+  { main: "땀을 씻어내고 상쾌해지고 싶은", sub: "운동 후" },
+  { main: "인상 깊은 순간을 만들고 싶은", sub: "특별한 날" },
+];
+
 export default function OccasionQuestion({
   onBack,
   onNext,
 }: OccasionQuestionProps) {
-  const occasions = [
-    { main: "매일 부담 없이 사용하는", sub: "데일리용" },
-    { main: "업무나 공부에 몰입하고 싶은", sub: "집중할 때" },
-    { main: "편안하게 휴식하고 싶은", sub: "잠들기 전" },
-    { main: "땀을 씻어내고 상쾌해지고 싶은", sub: "운동 후" },
-    { main: "인상 깊은 순간을 만들고 싶은", sub: "특별한 날" },
-  ];
-
   const [selected, setSelected] = useState<number | null>(null);
 
   const handleChange =

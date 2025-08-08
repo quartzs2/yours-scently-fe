@@ -9,17 +9,18 @@ interface IntensityQuestionProps {
   onNext: () => void;
 }
 
+// options 배열을 컴포넌트 바깥에 위치시켜 재생성 방지
+const options = [
+  "은은한 향을 좋아해요",
+  "적당한 향이 좋아요",
+  "존재감 있는 강한 향이 좋아요",
+];
+
 export default function IntensityQuestion({
   onBack,
   onNext,
 }: IntensityQuestionProps) {
   const [selected, setSelected] = useState<number | null>(null);
-
-  const options = [
-    "은은한 향을 좋아해요",
-    "적당한 향이 좋아요",
-    "존재감 있는 강한 향이 좋아요",
-  ];
 
   const handleChange =
     (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {

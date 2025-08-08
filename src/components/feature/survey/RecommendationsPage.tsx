@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";
-import Tag from "@components/ui/tabs/Tag"; // 경로는 프로젝트에 맞게 조정하세요
+import Tag from "@components/ui/tabs/Tag";
+import Image from "next/image"; // 추가
 
-// 노트 라벨 매핑
 const noteLabelMap: Record<string, string> = {
   vanilla: "바닐라",
   citrus: "시트러스",
@@ -13,7 +13,6 @@ const noteLabelMap: Record<string, string> = {
   rose: "로즈",
 };
 
-// 목업 데이터
 const mockResult = {
   reason:
     "당신이 선호한 향기 노트 'vanilla', 'amber'가 포함되어 있고, 비선호 향기 'citrus'는 포함되어 있지 않습니다. '따뜻한' 분위기와 중간 강도의 향이 특징입니다.",
@@ -26,23 +25,26 @@ const mockResult = {
   perfume_name: "Warm Vanilla Woods",
   intensity: "eau de parfume",
   main_moods: ["따뜻한", "부드러운"],
-  brand: "Scents & Co.",
   score: 0.93,
 };
 
 export default function RecommendationsPage() {
   const router = useRouter();
 
-  const { survey_result, perfume_name, reason, brand } = mockResult;
+  // brand 제거
+  const { survey_result, perfume_name, reason } = mockResult;
 
   return (
     <div className="bg-background-default mb-[120px] flex w-full items-center justify-center px-4 pt-[80px]">
       <div className="flex w-full max-w-lg flex-col items-center gap-8">
         {/* 향수 이미지 */}
-        <img
+        <Image
           src="/mock/survey/warmVanillaWoods.png"
           className="w-48"
+          height={192}
           alt="추천 향수"
+          width={192} // w-48 (48 * 4 = 192px) 기준
+          priority
         />
 
         {/* 향수 정보 */}
@@ -60,12 +62,14 @@ export default function RecommendationsPage() {
           </div>
         </div>
 
-        <div className="text-body-1 relative mb-6 w-[810px] px-6 text-center leading-relaxed break-keep whitespace-normal text-text-primary">
+        <div className="text-body-1 relative mb-6 w-full max-w-[810px] px-6 text-center leading-relaxed break-keep whitespace-normal text-text-primary">
           {/* 왼쪽 따옴표 */}
-          <img
-            className="absolute top-1 left-4 h-4 w-4"
+          <Image
             src="/mock/survey/left-double-quote.svg"
+            className="absolute top-1 left-4"
             alt="quote-left"
+            height={16}
+            width={16}
           />
           <div>
             <p>
@@ -74,10 +78,12 @@ export default function RecommendationsPage() {
             <p className="mt-1">{reason}</p>
           </div>
           {/* 오른쪽 따옴표 */}
-          <img
-            className="absolute top-1 right-4 h-4 w-4"
+          <Image
             src="/mock/survey/right-double-quote.svg"
+            className="absolute top-1 right-4"
             alt="quote-right"
+            height={16}
+            width={16}
           />
         </div>
 

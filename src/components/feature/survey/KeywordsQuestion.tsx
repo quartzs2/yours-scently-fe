@@ -9,23 +9,23 @@ interface KeywordsQuestionProps {
   onNext: () => void;
 }
 
+const keywords = [
+  "자유로운",
+  "따뜻한",
+  "부드러운",
+  "이성적인",
+  "몽환적인",
+  "정돈된",
+  "감성적인",
+  "시크한",
+  "사랑스러운",
+  "강렬한",
+];
+
 export default function KeywordsQuestion({
   onBack,
   onNext,
 }: KeywordsQuestionProps) {
-  const keywords = [
-    "자유로운",
-    "따뜻한",
-    "부드러운",
-    "이성적인",
-    "몽환적인",
-    "정돈된",
-    "감성적인",
-    "시크한",
-    "사랑스러운",
-    "강렬한",
-  ];
-
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
   const handleToggleKeyword = (keyword: string) => {
@@ -59,15 +59,7 @@ export default function KeywordsQuestion({
                 key={index}
               >
                 <Checkbox
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setSelectedKeywords((prev) => [...prev, word]);
-                    } else {
-                      setSelectedKeywords((prev) =>
-                        prev.filter((k) => k !== word),
-                      );
-                    }
-                  }}
+                  onChange={() => handleToggleKeyword(word)}
                   id={`keyword-${index}`}
                   checked={isSelected}
                   type="checkbox2"
