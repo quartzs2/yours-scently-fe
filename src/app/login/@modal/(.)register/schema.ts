@@ -92,7 +92,7 @@ export const registerSchema = z
     if (data.isEmailVerified !== true) {
       ctx.addIssue({
         message: "이메일 인증을 완료해주세요.",
-        path: ["isEmailVerified"],
+        path: ["verificationCode"],
         code: "custom",
       });
     }

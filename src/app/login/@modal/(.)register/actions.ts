@@ -126,9 +126,9 @@ export async function checkNickname(nickname: string): Promise<{
         success: false,
       };
     }
+    return {
+      message: "닉네임 중복 확인에 실패했습니다. 잠시 후 다시 시도해주세요.",
+      success: false,
+    };
   }
-  return {
-    message: "닉네임 중복 확인에 실패했습니다. 잠시 후 다시 시도해주세요.",
-    success: false,
-  };
 }
