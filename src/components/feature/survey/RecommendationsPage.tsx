@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";
 import Tag from "@components/ui/tabs/Tag";
-import Image from "next/image"; // 추가
+import Image from "next/image";
 
 const noteLabelMap: Record<string, string> = {
   vanilla: "바닐라",
@@ -91,7 +91,7 @@ export default function RecommendationsPage() {
         <div className="flex w-full items-center justify-center gap-3">
           <Button
             className="text-body-1 rounded-full border border-primary-main bg-bg-default py-2 text-primary-main"
-            onClick={() => router.push("/")}
+            href="/"
           >
             홈으로 돌아가기
           </Button>

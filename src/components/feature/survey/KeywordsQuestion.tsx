@@ -10,16 +10,12 @@ interface KeywordsQuestionProps {
 }
 
 const keywords = [
-  "자유로운",
   "따뜻한",
   "부드러운",
-  "이성적인",
-  "몽환적인",
-  "정돈된",
-  "감성적인",
   "시크한",
   "사랑스러운",
   "강렬한",
+  "몽환적인",
 ];
 
 export default function KeywordsQuestion({

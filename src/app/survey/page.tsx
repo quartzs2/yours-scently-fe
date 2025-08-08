@@ -10,6 +10,7 @@ import IntroPage from "@components/feature/survey/IntroPage";
 import ScentMood from "@components/feature/survey/ScentMood";
 import { useState } from "react";
 
+// 🔹 컴포넌트 외부로 이동
 const nextStepMap: Record<SurveyStep, SurveyStep> = {
   recommendations: "recommendations",
   keywords: "recommendations",

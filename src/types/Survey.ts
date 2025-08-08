@@ -5,11 +5,11 @@
  * 현재 사용되지 않으나, 향후 기능 확장 시 활용할 예정입니다.
  */
 export interface SurveyAnswer {
-  preferred_intensity: string;
-  preferred_notes: string[];
-  disliked_notes: string[];
-  preferred_mood: string[];
-  top_n: number;
+  preferredIntensity: string;
+  preferredNotes: string[];
+  dislikedNotes: string[];
+  preferredMood: string[];
+  topN: number;
 }
 
 export type SurveyStep =
