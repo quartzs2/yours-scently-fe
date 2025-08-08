@@ -1,4 +1,4 @@
-export type CardProps = {
+export type MainCardProps = {
   handleHeartChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   imageUrl?: string;
   isLiked?: boolean;

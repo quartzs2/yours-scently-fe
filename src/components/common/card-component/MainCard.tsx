@@ -1,23 +1,27 @@
 "use client";
 
-import type { CardProps } from "@custom-types/MainCard.type";
+import type { MainCardProps } from "@custom-types/MainCard.type";
 
 import Checkbox from "@components/ui/input/Checkbox";
+import { useEffect, useState } from "react";
 import { Tag } from "@components/ui/tabs";
-import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@utils/cn";
 
 const FALLBACK_IMAGE = "/fallback-image.svg";
 
-const Card = ({
+const MainCard = ({
   handleHeartChange,
   item,
 }: {
-  handleHeartChange?: CardProps["handleHeartChange"];
-  item?: Omit<CardProps, "handleHeartChange">;
+  handleHeartChange?: MainCardProps["handleHeartChange"];
+  item?: Omit<MainCardProps, "handleHeartChange">;
 }) => {
   const [imgSrc, setImgSrc] = useState(item?.imageUrl);
+
+  useEffect(() => {
+    setImgSrc(item?.imageUrl);
+  }, [item?.imageUrl]);
 
   if (!item) {
     return null;
@@ -65,4 +69,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default MainCard;

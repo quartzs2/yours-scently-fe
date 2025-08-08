@@ -13,7 +13,7 @@ import React from "react";
 
 type SwiperWithChildrenProps<T> = {
   children: React.ReactElement<{ item: T }>;
-  item: T[];
+  items: T[];
 } & Omit<CardSwiperProps, "items">;
 
 /**
@@ -51,7 +51,7 @@ const CardSwiper = <T extends { id: string | number }>({
   autoplay = true,
   className = "",
   children,
-  item,
+  items,
 }: SwiperWithChildrenProps<T>) => {
   return (
     <div className={cn("card-swiper-container relative w-full", className)}>
@@ -82,7 +82,7 @@ const CardSwiper = <T extends { id: string | number }>({
         spaceBetween={spaceBetween}
         slidesPerView={"auto"}
       >
-        {item.map((item) => (
+        {items.map((item) => (
           <SwiperSlide key={item.id}>
             {React.cloneElement(children, { item: item })}
           </SwiperSlide>
