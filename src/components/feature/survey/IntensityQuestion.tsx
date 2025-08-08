@@ -2,7 +2,7 @@
 
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import Checkbox from "@components/ui/input/Checkbox";
-import IconButton from "@components/ui/IconButton"; // 추가 임포트
+import IconButton from "@components/ui/IconButton";
 import { useState } from "react";
 import { cn } from "@utils/cn";
 
@@ -49,7 +49,7 @@ export default function IntensityQuestion({
         <div className="flex flex-col gap-4">
           {displayOptions.map((text, index) => (
             <label
-              className="flex cursor-pointer items-center gap-4"
+              className="flex cursor-pointer items-center gap-3"
               htmlFor={`intensity-option-${index}`}
               key={index}
             >
@@ -60,8 +60,8 @@ export default function IntensityQuestion({
                 checked={selected === index}
                 name="intensity"
                 type="checkbox2"
-                label={text}
               />
+              <span className="text-body-1 text-text-primary">{text}</span>
             </label>
           ))}
         </div>

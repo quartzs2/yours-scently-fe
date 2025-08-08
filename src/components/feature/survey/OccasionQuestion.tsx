@@ -2,12 +2,16 @@
 
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import Checkbox from "@components/ui/input/Checkbox";
+import IconButton from "@components/ui/IconButton";
 import { useState } from "react";
+import { cn } from "@utils/cn";
 
-interface OccasionQuestionProps {
+export type OccasionQuestionProps = {
   onBack: () => void;
   onNext: () => void;
-}
+};
+
+const QUESTION_TEXT = "Q. 어떤 상황에서 향을 사용하고 싶으신가요?";
 
 const occasions = [
   { main: "매일 부담 없이 사용하는", sub: "데일리용" },
@@ -36,7 +40,7 @@ export default function OccasionQuestion({
     <div className="bg-background-default flex h-screen w-full items-center justify-center">
       <div className="flex w-full max-w-xl flex-col items-center gap-10 px-4">
         <b className="text-subtitle-2 text-center font-bold text-text-primary">
-          Q. 어떤 상황에서 향을 사용하고 싶으신가요?
+          {QUESTION_TEXT}
         </b>
 
         <div className="flex flex-col gap-4">
@@ -44,19 +48,20 @@ export default function OccasionQuestion({
             const isSelected = selected === index;
             return (
               <label
-                className={`flex cursor-pointer items-start gap-3 rounded-md p-1 ${
-                  isSelected ? "bg-background-subtle" : ""
-                }`}
+                className={cn(
+                  "flex cursor-pointer items-start gap-3 rounded-md p-1",
+                  { "bg-background-subtle": isSelected },
+                )}
                 htmlFor={`occasion-option-${index}`}
                 key={index}
               >
                 <Checkbox
                   id={`occasion-option-${index}`}
                   onChange={handleChange(index)}
+                  className="h-[24px] w-[24px]"
                   checked={isSelected}
                   type="checkbox2"
                   name="occasion"
-                  className=""
                 />
                 <div className="flex">
                   <div className="text-body-1 text-text-secondary">
@@ -72,21 +77,23 @@ export default function OccasionQuestion({
         </div>
 
         <div className="mt-8 flex w-full max-w-xs justify-between">
-          <button onClick={onBack} aria-label="이전">
-            <ChevronLeft className="h-6 w-6 text-text-primary" />
-          </button>
-          <button
-            className={`${
-              selected === null
-                ? "cursor-not-allowed opacity-50"
-                : "cursor-pointer"
-            }`}
+          <IconButton
+            iconClassName="h-6 w-6 text-text-primary"
+            As={ChevronLeft}
+            onClick={onBack}
+            aria-label="이전"
+          />
+          <IconButton
+            className={cn({
+              "cursor-not-allowed opacity-50": selected === null,
+              "cursor-pointer": selected !== null,
+            })}
             onClick={() => selected !== null && onNext()}
+            iconClassName="h-6 w-6 text-text-primary"
             disabled={selected === null}
+            As={ChevronRight}
             aria-label="다음"
-          >
-            <ChevronRight className="h-6 w-6 text-text-primary" />
-          </button>
+          />
         </div>
       </div>
     </div>
