@@ -1,24 +1,31 @@
 "use client";
 
-import type { CardProps } from "@custom-types/MainCard.type";
+import type { MainCardProps } from "@custom-types/MainCard.type";
 
 import Checkbox from "@components/ui/input/Checkbox";
+import { useEffect, useState } from "react";
 import { Tag } from "@components/ui/tabs";
-import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@utils/cn";
 
 const FALLBACK_IMAGE = "/fallback-image.svg";
 
-const Card = ({
+const MainCard = ({
   handleHeartChange,
-  tags = [],
-  imageUrl,
-  isLiked,
-  price,
-  name,
-}: CardProps) => {
-  const [imgSrc, setImgSrc] = useState(imageUrl);
+  item,
+}: {
+  handleHeartChange?: MainCardProps["handleHeartChange"];
+  item?: Omit<MainCardProps, "handleHeartChange">;
+}) => {
+  const [imgSrc, setImgSrc] = useState(item?.imageUrl);
+
+  useEffect(() => {
+    setImgSrc(item?.imageUrl);
+  }, [item?.imageUrl]);
+
+  if (!item) {
+    return null;
+  }
 
   return (
     <div className="w-[308px]">
@@ -27,20 +34,20 @@ const Card = ({
         <Checkbox
           className="absolute top-[16px] right-[16px] m-2 h-[32px] w-[32px]"
           onChange={(e) => handleHeartChange && handleHeartChange(e)}
-          checked={isLiked}
+          checked={item?.isLiked || false}
           type="heart"
           name="heart"
           id="heart"
         />
         <Image
           className={cn(
-            imageUrl ? "h-full w-full object-contain" : "object-cover",
+            item?.imageUrl ? "h-full w-full object-contain" : "object-cover",
           )}
           onError={() => setImgSrc(FALLBACK_IMAGE)}
           src={imgSrc ?? FALLBACK_IMAGE}
+          alt={item.name}
           height={120}
           width={120}
-          alt={name}
         />
       </div>
 
@@ -48,18 +55,18 @@ const Card = ({
       <div className="rounded-lg border border-border-default">
         {/* 태그 */}
         <div className="flex flex-wrap gap-1 px-3 py-2">
-          {tags.map((tag, i) => (
+          {item.tags.map((tag, i) => (
             <Tag key={`${tag}-${i}`} text={tag} size="sm" />
           ))}
         </div>
         {/* 본문 */}
         <div className="px-3 pb-4">
-          <h3 className="text-body-1 truncate">{name}</h3>
-          <p className="text-body-1">{price.toLocaleString()}원</p>
+          <h3 className="text-body-1 truncate">{item.name}</h3>
+          <p className="text-body-1">{item.price.toLocaleString()}원</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Card;
+export default MainCard;

@@ -1,6 +1,6 @@
-import { CardProps } from "@custom-types/MainCard.type";
+import { MainCardProps } from "@custom-types/MainCard.type";
 
-export const cardMockData: CardProps[] = [
+export const cardMockData: MainCardProps[] = [
   {
     handleHeartChange: () => {},
     imageUrl: "/globe.svg",

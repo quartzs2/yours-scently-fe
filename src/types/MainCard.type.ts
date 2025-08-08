@@ -1,8 +1,8 @@
-export type CardProps = {
+export type MainCardProps = {
   handleHeartChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   imageUrl?: string;
-  isLiked: boolean;
-  tags?: string[];
+  isLiked?: boolean;
+  tags: string[];
   price: number;
   name: string;
   id: string; // SwiperSlide key용 필수

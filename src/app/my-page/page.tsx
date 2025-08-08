@@ -90,15 +90,7 @@ export default function MyPage() {
         <div className="mb-12 flex gap-2 overflow-hidden">
           {cardMockData.map((card) => (
             <div className="shrink-0" key={card.id}>
-              <MainCard
-                handleHeartChange={() => {}}
-                imageUrl={card.imageUrl}
-                isLiked={card.isLiked}
-                price={card.price}
-                tags={card.tags}
-                name={card.name}
-                id={card.id}
-              />
+              <MainCard handleHeartChange={() => {}} item={card} />
             </div>
           ))}
         </div>
