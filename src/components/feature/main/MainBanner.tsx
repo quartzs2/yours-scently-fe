@@ -1,8 +1,13 @@
+"use client";
+
 import mainBannerImg from "@assets/images/main-banner-img.png";
+import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";
 import Image from "next/image";
 
 export default function MainBanner() {
+  const router = useRouter();
+
   return (
     <section className="relative flex h-[720px] items-center justify-center select-none">
       <Image
@@ -22,7 +27,7 @@ export default function MainBanner() {
             <p>향으로 나를 표현하는 경험, 지금 시작하세요.</p>
           </div>
         </div>
-        <Button shape="pill" size="xl">
+        <Button onClick={() => router.push("/survey")} shape="pill" size="xl">
           START
         </Button>
       </div>

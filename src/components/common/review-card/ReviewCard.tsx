@@ -1,10 +1,21 @@
 "use client";
 
-import type { ReviewCardProps } from "@custom-types/ReviewCard.types";
-
 import { useEffect, useState, useMemo } from "react";
-import { StarHalf, Star } from "lucide-react";
+import { StarHalf, Star } from "lucide-react"; // StarHalf가 Star보다 먼저
 import Image from "next/image";
+
+export type ReviewCardProps = {
+  productImage?: string;
+  productPrice: string;
+  productName: string;
+  imageUrl?: string;
+  timeAgo: string;
+  rating: number;
+  review: string;
+  writer: string;
+  date: string;
+};
+
 const FALLBACK_IMAGE = "/fallback-image.svg";
 
 /**
@@ -60,7 +71,6 @@ const ReviewCard = ({
     setProductImgSrc(productImage || FALLBACK_IMAGE);
   }, [imageUrl, productImage]);
 
-  // 9시간 이상 또는 1일 이상이면 date 표시
   const displayTime = useMemo(() => {
     const match = timeAgo.match(/(\d+)\s*(시간|일)/);
     if (!match) return timeAgo;
@@ -74,7 +84,6 @@ const ReviewCard = ({
     return timeAgo;
   }, [timeAgo, date]);
 
-  // 0.5 단위 별점 렌더링 (full, half, empty)
   const renderStars = () => {
     const stars = [];
     const fullStars = Math.floor(rating);
