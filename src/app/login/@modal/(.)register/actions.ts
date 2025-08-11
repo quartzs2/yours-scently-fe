@@ -59,8 +59,10 @@ export async function register(
     if (error instanceof HTTPError) {
       const errorResponse = await error.response.json();
 
-      const firstError = Object.values(errorResponse)[0] as string[];
-      const errorMessage = firstError[0] || "서버 에러가 발생했습니다.";
+      const errorValues = Object.values(errorResponse);
+      const errorMessage =
+        (Array.isArray(errorValues[0]) && errorValues[0][0]) ||
+        "서버 에러가 발생했습니다.";
 
       return {
         message: errorMessage,
@@ -87,7 +89,10 @@ export async function checkEmailVerificationCode(
   } catch (error) {
     if (error instanceof HTTPError) {
       const errorResponse = await error.response.json();
-      const errorMessage = errorResponse.detail || "서버 에러가 발생했습니다.";
+      const errorValues = Object.values(errorResponse);
+      const errorMessage =
+        (Array.isArray(errorValues[0]) && errorValues[0][0]) ||
+        "서버 에러가 발생했습니다.";
 
       return {
         message: errorMessage,
@@ -111,7 +116,10 @@ export async function sendEmailVerificationCode(email: string): Promise<{
   } catch (error) {
     if (error instanceof HTTPError) {
       const errorResponse = await error.response.json();
-      const errorMessage = errorResponse.detail || "서버 에러가 발생했습니다.";
+      const errorValues = Object.values(errorResponse);
+      const errorMessage =
+        (Array.isArray(errorValues[0]) && errorValues[0][0]) ||
+        "서버 에러가 발생했습니다.";
 
       return {
         message: errorMessage,
@@ -139,7 +147,7 @@ export async function checkNickname(nickname: string): Promise<{
   } catch (error) {
     if (error instanceof HTTPError) {
       const errorResponse = await error.response.json();
-      const errorMessage = errorResponse.detail || "서버 에러가 발생했습니다.";
+      const errorMessage = errorResponse.message || "서버 에러가 발생했습니다.";
 
       return {
         message: errorMessage,

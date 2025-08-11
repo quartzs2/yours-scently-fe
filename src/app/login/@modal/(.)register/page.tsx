@@ -56,13 +56,18 @@ export default function RegisterModal() {
       return;
     }
 
-    if (!state.success && state.message) {
-      // 서버 에러 메시지 표시
-      alert(state.message);
-    }
-
     if (state.errors) {
+      Object.entries(state.errors).forEach(([key, value]) => {
+        if (value) {
+          form.setError(key as keyof RegisterSchema, {
+            message: value[0],
+            type: "server",
+          });
+        }
+      });
+    } else if (!state.success && state.message) {
       // TODO: 여기도 모달로 처리할지 확인
+      // 서버 에러 메시지 표시
       alert(state.message);
     }
   }, [state, router, form]);
