@@ -4,18 +4,6 @@ import { useEffect, useState, useMemo } from "react";
 import { StarHalf, Star } from "lucide-react"; // StarHalf가 Star보다 먼저
 import Image from "next/image";
 
-export type ReviewCardProps = {
-  productImage?: string;
-  productPrice: string;
-  productName: string;
-  imageUrl?: string;
-  timeAgo: string;
-  rating: number;
-  review: string;
-  writer: string;
-  date: string;
-};
-
 const FALLBACK_IMAGE = "/fallback-image.svg";
 
 /**
@@ -60,7 +48,17 @@ const ReviewCard = ({
   review,
   writer,
   date,
-}: ReviewCardProps) => {
+}: {
+  productImage?: string;
+  productPrice: string;
+  productName: string;
+  imageUrl?: string;
+  timeAgo: string;
+  rating: number;
+  review: string;
+  writer: string;
+  date: string;
+}) => {
   const [mainImgSrc, setMainImgSrc] = useState(imageUrl || FALLBACK_IMAGE);
   const [productImgSrc, setProductImgSrc] = useState(
     productImage || FALLBACK_IMAGE,

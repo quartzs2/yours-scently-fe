@@ -64,9 +64,7 @@ export type ButtonProps = (
       href?: undefined;
     } & React.ButtonHTMLAttributes<HTMLButtonElement>)
 ) &
-  VariantProps<typeof buttonStyles> & {
-    "aria-label"?: string;
-  };
+  VariantProps<typeof buttonStyles> & { "aria-label"?: string };
 
 /**
  * 재사용 가능한 Button 컴포넌트입니다.

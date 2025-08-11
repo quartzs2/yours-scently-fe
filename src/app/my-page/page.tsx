@@ -113,7 +113,6 @@ export default function MyPage() {
                 review={card.review}
                 writer={card.writer}
                 date={card.date}
-                id={card.id}
               />
             </div>
           ))}

@@ -15,7 +15,6 @@ const mockReviews: ReviewCardProps[] = [
     timeAgo: "3시간 전",
     writer: "사용자A",
     rating: 5,
-    id: "1",
   },
   {
     review:
@@ -28,7 +27,6 @@ const mockReviews: ReviewCardProps[] = [
     timeAgo: "1일 전",
     writer: "사용자B",
     rating: 4,
-    id: "2",
   },
   {
     review:
@@ -41,7 +39,6 @@ const mockReviews: ReviewCardProps[] = [
     timeAgo: "1일 전",
     writer: "사용자B",
     rating: 4.5,
-    id: "3",
   },
   {
     review:
@@ -54,7 +51,6 @@ const mockReviews: ReviewCardProps[] = [
     timeAgo: "1일 전",
     writer: "사용자B",
     rating: 4,
-    id: "4",
   },
   {
     review:
@@ -67,7 +63,6 @@ const mockReviews: ReviewCardProps[] = [
     timeAgo: "1일 전",
     writer: "사용자B",
     rating: 5,
-    id: "5",
   },
 ];
 

@@ -1,6 +1,7 @@
-export interface ReviewCardProps {
-  productPrice: string;
+// ReviewCard.types.ts
+export type ReviewCardProps = {
   productImage: string;
+  productPrice: string;
   productName: string;
   imageUrl: string;
   timeAgo: string;
@@ -8,5 +9,4 @@ export interface ReviewCardProps {
   review: string;
   writer: string;
   date: string;
-  id: string;
-}
+};
