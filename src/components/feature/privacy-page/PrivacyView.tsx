@@ -1,6 +1,6 @@
 // src/app/(mypage)/privacy/PrivacyView.tsx
 "use client";
-import FieldRow from "@components/privacy-page/FieldRow";
+import FieldRow from "@components/feature/privacy-page/FieldRow";
 import { DeliveryAddress } from "@custom-types/user";
 import { User } from "@custom-types/user";
 

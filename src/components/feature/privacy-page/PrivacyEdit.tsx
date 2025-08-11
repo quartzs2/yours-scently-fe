@@ -1,6 +1,6 @@
 // src/app/(mypage)/privacy/PrivacyEdit.tsx
 "use client";
-import FieldRow from "@components/privacy-page/FieldRow";
+import FieldRow from "@components/feature/privacy-page/FieldRow";
 import PhoneInput from "@components/ui/input/PhoneInput";
 import { useEffect, useState, useMemo } from "react";
 import { DeliveryAddress } from "@custom-types/user";
