@@ -1,7 +1,5 @@
 "use client";
 
-import type { SurveyStep } from "@custom-types/Survey";
-
 import RecommendationsPage from "@components/feature/survey/RecommendationsPage";
 import IntensityQuestion from "@components/feature/survey/IntensityQuestion";
 import OccasionQuestion from "@components/feature/survey/OccasionQuestion";
@@ -10,27 +8,40 @@ import IntroPage from "@components/feature/survey/IntroPage";
 import ScentMood from "@components/feature/survey/ScentMood";
 import { useState } from "react";
 
-// 🔹 컴포넌트 외부로 이동
-const nextStepMap: Record<SurveyStep, SurveyStep> = {
-  recommendations: "recommendations",
-  keywords: "recommendations",
-  scentMood: "intensity",
-  intensity: "occasion",
-  occasion: "keywords",
-  intro: "scentMood",
+// Step 상수 정의
+const STEP = {
+  RECOMMENDATIONS: "recommendations",
+  SCENT_MOOD: "scentMood",
+  INTENSITY: "intensity",
+  OCCASION: "occasion",
+  KEYWORDS: "keywords",
+  INTRO: "intro",
+} as const;
+
+type StepValue = (typeof STEP)[keyof typeof STEP];
+
+// 다음 스텝 매핑
+const nextStepMap: Record<StepValue, StepValue> = {
+  [STEP.RECOMMENDATIONS]: STEP.RECOMMENDATIONS,
+  [STEP.KEYWORDS]: STEP.RECOMMENDATIONS,
+  [STEP.SCENT_MOOD]: STEP.INTENSITY,
+  [STEP.INTENSITY]: STEP.OCCASION,
+  [STEP.OCCASION]: STEP.KEYWORDS,
+  [STEP.INTRO]: STEP.SCENT_MOOD,
 };
 
-const prevStepMap: Record<SurveyStep, SurveyStep> = {
-  recommendations: "keywords",
-  intensity: "scentMood",
-  occasion: "intensity",
-  keywords: "occasion",
-  scentMood: "intro",
-  intro: "intro",
+// 이전 스텝 매핑
+const prevStepMap: Record<StepValue, StepValue> = {
+  [STEP.RECOMMENDATIONS]: STEP.KEYWORDS,
+  [STEP.INTENSITY]: STEP.SCENT_MOOD,
+  [STEP.OCCASION]: STEP.INTENSITY,
+  [STEP.KEYWORDS]: STEP.OCCASION,
+  [STEP.SCENT_MOOD]: STEP.INTRO,
+  [STEP.INTRO]: STEP.INTRO,
 };
 
 export default function SurveyPage() {
-  const [step, setStep] = useState<SurveyStep>("intro");
+  const [step, setStep] = useState<StepValue>(STEP.INTRO);
 
   const goToNextStep = () => {
     setStep((prev) => nextStepMap[prev]);
@@ -40,22 +51,31 @@ export default function SurveyPage() {
     setStep((prev) => prevStepMap[prev]);
   };
 
+  // 렌더링 함수
+  const renderStepComponent = () => {
+    switch (step) {
+      case STEP.RECOMMENDATIONS:
+        return <RecommendationsPage />;
+      case STEP.SCENT_MOOD:
+        return <ScentMood onBack={goToPrevStep} onNext={goToNextStep} />;
+      case STEP.INTENSITY:
+        return (
+          <IntensityQuestion onBack={goToPrevStep} onNext={goToNextStep} />
+        );
+      case STEP.OCCASION:
+        return <OccasionQuestion onBack={goToPrevStep} onNext={goToNextStep} />;
+      case STEP.KEYWORDS:
+        return <KeywordsQuestion onBack={goToPrevStep} onNext={goToNextStep} />;
+      case STEP.INTRO:
+        return <IntroPage onNext={goToNextStep} />;
+      default:
+        return <IntroPage onNext={goToNextStep} />;
+    }
+  };
+
   return (
     <div className="bg-background-default flex h-screen w-full items-center justify-center px-4">
-      {step === "intro" && <IntroPage onNext={goToNextStep} />}
-      {step === "scentMood" && (
-        <ScentMood onBack={goToPrevStep} onNext={goToNextStep} />
-      )}
-      {step === "intensity" && (
-        <IntensityQuestion onBack={goToPrevStep} onNext={goToNextStep} />
-      )}
-      {step === "occasion" && (
-        <OccasionQuestion onBack={goToPrevStep} onNext={goToNextStep} />
-      )}
-      {step === "keywords" && (
-        <KeywordsQuestion onBack={goToPrevStep} onNext={goToNextStep} />
-      )}
-      {step === "recommendations" && <RecommendationsPage />}
+      {renderStepComponent()}
     </div>
   );
 }

@@ -1,8 +1,14 @@
 "use client";
 
+import type { SurveyRecommendationResult } from "@custom-types/Survey";
+
+import CloseQuoteIcon from "@assets/icons/ai-search-modal/icon-close-quote.svg";
+import OpenQuoteIcon from "@assets/icons/ai-search-modal/icon-open-quote.svg";
 import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";
 import Tag from "@components/ui/tabs/Tag";
+import Icon from "@components/ui/Icon";
+import { URLS } from "@constants/urls";
 import Image from "next/image";
 
 const noteLabelMap: Record<string, string> = {
@@ -13,7 +19,7 @@ const noteLabelMap: Record<string, string> = {
   rose: "로즈",
 };
 
-const mockResult = {
+const mockResult: SurveyRecommendationResult = {
   reason:
     "당신이 선호한 향기 노트 'vanilla', 'amber'가 포함되어 있고, 비선호 향기 'citrus'는 포함되어 있지 않습니다. '따뜻한' 분위기와 중간 강도의 향이 특징입니다.",
   survey_result: {
@@ -31,67 +37,55 @@ const mockResult = {
 export default function RecommendationsPage() {
   const router = useRouter();
 
-  // brand 제거
-  const { survey_result, perfume_name, reason } = mockResult;
+  const {
+    survey_result: surveyResult,
+    perfume_name: perfumeName,
+    reason,
+  } = mockResult;
 
   return (
     <div className="bg-background-default mb-[120px] flex w-full items-center justify-center px-4 pt-[80px]">
       <div className="flex w-full max-w-lg flex-col items-center gap-8">
-        {/* 향수 이미지 */}
         <Image
-          src="/mock/survey/warmVanillaWoods.png"
+          src="/survey/warmVanillaWoods.png"
           className="w-48"
           height={192}
           alt="추천 향수"
-          width={192} // w-48 (48 * 4 = 192px) 기준
+          width={192}
           priority
         />
 
-        {/* 향수 정보 */}
         <div className="flex flex-col items-center gap-2">
-          {/* 노트 태그 */}
           <div className="text-caption flex flex-wrap justify-center gap-2 text-text-secondary">
-            {survey_result.suitable_notes.map((note) => (
+            {surveyResult.suitable_notes.map((note) => (
               <Tag text={noteLabelMap[note] || note} key={note} size="sm" />
             ))}
           </div>
 
-          {/* 향수 이름 */}
           <div className="text-subtitle-1 mt-2 font-medium text-text-primary">
-            {perfume_name}
+            {perfumeName}
           </div>
         </div>
 
-        <div className="text-body-1 relative mb-6 w-full max-w-[810px] px-6 text-center leading-relaxed break-keep whitespace-normal text-text-primary">
-          {/* 왼쪽 따옴표 */}
-          <Image
-            src="/mock/survey/left-double-quote.svg"
-            className="absolute top-1 left-4"
-            alt="quote-left"
-            height={16}
-            width={16}
-          />
+        <div className="text-body-1 relative mb-6 w-[810px] max-w-[810px] px-6 text-center leading-relaxed break-keep whitespace-normal text-text-primary">
+          <div className="absolute top-1 left-4">
+            <Icon As={OpenQuoteIcon} />
+          </div>
           <div>
             <p>
-              당신이 선택한 ‘{survey_result.analyzed_mood}’ 분위기를 바탕으로,
+              당신이 선택한 ‘{surveyResult.analyzed_mood}’ 분위기를 바탕으로,
             </p>
             <p className="mt-1">{reason}</p>
           </div>
-          {/* 오른쪽 따옴표 */}
-          <Image
-            src="/mock/survey/right-double-quote.svg"
-            className="absolute top-1 right-4"
-            alt="quote-right"
-            height={16}
-            width={16}
-          />
+          <div className="absolute top-1 right-4">
+            <Icon As={CloseQuoteIcon} />
+          </div>
         </div>
 
-        {/* 버튼 */}
         <div className="flex w-full items-center justify-center gap-3">
           <Button
             className="text-body-1 rounded-full border border-primary-main bg-bg-default py-2 text-primary-main"
-            href="/"
+            href={URLS.HOME}
           >
             홈으로 돌아가기
           </Button>

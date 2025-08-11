@@ -15,3 +15,7 @@ export const API_URLS = {
   SIGN_UP_EMAIL_VERIFY: "/auth/signup/email/verify/",
   SIGN_UP: "/auth/signup/",
 };
+
+export const IMAGES = {
+  WARM_VANILLA_WOODS: "/survey/warmVanillaWoods.png",
+};

@@ -11,6 +11,9 @@ type KeywordsQuestionProps = {
   onNext: () => void;
 };
 
+const QUESTION_TEXT = "Q. 당신을 가장 잘 표현하는 감성 키워드를 골라주세요.";
+const QUESTION_NOTE = "(복수 선택)";
+
 const keywords = [
   "따뜻한",
   "부드러운",
@@ -39,9 +42,9 @@ export default function KeywordsQuestion({
       <div className="flex w-full max-w-2xl flex-col items-center gap-10 px-4">
         <div className="flex items-center justify-center gap-2">
           <b className="text-subtitle-2 font-bold text-text-primary">
-            Q. 당신을 가장 잘 표현하는 감성 키워드를 골라주세요.
+            {QUESTION_TEXT}
           </b>
-          <p className="text-body-1 text-text-secondary">(복수 선택)</p>
+          <p className="text-body-1 text-text-secondary">{QUESTION_NOTE}</p>
         </div>
 
         <div className="grid grid-cols-2 items-center justify-center gap-x-30 gap-y-6">
