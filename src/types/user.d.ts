@@ -1,16 +1,4 @@
-export interface DeliveryAddress {
-  receiver_name?: string;
-  address_line1: string;
-  address_line2: string;
-  phone_number?: string;
-  postal_code: string;
-  is_default: boolean;
-  created_at?: string;
-  updated_at?: string;
-  id: number;
-}
-
-export interface User {
+export type User = {
   gender: "FEMALE" | "OTHER" | "MALE";
   phoneNumber: string;
   birthDate: string;
@@ -21,4 +9,15 @@ export interface User {
   email: string;
   name: string;
   id: number;
-}
+};
+
+export type DeliveryAddress = {
+  receiverName?: string;
+  addressLine1: string;
+  addressLine2: string;
+  postalCode: string;
+  isDefault: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  id: number;
+};
