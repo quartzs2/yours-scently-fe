@@ -4,7 +4,6 @@ import type { SurveyRecommendationResult } from "@custom-types/Survey";
 
 import CloseQuoteIcon from "@assets/icons/ai-search-modal/icon-close-quote.svg";
 import OpenQuoteIcon from "@assets/icons/ai-search-modal/icon-open-quote.svg";
-import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";
 import Tag from "@components/ui/tabs/Tag";
 import Icon from "@components/ui/Icon";
@@ -35,8 +34,6 @@ const mockResult: SurveyRecommendationResult = {
 };
 
 export default function RecommendationsPage() {
-  const router = useRouter();
-
   const {
     survey_result: surveyResult,
     perfume_name: perfumeName,
