@@ -15,7 +15,10 @@ const BirthDateSection = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="text-body-2 text-text-primary">생년월일</div>
+      <div className="text-body-2 flex items-center gap-[2px] text-text-primary">
+        <span>생년월일</span>
+        <span className="text-system-error">*</span>
+      </div>
       <Input
         placeholder="8자리 입력해주세요 (ex. 20001004)"
         className="h-[48px] w-full"

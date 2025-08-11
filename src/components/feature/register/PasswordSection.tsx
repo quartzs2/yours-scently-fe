@@ -10,9 +10,12 @@ const PasswordSection = ({ form }: { form: UseFormReturn<RegisterSchema> }) => {
   } = form;
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="text-body-2 text-text-primary">비밀번호</div>
-      <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <div className="text-body-2 flex items-center gap-[2px] text-text-primary">
+          <span>비밀번호</span>
+          <span className="text-system-error">*</span>
+        </div>
         <Input
           className="h-[48px] w-full"
           placeholder="비밀번호를 입력해주세요."
@@ -21,6 +24,12 @@ const PasswordSection = ({ form }: { form: UseFormReturn<RegisterSchema> }) => {
           isValid={errors.password ? false : undefined}
           errorMessage={errors.password?.message}
         />
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="text-body-2 flex items-center gap-[2px] text-text-primary">
+          <span>비밀번호 확인</span>
+          <span className="text-system-error">*</span>
+        </div>
         <Input
           placeholder="비밀번호를 다시 입력해주세요."
           className="h-[48px] w-full"
