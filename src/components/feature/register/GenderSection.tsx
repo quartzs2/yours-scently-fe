@@ -13,7 +13,10 @@ const GenderSection = ({ form }: { form: UseFormReturn<RegisterSchema> }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="text-body-2 text-text-primary">성별</div>
+      <div className="text-body-2 flex items-center gap-[2px] text-text-primary">
+        <span>성별</span>
+        <span className="text-system-error">*</span>
+      </div>
       <Controller
         render={({ field: { onChange, value } }) => (
           <div className="flex gap-2">

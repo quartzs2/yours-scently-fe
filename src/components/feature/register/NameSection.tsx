@@ -11,7 +11,10 @@ const NameSection = ({ form }: { form: UseFormReturn<RegisterSchema> }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="text-body-2 text-text-primary">이름</div>
+      <div className="text-body-2 flex items-center gap-[2px] text-text-primary">
+        <span>이름</span>
+        <span className="text-system-error">*</span>
+      </div>
       <Input
         className="h-[48px] w-full"
         placeholder="이름을 입력해주세요."

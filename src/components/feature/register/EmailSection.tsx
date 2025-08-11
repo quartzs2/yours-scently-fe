@@ -57,18 +57,37 @@ const EmailSection = ({ form }: { form: UseFormReturn<RegisterSchema> }) => {
     });
   };
 
+  let isEmailValid: undefined | boolean;
+  if (errors.email) {
+    isEmailValid = false;
+  } else if (isEmailVerified) {
+    isEmailValid = true;
+  }
+
+  let isVerificationCodeValid: undefined | boolean;
+  if (errors.verificationCode) {
+    isVerificationCodeValid = false;
+  } else if (isEmailVerified) {
+    isVerificationCodeValid = true;
+  }
+
   return (
     <div className="flex flex-col gap-4">
-      <div className="text-body-2 text-text-primary">이메일</div>
+      <div className="text-body-2 flex items-center gap-[2px] text-text-primary">
+        <span>이메일</span>
+        <span className="text-system-error">*</span>
+      </div>
       <div className="flex flex-col gap-7">
         <div className="flex gap-3">
           <Input
-            validMessage={isEmailVerified ? "인증 완료" : undefined}
-            isValid={errors.email ? false : undefined}
+            validMessage={
+              isEmailVerified ? "인증이 완료되었습니다." : undefined
+            }
             errorMessage={errors.email?.message}
             className="h-[48px] w-[356px]"
             placeholder="이메일을 입력해주세요."
             disabled={isEmailVerified}
+            isValid={isEmailValid}
             type="email"
             {...register("email")}
           />
@@ -84,10 +103,12 @@ const EmailSection = ({ form }: { form: UseFormReturn<RegisterSchema> }) => {
         </div>
         <div className="flex gap-3">
           <Input
-            isValid={errors.verificationCode ? false : undefined}
-            validMessage={isEmailVerified ? "인증 완료" : undefined}
+            validMessage={
+              isEmailVerified ? "인증이 완료되었습니다." : undefined
+            }
             errorMessage={errors.verificationCode?.message}
             disabled={!isVerifyCodeSent || isEmailVerified}
+            isValid={isVerificationCodeValid}
             className="h-[48px] w-[356px]"
             placeholder="전송된 코드를 입력해주세요."
             type="text"

@@ -16,8 +16,21 @@ export type FormState = {
 
 export async function register(
   prevState: FormState,
-  data: z.infer<typeof registerSchema>,
+  formData: FormData,
 ): Promise<FormState> {
+  const data = {
+    isNicknameChecked: formData.get("isNicknameChecked") === "true",
+    verificationCode: formData.get("verificationCode") as string,
+    isEmailVerified: formData.get("isEmailVerified") === "true",
+    passwordConfirm: formData.get("passwordConfirm") as string,
+    phoneNumber: formData.get("phoneNumber") as string,
+    birthDate: formData.get("birthDate") as string,
+    nickname: formData.get("nickname") as string,
+    password: formData.get("password") as string,
+    gender: formData.get("gender") as string,
+    email: formData.get("email") as string,
+    name: formData.get("name") as string,
+  };
   const validatedFields = registerSchema.safeParse(data);
 
   if (!validatedFields.success) {
@@ -33,6 +46,7 @@ export async function register(
     await signupApi({
       password_confirm: validatedFields.data.passwordConfirm,
       phone_number: validatedFields.data.phoneNumber,
+      birth_date: validatedFields.data.birthDate,
       password: validatedFields.data.password,
       nickname: validatedFields.data.nickname,
       gender: validatedFields.data.gender,
@@ -45,8 +59,11 @@ export async function register(
     if (error instanceof HTTPError) {
       const errorResponse = await error.response.json();
 
+      const firstError = Object.values(errorResponse)[0] as string[];
+      const errorMessage = firstError[0] || "서버 에러가 발생했습니다.";
+
       return {
-        message: errorResponse.detail,
+        message: errorMessage,
         success: false,
       };
     }
@@ -70,9 +87,10 @@ export async function checkEmailVerificationCode(
   } catch (error) {
     if (error instanceof HTTPError) {
       const errorResponse = await error.response.json();
+      const errorMessage = errorResponse.detail || "서버 에러가 발생했습니다.";
 
       return {
-        message: errorResponse.detail,
+        message: errorMessage,
         success: false,
       };
     }
@@ -93,9 +111,10 @@ export async function sendEmailVerificationCode(email: string): Promise<{
   } catch (error) {
     if (error instanceof HTTPError) {
       const errorResponse = await error.response.json();
+      const errorMessage = errorResponse.detail || "서버 에러가 발생했습니다.";
 
       return {
-        message: errorResponse.detail,
+        message: errorMessage,
         success: false,
       };
     }
@@ -120,9 +139,10 @@ export async function checkNickname(nickname: string): Promise<{
   } catch (error) {
     if (error instanceof HTTPError) {
       const errorResponse = await error.response.json();
+      const errorMessage = errorResponse.detail || "서버 에러가 발생했습니다.";
 
       return {
-        message: errorResponse.detail,
+        message: errorMessage,
         success: false,
       };
     }
