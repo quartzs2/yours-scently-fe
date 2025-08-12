@@ -3,11 +3,9 @@
 import type { MainCardProps } from "@custom-types/MainCard.type";
 
 import MainCard from "@components/common/card-component/MainCard";
+import { IMAGES, URLS } from "@constants/urls";
 import Button from "@components/ui/Button";
-import { URLS } from "@constants/urls";
 import Image from "next/image";
-
-const PROMO_BANNER_BG_IMG = "/images/promo-banner-bg-img.png";
 
 const sampleCards: Omit<MainCardProps, "handleHeart">[] = [
   {
@@ -42,8 +40,8 @@ export default function PromoBanner() {
       <Image
         sizes="(max-width: 768px) 100vw, 50vw"
         alt="운동 후 산뜻한 향기를 표현한 프로모션 배경 이미지"
-        style={{ objectFit: "cover" }}
-        src={PROMO_BANNER_BG_IMG}
+        src={IMAGES.PROMO_BANNER_BG}
+        className="object-cover"
         priority
         fill
       />
@@ -56,13 +54,11 @@ export default function PromoBanner() {
             <p>샤워 후 한 번의 분사만으로 상쾌함이 오래 지속되는</p>
             <p>운동 후에 딱 어울리는 향수를 소개합니다.</p>
           </div>
-          {/* href 속성으로 링크 연결 */}
           <Button href={URLS.PROMOTION} shape="pill">
             더 알아보기
           </Button>
         </div>
 
-        {/* 카드 리스트 (오른쪽) */}
         <div className="flex flex-[2] flex-row gap-4 overflow-hidden">
           {sampleCards.map((card) => (
             <div

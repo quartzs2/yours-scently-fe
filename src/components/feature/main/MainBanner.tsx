@@ -1,10 +1,8 @@
 "use client";
 
+import { IMAGES, URLS } from "@constants/urls";
 import Button from "@components/ui/Button";
-import { URLS } from "@constants/urls";
 import Image from "next/image";
-
-const MAIN_BANNER_IMG = "/images/main-banner-img.png";
 
 export default function MainBanner() {
   return (
@@ -12,7 +10,7 @@ export default function MainBanner() {
       <Image
         alt="Main banner background"
         className="object-cover"
-        src={MAIN_BANNER_IMG}
+        src={IMAGES.MAIN_BANNER}
         priority
         fill
       />
