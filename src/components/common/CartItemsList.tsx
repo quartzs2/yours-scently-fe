@@ -1,5 +1,6 @@
 "use client";
 
+import QuantitySelector from "@components/ui/input/QuantitySelector";
 import Checkbox from "@components/ui/input/Checkbox";
 import CartCard from "@components/common/CartCard";
 import { type CartItemType } from "@app/cart/page";
@@ -41,24 +42,7 @@ const CartItemList = ({ setCartItems, cartItems }: CartItemListProps) => {
   const selectedOrders = checkedIds.size;
   const SHIPPING_FEE = 3000;
 
-  const handleQuantityChange = (id: number, type: "increase" | "decrease") => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity:
-                type === "increase"
-                  ? Math.min(99, item.quantity + 1)
-                  : Math.max(1, item.quantity - 1),
-            }
-          : item,
-      ),
-    );
-  };
-
-  const handleQuantityInputChange = (id: number, value: number) => {
-    const newQuantity = Math.min(Math.max(value, 1), 99);
+  const handleItemQuantityUpdate = (id: number, newQuantity: number) => {
     setCartItems((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, quantity: newQuantity } : item,
@@ -143,32 +127,13 @@ const CartItemList = ({ setCartItems, cartItems }: CartItemListProps) => {
                   <span className="text-subtitle-2">원</span>
                 </p>
                 <div className="flex justify-end">
-                  <button
-                    className="text-button-1 flex h-8 w-8 items-center justify-center rounded-l-xl border border-border-default text-text-secondary"
-                    onClick={() => handleQuantityChange(item.id, "decrease")}
-                    aria-label="수량 감소"
-                  >
-                    -
-                  </button>
-                  <input
-                    onChange={(e) =>
-                      handleQuantityInputChange(
-                        item.id,
-                        parseInt(e.target.value, 10) || 1,
-                      )
+                  <QuantitySelector
+                    onQuantityChange={(newQuantity) =>
+                      handleItemQuantityUpdate(item.id, newQuantity)
                     }
-                    className="text-button-1 h-8 w-8 border border-border-default text-center text-text-secondary"
-                    value={item.quantity}
-                    type="text"
-                    min={1}
+                    initialQuantity={item.quantity}
+                    inputClassName="w-8 h-8"
                   />
-                  <button
-                    className="text-button-1 flex h-8 w-8 items-center justify-center rounded-r-xl border border-border-default text-text-secondary"
-                    onClick={() => handleQuantityChange(item.id, "increase")}
-                    aria-label="수량 증가"
-                  >
-                    +
-                  </button>
                 </div>
               </div>
             </div>
