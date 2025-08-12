@@ -1,4 +1,6 @@
-import mainBannerImg from "@assets/images/main-banner-img.png";
+"use client";
+
+import { IMAGES, URLS } from "@constants/urls";
 import Button from "@components/ui/Button";
 import Image from "next/image";
 
@@ -8,7 +10,7 @@ export default function MainBanner() {
       <Image
         alt="Main banner background"
         className="object-cover"
-        src={mainBannerImg}
+        src={IMAGES.MAIN_BANNER}
         priority
         fill
       />
@@ -22,7 +24,7 @@ export default function MainBanner() {
             <p>향으로 나를 표현하는 경험, 지금 시작하세요.</p>
           </div>
         </div>
-        <Button shape="pill" size="xl">
+        <Button href={URLS.SURVEY} shape="pill" size="xl">
           START
         </Button>
       </div>

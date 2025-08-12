@@ -1,6 +1,6 @@
 import { ValidationMessage } from "@components/ui/input/ValidationMessage";
-import React, { useEffect, useState, useRef } from "react";
 import Input from "@components/ui/input/Input";
+import React, { useRef } from "react";
 
 export type PhoneInputProps = {
   onChange: (value: string[]) => void;
@@ -49,12 +49,6 @@ const PhoneInput = ({
   isValid,
   values,
 }: PhoneInputProps) => {
-  const [phoneValues, setPhoneValues] = useState(values);
-
-  useEffect(() => {
-    onChange(phoneValues);
-  }, [onChange, phoneValues]);
-
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,16 +56,14 @@ const PhoneInput = ({
     const index = parseInt(name, 10);
     const numericValue = value.replace(/\D/g, "");
 
-    setPhoneValues((prevValues) => {
-      const newValues = [...prevValues];
-      newValues[index] = numericValue;
-      return newValues as [string, string, string];
-    });
+    const newValues = [...values] as [string, string, string];
+    newValues[index] = numericValue;
+    onChange(newValues);
 
     // 자동 포커스 이동 로직
     const maxLength =
       index === 0 ? FIRST_INPUT_MAX_LENGTH : OTHER_INPUT_MAX_LENGTH;
-    const isLastIndex = index >= phoneValues.length - 1;
+    const isLastIndex = index >= values.length - 1;
     const moveFocus = numericValue.length === maxLength && !isLastIndex;
 
     if (moveFocus) {
@@ -82,7 +74,7 @@ const PhoneInput = ({
   return (
     <div className="relative">
       <div className="flex items-center">
-        {phoneValues.map((val, index) => (
+        {values.map((val, index) => (
           <React.Fragment key={index}>
             <Input
               maxLength={
@@ -98,9 +90,7 @@ const PhoneInput = ({
               isValid={isValid}
               value={val}
             />
-            {index < phoneValues.length - 1 && (
-              <span className="px-0.5">-</span>
-            )}
+            {index < values.length - 1 && <span className="px-0.5">-</span>}
           </React.Fragment>
         ))}
       </div>
