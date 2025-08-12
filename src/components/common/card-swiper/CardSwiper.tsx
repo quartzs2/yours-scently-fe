@@ -55,7 +55,7 @@ const CardSwiper = <T extends { id: string | number }>({
   slidesPerView = 3,
   spaceBetween = 8,
   autoplay = true,
-  className = "",
+  className,
   children,
   items,
 }: SwiperWithChildrenProps<T>) => {

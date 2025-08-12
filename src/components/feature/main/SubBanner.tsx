@@ -1,16 +1,14 @@
-import SubBannerSampleImg from "@assets/images/sub-banner-sample-img.png";
-import SubBannerPromoImg from "@assets/images/sub-banner-promo-img.png";
-import SubBannerBgImg from "@assets/images/sub-banner-bg-img.png";
 import Button from "@components/ui/Button";
 import Image from "next/image";
 
 export default function SubBanner() {
   return (
     <section className="relative flex h-[400px] items-center justify-center select-none">
+      {/* 배경 이미지 */}
       <Image
+        src="/images/sub-banner-bg-img.png"
         alt="Sub banner background"
         className="object-cover"
-        src={SubBannerBgImg}
         priority
         fill
       />
@@ -38,9 +36,9 @@ export default function SubBanner() {
             {/* 썬글라스 프로모션 이미지 */}
             <div className="relative h-[246px] w-[246px] overflow-hidden rounded-md">
               <Image
+                src="/images/sub-banner-promo-img.png"
                 alt="SUMMER 향기전 최대 25% OFF"
                 className="object-cover"
-                src={SubBannerPromoImg}
                 fill
               />
               <div className="text-caption absolute top-4/5 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 text-center font-bold text-white">
@@ -52,7 +50,7 @@ export default function SubBanner() {
             {/* 샘플 신청 배너 */}
             <div className="relative h-[98px] w-[246px] overflow-hidden rounded-md">
               <Image
-                src={SubBannerSampleImg}
+                src="/images/sub-banner-sample-img.png"
                 className="object-cover"
                 alt="샘플 신청 배너"
                 fill

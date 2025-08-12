@@ -2,10 +2,10 @@
 
 import type { MainCardProps } from "@custom-types/MainCard.type";
 
-import PromoBannerBgImg from "@assets/images/promo-banner-bg-img.png";
 import MainCard from "@components/common/card-component/MainCard";
 import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";
+import { URLS } from "@constants/urls";
 import Image from "next/image";
 
 const sampleCards: Omit<MainCardProps, "handleHeart">[] = [
@@ -43,9 +43,9 @@ export default function PromoBanner() {
       {/* 배경 이미지 */}
       <Image
         sizes="(max-width: 768px) 100vw, 50vw"
+        src="/images/promo-banner-bg-img.png"
         alt="운동 후 산뜻한 향기를 표현한 프로모션 배경 이미지"
         style={{ objectFit: "cover" }}
-        src={PromoBannerBgImg}
         priority
         fill
       />
@@ -58,7 +58,9 @@ export default function PromoBanner() {
             <p>샤워 후 한 번의 분사만으로 상쾌함이 오래 지속되는</p>
             <p>운동 후에 딱 어울리는 향수를 소개합니다.</p>
           </div>
-          <Button onClick={() => router.push("/promotion")}>더 알아보기</Button>
+          <Button onClick={() => router.push(URLS.PROMOTION)}>
+            더 알아보기
+          </Button>
         </div>
 
         {/* 카드 리스트 (오른쪽) */}
