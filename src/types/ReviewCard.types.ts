@@ -1,8 +1,8 @@
 export type ReviewCardProps = {
-  productImage?: string;
+  productImage: string;
   productPrice: string;
   productName: string;
-  imageUrl?: string;
+  imageUrl: string;
   timeAgo: string;
   rating: number;
   review: string;
