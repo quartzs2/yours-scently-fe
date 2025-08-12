@@ -1,15 +1,30 @@
 import Dialog from "@components/common/Dialog";
+import { cva } from "class-variance-authority";
 import Button from "@components/ui/Button";
 import { cn } from "@utils/cn";
-import Link from "next/link";
 
 type CartModalProps = {
   position: "actionBar" | "cart";
   isAlreadyInCart?: boolean;
-  className?: "string";
   onClose: () => void;
+  className?: string;
   isOpen: boolean;
 };
+
+const dialogClasses = cva(
+  "max-w-[296px] -translate-x-1/2 transform rounded-2xl border border-primary-light bg-bg-default p-[24px] shadow-[5px_5px_10px_0px_#00000040]",
+  {
+    variants: {
+      position: {
+        actionBar: "absolute right-85 bottom-25",
+        cart: "absolute top-[62%] right-[7.5%]",
+      },
+    },
+    defaultVariants: {
+      position: "cart",
+    },
+  },
+);
 
 /**
  * CartModal 컴포넌트는 장바구니에 상품이 추가되었음을 알리고,
@@ -63,14 +78,9 @@ const CartModal = ({
 
   return (
     <>
-      <div className="fixed inset-0" onClick={onClose}></div>
       <Dialog
-        className={cn(
-          "max-w-[296px] -translate-x-1/2 transform rounded-2xl border border-primary-light bg-bg-default p-[24px] shadow-[5px_5px_10px_0px_#00000040]",
-          position === "cart" && "absolute top-[62%] right-[7.5%]",
-          position === "actionBar" && "absolute right-85 bottom-25",
-          className,
-        )}
+        className={cn(dialogClasses({ position }), className)}
+        onClose={onClose}
       >
         <p className="text-body-2 text-text-secondary">
           상품을 장바구니에 담았습니다.
@@ -84,9 +94,9 @@ const CartModal = ({
           <Button onClick={onClose} theme={"light"}>
             쇼핑 계속하기
           </Button>
-          <Link href={"/cart"}>
-            <Button onClick={onClose}>장바구니 가기</Button>
-          </Link>
+          <Button onClick={onClose} href={"/cart"}>
+            장바구니 가기
+          </Button>
         </div>
       </Dialog>
     </>
