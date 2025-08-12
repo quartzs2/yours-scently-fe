@@ -1,4 +1,3 @@
-// ReviewCard.types.ts
 export type ReviewCardProps = {
   productImage: string;
   productPrice: string;
@@ -9,4 +8,5 @@ export type ReviewCardProps = {
   review: string;
   writer: string;
   date: string;
+  id: string;
 };

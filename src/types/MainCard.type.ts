@@ -5,5 +5,5 @@ export type MainCardProps = {
   tags: string[];
   price: number;
   name: string;
-  id: string; // SwiperSlide key용 필수
+  id: string;
 };

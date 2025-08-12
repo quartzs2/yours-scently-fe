@@ -1,4 +1,3 @@
-// 서브배너
 import SubBannerSampleImg from "@assets/images/sub-banner-sample-img.png";
 import SubBannerPromoImg from "@assets/images/sub-banner-promo-img.png";
 import SubBannerBgImg from "@assets/images/sub-banner-bg-img.png";

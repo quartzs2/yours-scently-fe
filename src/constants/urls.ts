@@ -19,3 +19,7 @@ export const API_URLS = {
 export const IMAGES = {
   WARM_VANILLA_WOODS: "/survey/warmVanillaWoods.png",
 };
+
+export const urls = {
+  survey: "/survey",
+};
