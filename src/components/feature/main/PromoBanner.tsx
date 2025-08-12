@@ -3,10 +3,11 @@
 import type { MainCardProps } from "@custom-types/MainCard.type";
 
 import MainCard from "@components/common/card-component/MainCard";
-import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";
 import { URLS } from "@constants/urls";
 import Image from "next/image";
+
+const PROMO_BANNER_BG_IMG = "/images/promo-banner-bg-img.png";
 
 const sampleCards: Omit<MainCardProps, "handleHeart">[] = [
   {
@@ -36,16 +37,13 @@ const sampleCards: Omit<MainCardProps, "handleHeart">[] = [
 ];
 
 export default function PromoBanner() {
-  const router = useRouter();
-
   return (
     <section className="relative flex h-[480px] items-center justify-center px-6 select-none">
-      {/* 배경 이미지 */}
       <Image
         sizes="(max-width: 768px) 100vw, 50vw"
-        src="/images/promo-banner-bg-img.png"
         alt="운동 후 산뜻한 향기를 표현한 프로모션 배경 이미지"
         style={{ objectFit: "cover" }}
+        src={PROMO_BANNER_BG_IMG}
         priority
         fill
       />
@@ -58,7 +56,8 @@ export default function PromoBanner() {
             <p>샤워 후 한 번의 분사만으로 상쾌함이 오래 지속되는</p>
             <p>운동 후에 딱 어울리는 향수를 소개합니다.</p>
           </div>
-          <Button onClick={() => router.push(URLS.PROMOTION)}>
+          {/* href 속성으로 링크 연결 */}
+          <Button href={URLS.PROMOTION} shape="pill">
             더 알아보기
           </Button>
         </div>

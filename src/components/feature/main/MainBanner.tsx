@@ -4,14 +4,15 @@ import Button from "@components/ui/Button";
 import { URLS } from "@constants/urls";
 import Image from "next/image";
 
+const MAIN_BANNER_IMG = "/images/main-banner-img.png";
+
 export default function MainBanner() {
   return (
     <section className="relative flex h-[720px] items-center justify-center select-none">
-      {/* public 폴더에 넣은 이미지 경로를 직접 src에 사용 */}
       <Image
-        src="/images/main-banner-img.png"
         alt="Main banner background"
         className="object-cover"
+        src={MAIN_BANNER_IMG}
         priority
         fill
       />
