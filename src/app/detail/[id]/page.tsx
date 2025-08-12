@@ -8,9 +8,9 @@ import DetailSwiper from "@components/feature/detail/DetailSwiper";
 import CardSwiper from "@components/common/card-swiper/CardSwiper";
 import ReviewListCard from "@components/common/ReviewlistCard";
 import CartModal from "@components/feature/detail/CartModal";
+import { useEffect, useState, useRef, use } from "react";
 import TabScroll from "@components/ui/tabs/TabScroll";
 import Checkbox from "@components/ui/input/Checkbox";
-import { useEffect, useState, useRef } from "react";
 import data from "@app/detail/[id]/mock/mock.json";
 import Button from "@components/ui/Button";
 import { IMAGES } from "@constants/urls";
@@ -28,10 +28,12 @@ const POSITION = {
   CART: "cart",
 } as const;
 
+const MAX_HEIGHT = "600px" as const;
+
 type PositionType = (typeof POSITION)[keyof typeof POSITION];
 
 const DetailPage = ({ params }: DetailPageProps) => {
-  // const { id } = await params;
+  const { id } = use(params);
 
   const [mockData, setMockData] = useState(data);
 
@@ -42,7 +44,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
 
   const [isLiked, setIsLiked] = useState(false);
 
-  const [maxHeight, setMaxHeight] = useState("600px");
+  const [maxHeight, setMaxHeight] = useState<string>(MAX_HEIGHT);
 
   const contentRef = useRef<HTMLDivElement | null>(null);
   const detailRef = useRef<HTMLDivElement | null>(null);
@@ -53,14 +55,13 @@ const DetailPage = ({ params }: DetailPageProps) => {
   useEffect(() => {
     if (contentRef.current) {
       setMaxHeight(
-        isExpanded ? `${contentRef.current.scrollHeight}px` : "600px",
+        isExpanded ? `${contentRef.current.scrollHeight}px` : MAX_HEIGHT,
       );
     }
   }, [isExpanded]);
 
   const handleQuantityUpdate = (newQuantity: number) => {
     setProductQuantity(newQuantity);
-    console.log(`Product ID: ${mockData[0].id}, New Quantity: ${newQuantity}`);
   };
 
   const handleLikeToggle = () => {
@@ -197,7 +198,8 @@ const DetailPage = ({ params }: DetailPageProps) => {
           </p>
           <CardSwiper
             withNavigation={true}
-            spaceBetween={26.65}
+            spaceBetween={25.13}
+            slidesPerView={4}
             autoplay={false}
             items={data}
           >
@@ -206,7 +208,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
         </div>
       </div>
       <div className="mx-auto mt-20 flex w-full justify-center">
-        <TabScroll setTab={handleTabClick} tab={tab}></TabScroll>
+        <TabScroll setTab={handleTabClick} tab={tab} />
       </div>
       <div className="mx-auto max-w-[1280px]" ref={detailRef}>
         <ProductDetailInfo
