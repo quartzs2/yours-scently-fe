@@ -1,17 +1,20 @@
 "use client";
 
-import ProductDetailInfo from "@components/common/detail-component/ProductDetailInfo";
-import ProductActionBar from "@components/common/detail-component/ProductActionBar";
-import DetailSwiper from "@components/common/detail-component/DetailSwiper";
-import CartModal from "@components/common/detail-component/CartModal";
+import ProductDetailInfo from "@components/feature/detail/ProductDetailInfo";
+import ProductActionBar from "@components/feature/detail/ProductActionBar";
 import QuantitySelector from "@components/ui/input/QuantitySelector";
 import { VolumeToggle, StarRating, Tag } from "@components/ui/tabs";
+import DetailSwiper from "@components/feature/detail/DetailSwiper";
 import CardSwiper from "@components/common/card-swiper/CardSwiper";
 import ReviewListCard from "@components/common/ReviewlistCard";
+import CartModal from "@components/feature/detail/CartModal";
 import TabScroll from "@components/ui/tabs/TabScroll";
 import Checkbox from "@components/ui/input/Checkbox";
 import { useEffect, useState, useRef } from "react";
+import data from "@app/detail/[id]/mock/mock.json";
 import Button from "@components/ui/Button";
+import { IMAGES } from "@constants/urls";
+import useScroll from "@hooks/useScroll";
 import Image from "next/image";
 
 type DetailPageProps = {
@@ -20,116 +23,15 @@ type DetailPageProps = {
   }>;
 };
 
-const data = [
-  {
-    perfume_detail: {
-      main_accords: "fresh citrus floral",
-      middle_notes: ["jasmine", "peach"],
-      base_notes: ["cedarwood", "amber"],
-      top_notes: ["bergamot", "orange"],
-      intensity: "moderate",
-      release_year: 2024,
-      gender: "unisex",
-    },
-    product_img_url: "https://cdn.example.com/product15.jpg",
-    description: "상큼하고 가벼운 시트러스 향의 향수입니다.",
-    created_at: "2025-07-21T13:25:33Z",
-    tags: ["피오니", "로즈", "머스크", "달콤한"],
-    category: "perfume",
-    brand: "FreshAir",
-    name: "시트러스 블라썸",
-    price: 72000.0,
-    stock: 35,
-    id: 1,
-  },
-  {
-    perfume_detail: {
-      main_accords: "fresh citrus floral",
-      middle_notes: ["jasmine", "peach"],
-      base_notes: ["cedarwood", "amber"],
-      top_notes: ["bergamot", "orange"],
-      intensity: "moderate",
-      release_year: 2024,
-      gender: "unisex",
-    },
-    product_img_url: "https://cdn.example.com/product15.jpg",
-    description: "상큼하고 가벼운 시트러스 향의 향수입니다.",
-    created_at: "2025-07-21T13:25:33Z",
-    tags: ["피오니", "로즈", "머스크", "달콤한"],
-    category: "perfume",
-    name: "시트러스 블라썸아아아",
-    brand: "FreshAir",
-    price: 72000.0,
-    stock: 35,
-    id: 2,
-  },
-  {
-    perfume_detail: {
-      main_accords: "fresh citrus floral",
-      middle_notes: ["jasmine", "peach"],
-      base_notes: ["cedarwood", "amber"],
-      top_notes: ["bergamot", "orange"],
-      intensity: "moderate",
-      release_year: 2024,
-      gender: "unisex",
-    },
-    product_img_url: "https://cdn.example.com/product15.jpg",
-    description: "상큼하고 가벼운 시트러스 향의 향수입니다.",
-    created_at: "2025-07-21T13:25:33Z",
-    tags: ["피오니", "로즈", "머스크", "달콤한"],
-    category: "perfume",
-    brand: "FreshAir",
-    name: "시트러스 블라썸",
-    price: 72000.0,
-    stock: 35,
-    id: 3,
-  },
-  {
-    perfume_detail: {
-      main_accords: "fresh citrus floral",
-      middle_notes: ["jasmine", "peach"],
-      base_notes: ["cedarwood", "amber"],
-      top_notes: ["bergamot", "orange"],
-      intensity: "moderate",
-      release_year: 2024,
-      gender: "unisex",
-    },
-    product_img_url: "https://cdn.example.com/product15.jpg",
-    description: "상큼하고 가벼운 시트러스 향의 향수입니다.",
-    created_at: "2025-07-21T13:25:33Z",
-    tags: ["피오니", "로즈", "머스크", "달콤한"],
-    category: "perfume",
-    brand: "FreshAir",
-    name: "시트러스 블라썸",
-    price: 72000.0,
-    stock: 35,
-    id: 4,
-  },
-  {
-    perfume_detail: {
-      main_accords: "fresh citrus floral",
-      middle_notes: ["jasmine", "peach"],
-      base_notes: ["cedarwood", "amber"],
-      top_notes: ["bergamot", "orange"],
-      intensity: "moderate",
-      release_year: 2024,
-      gender: "unisex",
-    },
-    product_img_url: "https://cdn.example.com/product15.jpg",
-    description: "상큼하고 가벼운 시트러스 향의 향수입니다.",
-    created_at: "2025-07-21T13:25:33Z",
-    tags: ["피오니", "로즈", "머스크", "달콤한"],
-    name: "아ㅏ아아아아아 코딩어렵다아아아아",
-    category: "perfume",
-    brand: "FreshAir",
-    price: 72000.0,
-    stock: 35,
-    id: 5,
-  },
-];
+const POSITION = {
+  ACTION_BAR: "actionBar",
+  CART: "cart",
+} as const;
+
+type PositionType = (typeof POSITION)[keyof typeof POSITION];
 
 const DetailPage = ({ params }: DetailPageProps) => {
-  //   const { id } = await params;
+  // const { id } = await params;
 
   const [mockData, setMockData] = useState(data);
 
@@ -142,9 +44,11 @@ const DetailPage = ({ params }: DetailPageProps) => {
 
   const [maxHeight, setMaxHeight] = useState("600px");
 
-  const contentRef = useRef<HTMLDivElement>(null);
-  const detailRef = useRef<HTMLDivElement>(null);
-  const reviewRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const detailRef = useRef<HTMLDivElement | null>(null);
+  const reviewRef = useRef<HTMLDivElement | null>(null);
+
+  useScroll([detailRef, reviewRef], setTab);
 
   useEffect(() => {
     if (contentRef.current) {
@@ -178,48 +82,27 @@ const DetailPage = ({ params }: DetailPageProps) => {
   };
 
   const [modalState, setModalState] = useState<{
-    position: "actionBar" | "cart";
+    position: PositionType;
     isOpen: boolean;
   }>({
-    position: "cart",
+    position: POSITION.CART,
     isOpen: false,
   });
-
-  const handleOpenCartModal = (positionType: "actionBar" | "cart") => {
+  const handleOpenCartModal = (positionType: PositionType) => {
     setModalState({ position: positionType, isOpen: true });
-  }; // 모달 닫기 버튼을 눌렀을 때 실행되는 함수
+  };
 
   const handleCloseCartModal = () => {
     setModalState((prev) => ({ ...prev, isOpen: false }));
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const detailTop = detailRef.current?.getBoundingClientRect().top || 0;
-      const reviewTop = reviewRef.current?.getBoundingClientRect().top || 0;
-
-      const middle = window.innerHeight / 2;
-
-      if (Math.abs(detailTop - middle) < Math.abs(reviewTop - middle)) {
-        setTab(0);
-      } else {
-        setTab(1);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <>
       <div className="flex w-full justify-center">
-        <div className="relative h-[720px] w-[1280px]">
+        <div className="relative h-[720px] w-container">
           <Image
             className="object-cover"
-            src="/detail/image.png"
+            src={IMAGES.DETAIL_MAIN}
             alt="상세 메인 이미지"
             sizes="1280px"
             priority
@@ -255,12 +138,17 @@ const DetailPage = ({ params }: DetailPageProps) => {
                 향기 노트
               </p>
               <ul className="text-body-2 list-disc pl-6 text-text-secondary">
-                <li>탑 노트: {data[0].perfume_detail.top_notes.join(", ")} </li>
                 <li>
-                  미들 노트: {data[0].perfume_detail.middle_notes.join(", ")}
+                  탑 노트:
+                  {mockData[0].perfume_detail.top_notes.join(", ")}
                 </li>
                 <li>
-                  베이스 노트: {data[0].perfume_detail.base_notes.join(", ")}
+                  미들 노트:
+                  {mockData[0].perfume_detail.middle_notes.join(", ")}
+                </li>
+                <li>
+                  베이스 노트:
+                  {mockData[0].perfume_detail.base_notes.join(", ")}
                 </li>
               </ul>
             </div>
@@ -281,10 +169,8 @@ const DetailPage = ({ params }: DetailPageProps) => {
             </div>
             <div className="flex w-full justify-end gap-4">
               <Checkbox
-                onChange={() => {
-                  handleLikeToggle();
-                }}
                 className="p-4 focus:ring-0 focus:outline-none"
+                onChange={handleLikeToggle}
                 checked={isLiked}
                 type="heart"
                 name="heart"
@@ -292,7 +178,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
               />
               <div className="relative flex gap-2">
                 <Button
-                  onClick={() => handleOpenCartModal("cart")}
+                  onClick={() => handleOpenCartModal(POSITION.CART)}
                   theme={"light"}
                   size={"lg"}
                 >
@@ -325,7 +211,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
       <div className="mx-auto max-w-[1280px]" ref={detailRef}>
         <ProductDetailInfo
           toggleExpanded={() => setIsExpanded((prev) => !prev)}
-          imageSrc="/detail/detailImage.png"
+          imageSrc={IMAGES.DETAIL_IMAGE}
           isExpanded={isExpanded}
           contentRef={contentRef}
           maxHeight={maxHeight}
@@ -386,16 +272,16 @@ const DetailPage = ({ params }: DetailPageProps) => {
       <div className="sticky bottom-0 z-50">
         <ProductActionBar
           onBuyNow={() => {
-            /* 구매하기 클릭 시 처리 */
+            /* TODO 구매하기 클릭 시 처리 */
           }}
-          onAddToCart={() => handleOpenCartModal("actionBar")}
+          onAddToCart={() => handleOpenCartModal(POSITION.ACTION_BAR)}
           onQuantityChange={handleQuantityUpdate}
           price={data[0].price * productQuantity}
           productQuantity={productQuantity}
           onLikeToggle={handleLikeToggle}
           isLiked={isLiked}
         />
-        {modalState.isOpen && modalState.position === "actionBar" && (
+        {modalState.isOpen && modalState.position === POSITION.ACTION_BAR && (
           <CartModal
             onClose={handleCloseCartModal}
             position={modalState.position}
@@ -403,7 +289,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
           />
         )}
       </div>
-      {modalState.isOpen && modalState.position === "cart" && (
+      {modalState.isOpen && modalState.position === POSITION.CART && (
         <CartModal
           onClose={handleCloseCartModal}
           position={modalState.position}

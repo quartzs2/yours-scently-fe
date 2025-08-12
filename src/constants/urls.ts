@@ -23,5 +23,7 @@ export const IMAGES = {
   WARM_VANILLA_WOODS: "/survey/warmVanillaWoods.png",
   PROMO_BANNER_BG: "/images/promo-banner-bg-img.png",
   SUB_BANNER_BG: "/images/sub-banner-bg-img.png",
+  DETAIL_IMAGE: "/mock/detail/detail-image.png",
+  DETAIL_MAIN: "/mock/detail/detail-main.png",
   MAIN_BANNER: "/images/main-banner-img.png",
 };

@@ -2,26 +2,25 @@
 
 import type { MainCardProps } from "@custom-types/MainCard.type";
 
-import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@utils/cn";
 import Link from "next/link";
 
 const FALLBACK_IMAGE = "/fallback-image.svg";
-// 디테일카드 컴포넌트
 const DetailSwiper = ({
   item,
 }: {
   item?: Omit<MainCardProps, "handleHeartChange">;
 }) => {
-  const [imgSrc, setImgSrc] = useState(item?.imageUrl);
-
   if (!item) {
     return null;
   }
 
   return (
-    <Link className="flex h-[100px] w-[288px] items-center" href={"/cart"}>
+    <Link
+      className="flex h-[100px] w-[288px] items-center"
+      href={`/detail/${item.id}`}
+    >
       <div className="relative h-25 w-25">
         <Image
           className={cn(
@@ -30,7 +29,7 @@ const DetailSwiper = ({
               ? "h-[100px] w-[100px] object-contain"
               : "object-cover",
           )}
-          src={`/mock/best-review/perfume${item.id}.png`}
+          src={item.imageUrl ?? FALLBACK_IMAGE}
           alt={item.name}
           sizes="100px"
           priority
