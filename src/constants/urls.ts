@@ -4,6 +4,7 @@ export const URLS = {
   PROMOTION: "/promotion",
   MY_PAGE: "/my-page",
   SURVEY: "/survey",
+  LOGIN: "/login",
   CART: "/cart",
   HOME: "/",
 };

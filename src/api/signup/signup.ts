@@ -1,5 +1,5 @@
-import { API_BASE_URL, API_URLS } from "@constants/urls";
-import ky from "ky";
+import { API_URLS } from "@constants/urls";
+import { publicApi } from "@api/api";
 
 type SignupProps = {
   password_confirm: string;
@@ -32,8 +32,8 @@ const signup = async ({
   formData.append("email", email);
   formData.append("name", name);
 
-  const response = await ky
-    .post(`${API_BASE_URL}${API_URLS.SIGN_UP}`, {
+  const response = await publicApi
+    .post(`${API_URLS.SIGN_UP}`, {
       body: formData,
     })
     .json();
