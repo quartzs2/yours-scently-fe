@@ -41,6 +41,8 @@ export default function LoginPage() {
   });
 
   useEffect(() => {
+    if (state.success) return;
+
     if (state.errors) {
       Object.entries(state.errors).forEach(([key, value]) => {
         if (value) {
@@ -48,10 +50,11 @@ export default function LoginPage() {
             message: value[0],
             type: "server",
           });
-        } else if (!state.success && state.message) {
-          alert(state.message);
         }
       });
+    } else if (state.message) {
+      // TODO: alert 대신 UI에 에러 메시지를 표시하도록 개선
+      alert(state.message);
     }
   }, [state, setError]);
 

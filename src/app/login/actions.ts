@@ -15,6 +15,9 @@ export type EmailLoginFormState = {
   message: string;
 };
 
+// TODO: 환경변수 추가 필요
+const isProduction = process.env.NODE_ENV === "production";
+
 export async function emailLogin(
   prevState: EmailLoginFormState,
   formData: FormData,
@@ -49,8 +52,18 @@ export async function emailLogin(
   }
 
   const cookieStore = await cookies();
-  cookieStore.set(TOKEN_COOKIE_NAME.ACCESS_TOKEN, apiResult.access_token);
-  cookieStore.set(TOKEN_COOKIE_NAME.REFRESH_TOKEN, apiResult.refresh_token);
+  cookieStore.set(TOKEN_COOKIE_NAME.ACCESS_TOKEN, apiResult.access_token, {
+    secure: isProduction,
+    sameSite: "lax",
+    httpOnly: true,
+    path: "/",
+  });
+  cookieStore.set(TOKEN_COOKIE_NAME.REFRESH_TOKEN, apiResult.refresh_token, {
+    secure: isProduction,
+    sameSite: "lax",
+    httpOnly: true,
+    path: "/",
+  });
 
   redirect(URLS.HOME);
 }

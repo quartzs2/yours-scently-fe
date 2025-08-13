@@ -35,12 +35,14 @@ export async function register(
   }
 
   try {
+    const { passwordConfirm, phoneNumber, birthDate, ...rest } =
+      validatedFields.data;
     await signupApi({
       signupData: {
-        ...validatedFields.data,
-        password_confirm: validatedFields.data.passwordConfirm,
-        phone_number: validatedFields.data.phoneNumber,
-        birth_date: validatedFields.data.birthDate,
+        ...rest,
+        password_confirm: passwordConfirm,
+        phone_number: phoneNumber,
+        birth_date: birthDate,
       },
     });
 
