@@ -52,33 +52,36 @@ type SwiperWithChildrenProps<T> = {
 const CardSwiper = <T extends { id: string | number }>({
   withNavigation = false,
   withPagination = false,
-  slidesPerView = 3,
   spaceBetween = 8,
   autoplay = true,
+  slidesPerView,
   className,
   children,
   items,
 }: SwiperWithChildrenProps<T>) => {
   return (
-    <div
-      className={cn(
-        "card-swiper-container relative w-full overflow-hidden",
-        className,
-      )}
-    >
+    <div className={cn("card-swiper-container relative w-full", className)}>
       <Swiper
         breakpoints={{
           1024: { slidesPerView: 4.5, spaceBetween: 8 },
-          320: { slidesPerView: 2, spaceBetween: 8 },
+          1232: { slidesPerView: 4, spaceBetween: 8 },
           640: { slidesPerView: 3, spaceBetween: 8 },
+          320: { slidesPerView: 2, spaceBetween: 8 },
         }}
+        navigation={
+          withNavigation
+            ? {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              }
+            : false
+        }
         autoplay={
           autoplay ? { disableOnInteraction: false, delay: 3000 } : false
         }
         pagination={withPagination ? { clickable: true } : false}
         modules={[Navigation, Pagination, Autoplay]}
         slidesPerView={slidesPerView}
-        navigation={withNavigation}
         spaceBetween={spaceBetween}
       >
         {items.map((item) => (
@@ -86,14 +89,13 @@ const CardSwiper = <T extends { id: string | number }>({
             {React.cloneElement(children, { item })}
           </SwiperSlide>
         ))}
-
-        {withNavigation && (
-          <>
-            <div className="swiper-button-prev" />
-            <div className="swiper-button-next" />
-          </>
-        )}
       </Swiper>
+      {withNavigation && (
+        <>
+          <div className="swiper-button-prev" />
+          <div className="swiper-button-next" />
+        </>
+      )}
     </div>
   );
 };
