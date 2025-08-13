@@ -52,9 +52,9 @@ type SwiperWithChildrenProps<T> = {
 const CardSwiper = <T extends { id: string | number }>({
   withNavigation = false,
   withPagination = false,
+  slidesPerView = 3,
   spaceBetween = 8,
   autoplay = true,
-  slidesPerView,
   className,
   children,
   items,
