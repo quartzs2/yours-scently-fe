@@ -1,13 +1,13 @@
-import { API_BASE_URL, API_URLS } from "@constants/urls";
-import ky from "ky";
+import { API_URLS } from "@constants/urls";
+import { publicApi } from "@api/api";
 
 type CheckNicknameProps = {
   nickname: string;
 };
 
 const checkNickname = async ({ nickname }: CheckNicknameProps) => {
-  const response = await ky
-    .post(`${API_BASE_URL}${API_URLS.SIGN_UP_NICKNAME_CHECK}`, {
+  const response = await publicApi
+    .post(`${API_URLS.SIGN_UP_NICKNAME_CHECK}`, {
       json: { nickname },
     })
     .json();

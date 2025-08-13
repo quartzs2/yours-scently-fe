@@ -1,5 +1,5 @@
-import { API_BASE_URL, API_URLS } from "@constants/urls";
-import ky from "ky";
+import { API_URLS } from "@constants/urls";
+import { publicApi } from "@api/api";
 
 type CheckEmailVerificationCodeProps = {
   email: string;
@@ -10,8 +10,8 @@ const checkEmailVerificationCode = async ({
   email,
   code,
 }: CheckEmailVerificationCodeProps) => {
-  const response = await ky
-    .post(`${API_BASE_URL}${API_URLS.SIGN_UP_EMAIL_VERIFY}`, {
+  const response = await publicApi
+    .post(`${API_URLS.SIGN_UP_EMAIL_VERIFY}`, {
       json: {
         verification_code: code,
         email,
