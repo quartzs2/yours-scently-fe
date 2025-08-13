@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import ky from "ky";
 
 const isServer = typeof window === "undefined";
+const TOKEN_COOKIE_NAME = "jwt_token";
 
 // 인증이 필요 없는 요청을 위한 인스턴스
 export const publicApi = ky.create({
@@ -19,12 +20,12 @@ export const api = publicApi.extend({
 
         if (isServer) {
           const cookieStore = await cookies();
-          token = cookieStore.get("jwt_token")?.value;
+          token = cookieStore.get(TOKEN_COOKIE_NAME)?.value;
         } else {
           token = document.cookie
             .split("; ")
-            .find((row) => row.startsWith("jwt_token="))
-            ?.split("=")[1];
+            .find((row) => row.startsWith(`${TOKEN_COOKIE_NAME}=`))
+            ?.substring(TOKEN_COOKIE_NAME.length + 1);
         }
 
         if (token) {
