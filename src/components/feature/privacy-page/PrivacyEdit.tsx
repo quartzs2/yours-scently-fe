@@ -1,5 +1,5 @@
-// src/app/(mypage)/privacy/PrivacyEdit.tsx
 "use client";
+
 import FieldRow from "@components/feature/privacy-page/FieldRow";
 import PhoneInput from "@components/ui/input/PhoneInput";
 import { useEffect, useState, useMemo } from "react";
@@ -7,6 +7,11 @@ import { DeliveryAddress } from "@custom-types/user";
 import Input from "@components/ui/input/Input";
 import Button from "@components/ui/Button";
 import { User } from "@custom-types/user";
+
+const GENDER = {
+  FEMALE: "여성",
+  MALE: "남성",
+};
 
 type Props = {
   onSave: (
@@ -21,8 +26,14 @@ type Props = {
   initialUser: User;
 };
 
-const toKoreanGender = (g: User["gender"]) =>
-  g === "MALE" ? "남성" : g === "FEMALE" ? "여성" : "기타";
+const toKoreanGender = (g: User["gender"]) => {
+  switch (g) {
+    case GENDER.FEMALE:
+      return "여성";
+    case GENDER.MALE:
+      return "남성";
+  }
+};
 
 const phoneToTriplet = (p: string): [string, string, string] => {
   const m = p.match(/^(\d{3})-(\d{3,4})-(\d{4})$/);
@@ -41,9 +52,6 @@ export default function PrivacyEdit({
   const [addresses, setAddresses] =
     useState<DeliveryAddress[]>(initialAddresses);
 
-  const [sendingCode, setSendingCode] = useState(false);
-  const [code, setCode] = useState("");
-  const [codeVerified, setCodeVerified] = useState(false);
   const [phoneValues, setPhoneValues] = useState<[string, string, string]>(
     phoneToTriplet(initialUser.phoneNumber),
   );
@@ -65,17 +73,8 @@ export default function PrivacyEdit({
   const isValid = useMemo(() => {
     const nn = user.nickname?.trim().length >= 1;
     const phoneOk = /^010-\d{3,4}-\d{4}$/.test(user.phoneNumber);
-    return nn && phoneOk && codeVerified;
-  }, [user.nickname, user.phoneNumber, codeVerified]);
-
-  const sendCode = async () => {
-    setSendingCode(true);
-    setTimeout(() => setSendingCode(false), 700);
-  };
-
-  const verifyCode = () => {
-    setCodeVerified(code === "000000");
-  };
+    return nn && phoneOk;
+  }, [user.nickname, user.phoneNumber]);
 
   const updateDefaultAddress = (patch: Partial<DeliveryAddress>) => {
     if (!defaultAddress) return;
@@ -113,7 +112,7 @@ export default function PrivacyEdit({
             type="text"
           />
           <Button
-            className="h-[48px] w-[112px] border border-border-default text-text-secondary"
+            className="h-[48px] w-[112px] border border-border-default text-text-primary"
             theme="light"
           >
             중복확인
@@ -140,37 +139,7 @@ export default function PrivacyEdit({
               onChange={handlePhoneChange}
               validMessage="유효한 번호입니다."
               values={phoneValues}
-              errorMessage=""
             />
-            <Button
-              className="h-[48px] w-[112px] border border-border-default text-text-secondary"
-              disabled={sendingCode}
-              onClick={sendCode}
-              theme="light"
-            >
-              {sendingCode ? "전송중..." : "인증코드전송"}
-            </Button>
-          </div>
-          <div className="itmes-center flex gap-2">
-            <Input
-              className="h-[48px] w-[360px] border border-border-default text-text-secondary"
-              onChange={(e) => setCode(e.target.value)}
-              validMessage="인증코드를 입력하세요"
-              isValid={code.length > 0}
-              placeholder="인증코드"
-              value={code}
-              type="text"
-            />
-            <Button
-              className="h-[48px] w-[112px] border border-border-default text-text-secondary"
-              onClick={verifyCode}
-              theme="light"
-            >
-              인증코드확인
-            </Button>
-            {codeVerified && (
-              <span className="text-[12px] text-green-600">인증 완료</span>
-            )}
           </div>
         </div>
       </FieldRow>
@@ -191,7 +160,7 @@ export default function PrivacyEdit({
               type="text"
             />
             <Button
-              className="h-[48px] w-[112px] border border-border-default text-text-secondary"
+              className="h-[48px] w-[112px] border border-border-default text-text-primary"
               theme="light"
             >
               우편번호 찾기
@@ -239,13 +208,12 @@ export default function PrivacyEdit({
               validMessage="비밀번호를 입력하세요."
               value={password}
               type="password"
-              errorMessage=""
               isValid={true}
             />
             <p className="text-body-2 relative text-text-primary">
               새 비밀번호
               <span className="text-body-2 text-system-error">*</span>
-              <span className="absolute left-20 font-semibold whitespace-nowrap text-text-primary">
+              <span className="absolute left-20 text-[0.875rem] leading-[1.2] font-semibold tracking-[-0.03em] whitespace-nowrap text-text-primary">
                 6~15자의 영문 대소문자, 숫자, 특수문자 포함
               </span>
             </p>
@@ -256,14 +224,13 @@ export default function PrivacyEdit({
               className="text-button-2 h-[48px] w-[360px] text-text-disabled"
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="비밀번호를 다시 입력하세요."
-              validMessage="새 비밀번호를 입력하세요."
+              validMessage="인증이 성공되었습니다."
               value={confirmPassword}
               type="password"
-              errorMessage=""
               isValid={true}
             />
             <Button
-              className="h-[48px] w-[112px] border border-border-default text-text-secondary"
+              className="h-[48px] w-[112px] border border-border-default text-text-primary"
               onClick={() => console.log("비밀번호 변경 클릭")}
               theme="light"
             >

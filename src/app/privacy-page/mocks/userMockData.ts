@@ -1,5 +1,3 @@
-// user.mock.ts
-
 import { DeliveryAddress } from "@custom-types/user";
 import { User } from "@custom-types/user";
 

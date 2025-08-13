@@ -1,5 +1,9 @@
-// src/app/(mypage)/privacy/PrivacyPage.tsx
 "use client";
+
+import {
+  ACCOUNT_DELETE_CONFIRM,
+  ACCOUNT_DELETE_SUCCESS,
+} from "@constants/messages";
 import {
   mockAddresses,
   mockUserApi,
@@ -12,16 +16,23 @@ import Button from "@components/ui/Button";
 import { User } from "@custom-types/user";
 import { useState } from "react";
 
+const MODE = {
+  DEFAULT: "default",
+  VIEW: "view",
+  EDIT: "edit",
+} as const;
+type Mode = (typeof MODE)[keyof typeof MODE];
+
 export default function PrivacyPage() {
   const router = useRouter();
-  const [mode, setMode] = useState<"view" | "edit">("view");
+  const [mode, setMode] = useState<Mode>(MODE.VIEW);
 
-  const [user, setUser] = useState<User>(mockUserApi);
+  const [user, setUser] = useState<User | null>(null);
   const [addresses, setAddresses] = useState<DeliveryAddress[]>(mockAddresses);
 
   const handleDeleteAccount = async () => {
-    if (!confirm("정말 탈퇴하시겠습니까?")) return;
-    alert("탈퇴 처리되었습니다.");
+    if (!confirm(ACCOUNT_DELETE_CONFIRM)) return;
+    alert(ACCOUNT_DELETE_SUCCESS);
     router.push("/");
   };
 
@@ -32,24 +43,25 @@ export default function PrivacyPage() {
     // TODO: 실제 저장 API 호출
     setUser(nextUser);
     setAddresses(nextAddresses);
-    setMode("view");
+    setMode(MODE.VIEW);
   };
+  if (!user) {
+    return <div>로딩 중...</div>;
+  }
 
-  if (mode === "view") {
+  if (mode === MODE.VIEW) {
     return (
       <PrivacyView
         DeleteButton={
-          <Button theme="light" size="lg">
+          <Button onClick={handleDeleteAccount} theme="light" size="lg">
             회원 탈퇴하기
           </Button>
         }
         EditButton={
-          <Button theme="dark" size="lg">
+          <Button onClick={() => setMode(MODE.EDIT)} theme="dark" size="lg">
             수정하기
           </Button>
         }
-        onEdit={() => setMode("edit")}
-        onDelete={handleDeleteAccount}
         addresses={addresses}
         user={user}
       />
