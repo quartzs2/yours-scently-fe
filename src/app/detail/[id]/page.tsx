@@ -198,10 +198,10 @@ const DetailPage = ({ params }: DetailPageProps) => {
           </p>
           <CardSwiper
             withNavigation={true}
-            spaceBetween={25.13}
+            spaceBetween={26.65}
             slidesPerView={4}
             autoplay={false}
-            items={data}
+            items={mockData}
           >
             <DetailSwiper />
           </CardSwiper>
