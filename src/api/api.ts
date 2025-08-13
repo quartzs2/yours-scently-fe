@@ -1,10 +1,10 @@
 import { API_BASE_URL, URLS } from "@constants/urls";
+import { TOKEN_COOKIE_NAME } from "@constants/auth";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import ky from "ky";
 
 const isServer = typeof window === "undefined";
-const TOKEN_COOKIE_NAME = "jwt_token";
 
 // 인증이 필요 없는 요청을 위한 인스턴스
 export const publicApi = ky.create({
@@ -20,12 +20,12 @@ export const api = publicApi.extend({
 
         if (isServer) {
           const cookieStore = await cookies();
-          token = cookieStore.get(TOKEN_COOKIE_NAME)?.value;
+          token = cookieStore.get(TOKEN_COOKIE_NAME.ACCESS_TOKEN)?.value;
         } else {
           token = document.cookie
             .split("; ")
-            .find((row) => row.startsWith(`${TOKEN_COOKIE_NAME}=`))
-            ?.substring(TOKEN_COOKIE_NAME.length + 1);
+            .find((row) => row.startsWith(`${TOKEN_COOKIE_NAME.ACCESS_TOKEN}=`))
+            ?.substring(TOKEN_COOKIE_NAME.ACCESS_TOKEN.length + 1);
         }
 
         if (token) {

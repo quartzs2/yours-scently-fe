@@ -10,7 +10,7 @@ const checkEmailVerificationCode = async ({
   email,
   code,
 }: CheckEmailVerificationCodeProps) => {
-  const response = await publicApi
+  const data = await publicApi
     .post(`${API_URLS.SIGN_UP_EMAIL_VERIFY}`, {
       json: {
         verification_code: code,
@@ -19,7 +19,7 @@ const checkEmailVerificationCode = async ({
     })
     .json();
 
-  return response;
+  return data;
 };
 
 export default checkEmailVerificationCode;

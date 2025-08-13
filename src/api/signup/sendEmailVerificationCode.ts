@@ -8,13 +8,13 @@ type SendEmailVerificationCodeProps = {
 const sendEmailVerificationCode = async ({
   email,
 }: SendEmailVerificationCodeProps) => {
-  const response = await publicApi
+  const data = await publicApi
     .post(`${API_URLS.SIGN_UP_EMAIL_SEND_CODE}`, {
       json: { email },
     })
     .json();
 
-  return response;
+  return data;
 };
 
 export default sendEmailVerificationCode;

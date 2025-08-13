@@ -1,4 +1,5 @@
 export const URLS = {
+  REGISTER_MODAL: "/login/register",
   MY_PAGE_MODAL: "/my-page-modal",
   AI_SEARCH: "/ai-search",
   PROMOTION: "/promotion",
@@ -15,6 +16,7 @@ export const API_URLS = {
   SIGN_UP_EMAIL_SEND_CODE: "/auth/signup/email/send-code/",
   SIGN_UP_NICKNAME_CHECK: "/auth/signup/nickname-check/",
   SIGN_UP_EMAIL_VERIFY: "/auth/signup/email/verify/",
+  EMAIL_LOGIN: "/auth/login/email/",
   SIGN_UP: "/auth/signup/",
 };
 
