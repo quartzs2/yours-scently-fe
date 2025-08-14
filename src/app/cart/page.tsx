@@ -46,7 +46,7 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState<CartItemType[]>(data.items);
 
   return (
-    <div className="mx-auto max-w-[1280px]">
+    <div className="mx-auto max-w-[1024px]">
       <p className="text-subtitle-1 py-5">장바구니</p>
 
       <div className="flex w-full flex-col justify-between">

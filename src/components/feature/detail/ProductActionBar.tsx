@@ -22,8 +22,8 @@ const ProductActionBar = ({
   price,
 }: ProductActionBarProps) => {
   return (
-    <div className="sticky bottom-0 left-0 z-150 mx-auto flex h-20 max-w-[1344px] items-center justify-center rounded-2xl border border-border-default bg-bg-default">
-      <div className="flex w-[1280px] items-center justify-between">
+    <div className="sticky bottom-0 left-0 z-150 mx-auto flex h-20 max-w-[1024px] items-center justify-center rounded-2xl border border-border-default bg-bg-default px-8">
+      <div className="flex w-full items-center justify-between">
         <Checkbox
           className="mr-4 p-4 focus:ring-0 focus:outline-none"
           onChange={onLikeToggle}
