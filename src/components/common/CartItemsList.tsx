@@ -110,23 +110,24 @@ const CartItemList = ({ setCartItems, cartItems }: CartItemListProps) => {
         </p>
       </div>
       {cartItems.map((item) => (
-        <div className="flex w-full flex-wrap justify-between" key={item.id}>
-          <CartCard
-            isChecked={checkedIds.has(item.id)}
-            handleCheckboxChange={toggleCheck}
-            name={item.name}
-            tags={["안녕"]}
-            id={item.id}
-            brand="안녕"
-          />
-          <div className="flex w-[606px] justify-end">
-            <div className="text-subtitle-1 flex flex-1 items-center justify-center border-l border-border-default">
-              <div className="w-[150px] flex-col items-center justify-center">
-                <p className="flex items-center justify-end pb-2">
-                  {(item.price * item.quantity).toLocaleString()}
+        <div key={item.id}>
+          <div className="flex justify-center">
+            <CartCard
+              isChecked={checkedIds.has(item.id)}
+              handleCheckboxChange={toggleCheck}
+              name={item.name}
+              tags={["안녕"]}
+              id={item.id}
+              brand="안녕"
+            />
+            <div className="flex items-center">
+              <div className="text-subtitle-1 flex h-[120px] w-[233px] flex-col items-end justify-center border-l border-border-default px-10">
+                <div className="flex items-center pb-2">
+                  <p>{(item.price * item.quantity).toLocaleString()}</p>
                   <span className="text-subtitle-2">원</span>
-                </p>
-                <div className="flex justify-end">
+                </div>
+
+                <div className="flex">
                   <QuantitySelector
                     onQuantityChange={(newQuantity) =>
                       handleItemQuantityUpdate(item.id, newQuantity)
@@ -136,18 +137,20 @@ const CartItemList = ({ setCartItems, cartItems }: CartItemListProps) => {
                   />
                 </div>
               </div>
-            </div>
-            <div className="flex flex-1 items-center justify-center border-l border-border-default">
-              <p className="text-subtitle-2 text-center text-text-primary">
-                3,000
-                <span className="text-[20px] text-text-secondary">원</span>
-                <br />
-                <span className="text-text-secondary">배송비</span>
-              </p>
-            </div>
-            <div className="flex flex-1 flex-col items-center justify-center gap-2 border-l border-border-default">
-              <Button>구매하기</Button>
-              <Button theme="light">삭제하기</Button>
+              <div className="flex h-[120px] w-[202px] items-center justify-center border-l border-border-default">
+                <p className="text-subtitle-2 text-center text-text-primary">
+                  3,000
+                  <span className="text-[20px] text-text-secondary">원</span>
+                  <br />
+                  <span className="text-text-secondary">배송비</span>
+                </p>
+              </div>
+              <div className="flex h-[120px] w-[202px] flex-col items-end justify-center gap-2 border-l border-border-default">
+                <Button size={"lg"}>구매하기</Button>
+                <Button theme="light" size={"lg"}>
+                  삭제하기
+                </Button>
+              </div>
             </div>
           </div>
           <div className="my-6 flex h-[50px] w-full flex-none items-center justify-center bg-bg-subtle text-[20px] text-primary-main">
@@ -195,9 +198,9 @@ const CartItemList = ({ setCartItems, cartItems }: CartItemListProps) => {
           <p className="text-body-1 text-text-disabled">
             배송비는 할인금액에 따라 변경될 수 있습니다.
           </p>
-          <p className="text-subtitle-1">총 결제예상금액</p>
+          <p className="text-subtitle-1 min-w-[197px]">총 결제예상금액</p>
         </div>
-        <div className="text-subtitle-1 flex min-w-[138px] items-center justify-end">
+        <div className="text-subtitle-1 flex items-center justify-end">
           {totalPaymentAmount.toLocaleString()}
           <span className="text-subtitle-2 text-text-primary">원</span>
         </div>

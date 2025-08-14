@@ -17,10 +17,7 @@ const DetailSwiper = ({
   }
 
   return (
-    <Link
-      className="flex h-[100px] w-[288px] items-center"
-      href={`/detail/${item.id}`}
-    >
+    <Link className="flex h-[100px] items-center" href={`/detail/${item.id}`}>
       <div className="relative h-25 w-25">
         <Image
           className={cn(
