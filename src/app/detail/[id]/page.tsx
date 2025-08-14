@@ -222,12 +222,12 @@ const DetailPage = ({ params }: DetailPageProps) => {
           <p className="text-subtitle-1 pt-12 pb-8 text-text-primary">리뷰</p>
 
           <div className="flex h-[290px] w-[1024px] justify-center">
-            <div className="flex w-full flex-col items-center justify-center">
+            <div className="flex w-1/4 flex-col items-center justify-center">
               <StarRating rating={4.7} size={48} />
               <p className="text-h3 text-text-primary">4.7</p>
               <p className="text-subtitle-2 text-text-secondary">총 1,329 건</p>
             </div>
-            <div className="flex w-full items-center justify-center">
+            <div className="flex w-3/4 items-center justify-center">
               <div className="w-[355px] pl-14">
                 <p className="text-subtitle-2 pb-2 text-text-primary">향</p>
                 <div className="flex flex-col gap-[13px]">
