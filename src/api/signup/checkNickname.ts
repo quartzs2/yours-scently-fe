@@ -6,13 +6,13 @@ type CheckNicknameProps = {
 };
 
 const checkNickname = async ({ nickname }: CheckNicknameProps) => {
-  const response = await publicApi
+  const data = await publicApi
     .post(`${API_URLS.SIGN_UP_NICKNAME_CHECK}`, {
       json: { nickname },
     })
     .json();
 
-  return response;
+  return data;
 };
 
 export default checkNickname;

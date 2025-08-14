@@ -18,20 +18,12 @@ export async function register(
   prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
-  const data = {
-    isNicknameChecked: formData.get("isNicknameChecked") === "true",
-    verificationCode: formData.get("verificationCode") as string,
-    isEmailVerified: formData.get("isEmailVerified") === "true",
-    passwordConfirm: formData.get("passwordConfirm") as string,
-    phoneNumber: formData.get("phoneNumber") as string,
-    birthDate: formData.get("birthDate") as string,
-    nickname: formData.get("nickname") as string,
-    password: formData.get("password") as string,
-    gender: formData.get("gender") as string,
-    email: formData.get("email") as string,
-    name: formData.get("name") as string,
-  };
-  const validatedFields = registerSchema.safeParse(data);
+  const data = Object.fromEntries(formData);
+  const validatedFields = registerSchema.safeParse({
+    ...data,
+    isNicknameChecked: data.isNicknameChecked === "true",
+    isEmailVerified: data.isEmailVerified === "true",
+  });
 
   if (!validatedFields.success) {
     return {
@@ -43,15 +35,15 @@ export async function register(
   }
 
   try {
+    const { passwordConfirm, phoneNumber, birthDate, ...rest } =
+      validatedFields.data;
     await signupApi({
-      password_confirm: validatedFields.data.passwordConfirm,
-      phone_number: validatedFields.data.phoneNumber,
-      birth_date: validatedFields.data.birthDate,
-      password: validatedFields.data.password,
-      nickname: validatedFields.data.nickname,
-      gender: validatedFields.data.gender,
-      email: validatedFields.data.email,
-      name: validatedFields.data.name,
+      signupData: {
+        ...rest,
+        password_confirm: passwordConfirm,
+        phone_number: phoneNumber,
+        birth_date: birthDate,
+      },
     });
 
     return { message: "회원가입이 정상적으로 완료되었습니다.", success: true };

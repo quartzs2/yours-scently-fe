@@ -1,44 +1,35 @@
 import { API_URLS } from "@constants/urls";
 import { publicApi } from "@api/api";
 
-type SignupProps = {
+export type SignupData = {
+  gender: "FEMALE" | "MALE";
   password_confirm: string;
   phone_number: string;
   birth_date: string;
   password: string;
   nickname: string;
-  gender: string;
   email: string;
   name: string;
 };
+type SignupProps = {
+  signupData: SignupData;
+};
 
-const signup = async ({
-  password_confirm,
-  phone_number,
-  birth_date,
-  password,
-  nickname,
-  gender,
-  email,
-  name,
-}: SignupProps) => {
+const signup = async ({ signupData }: SignupProps) => {
   const formData = new FormData();
-  formData.append("password_confirm", password_confirm);
-  formData.append("phone_number", phone_number);
-  formData.append("birth_date", birth_date);
-  formData.append("password", password);
-  formData.append("nickname", nickname);
-  formData.append("gender", gender);
-  formData.append("email", email);
-  formData.append("name", name);
+  Object.entries(signupData).forEach(([key, value]) => {
+    if (value) {
+      formData.append(key, value);
+    }
+  });
 
-  const response = await publicApi
+  const data = await publicApi
     .post(`${API_URLS.SIGN_UP}`, {
       body: formData,
     })
     .json();
 
-  return response;
+  return data;
 };
 
 export default signup;
