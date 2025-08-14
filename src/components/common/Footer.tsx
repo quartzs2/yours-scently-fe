@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="h-[322px] bg-[#4F555E] px-6 py-10 sm:px-12 md:px-[80px] lg:px-[160px] xl:px-[320px]">
+    <footer className="flex h-[322px] items-center justify-center bg-[#4F555E]">
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row">
         {/* 왼쪽: 로고 및 아이콘 */}
         <div className="space-y-6">

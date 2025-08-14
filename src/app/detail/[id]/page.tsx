@@ -192,16 +192,16 @@ const DetailPage = ({ params }: DetailPageProps) => {
         </div>
       </div>
       <div className="mt-20 flex justify-center">
-        <div className="flex max-w-[1232px] flex-wrap">
+        <div className="flex max-w-[1024px] flex-wrap">
           <p className="text-subtitle-1 pb-8 text-text-primary">
             이런 향수는 어때요?
           </p>
           <CardSwiper
             withNavigation={true}
-            spaceBetween={25.13}
             slidesPerView={4}
+            spaceBetween={8}
             autoplay={false}
-            items={data}
+            items={mockData}
           >
             <DetailSwiper />
           </CardSwiper>
@@ -210,7 +210,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
       <div className="mx-auto mt-20 flex w-full justify-center">
         <TabScroll setTab={handleTabClick} tab={tab} />
       </div>
-      <div className="mx-auto max-w-[1280px]" ref={detailRef}>
+      <div className="mx-auto max-w-[1024px]" ref={detailRef}>
         <ProductDetailInfo
           toggleExpanded={() => setIsExpanded((prev) => !prev)}
           imageSrc={IMAGES.DETAIL_IMAGE}
@@ -221,14 +221,14 @@ const DetailPage = ({ params }: DetailPageProps) => {
         <div className="mt-20" ref={reviewRef}>
           <p className="text-subtitle-1 pt-12 pb-8 text-text-primary">리뷰</p>
 
-          <div className="flex h-[290px] w-full justify-center">
-            <div className="flex w-[288px] flex-col items-center justify-center">
+          <div className="flex h-[290px] w-[1024px] justify-center">
+            <div className="flex w-1/4 flex-col items-center justify-center">
               <StarRating rating={4.7} size={48} />
               <p className="text-h3 text-text-primary">4.7</p>
               <p className="text-subtitle-2 text-text-secondary">총 1,329 건</p>
             </div>
-            <div className="flex w-[944px] items-center justify-center">
-              <div className="w-[355px]">
+            <div className="flex w-3/4 items-center justify-center">
+              <div className="w-[355px] pl-14">
                 <p className="text-subtitle-2 pb-2 text-text-primary">향</p>
                 <div className="flex flex-col gap-[13px]">
                   <p className="text-body-1 text-text-primary">은은해요</p>
@@ -236,7 +236,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
                   <p className="text-body-1 text-text-primary">강해요</p>
                 </div>
               </div>
-              <div className="w-[355px]">
+              <div className="w-[355px] pl-20">
                 <p className="text-subtitle-2 pb-2">지속력</p>
                 <div className="flex flex-col gap-[13px]">
                   <p className="text-body-1 text-text-primary">오래가요</p>

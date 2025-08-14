@@ -16,7 +16,7 @@ const dialogClasses = cva(
   {
     variants: {
       position: {
-        actionBar: "absolute right-85 bottom-25",
+        actionBar: "absolute right-125 bottom-25",
         cart: "absolute top-[62%] right-[7.5%]",
       },
     },
