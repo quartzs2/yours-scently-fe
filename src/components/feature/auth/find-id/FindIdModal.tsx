@@ -36,16 +36,13 @@ const FindIdModal = ({ onClose, isOpen }: FindIdModalProps) => {
     resolver: zodResolver(findEmailSchema),
     mode: "onChange",
   });
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-    form.handleSubmit((data) => {
-      const formData = new FormData();
-      Object.entries(data).forEach(([key, value]) => {
-        formData.append(key, value.toString());
-      });
-      startTransition(() => formAction(formData));
-    })();
+  const onSubmit = (data: FindEmailSchema) => {
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value.toString());
+    });
+    startTransition(() => formAction(formData));
   };
 
   useEffect(() => {
@@ -92,7 +89,11 @@ const FindIdModal = ({ onClose, isOpen }: FindIdModalProps) => {
           </div>
         </div>
         {/* 폼 영역 */}
-        <FindIdForm onSubmit={handleSubmit} isPending={isPending} form={form} />
+        <FindIdForm
+          onSubmit={form.handleSubmit(onSubmit)}
+          isPending={isPending}
+          form={form}
+        />
       </div>
     </Modal>
   );
