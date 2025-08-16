@@ -1,6 +1,7 @@
 "use client";
 
 import { EmailLoginSchema, emailLoginSchema } from "@app/login/schema";
+import FindIdModal from "@components/feature/auth/find-id/FindIdModal";
 import { useActionState, useTransition, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { emailLogin } from "@app/login/actions";
@@ -9,6 +10,7 @@ import Logo from "@assets/logo/logo-gray.svg";
 import Button from "@components/ui/Button";
 import { useForm } from "react-hook-form";
 import { URLS } from "@constants/urls";
+import { overlay } from "overlay-kit";
 import Link from "next/link";
 
 export default function LoginPage() {
@@ -99,6 +101,32 @@ export default function LoginPage() {
           {isPending ? "로그인 중..." : "일반회원 로그인"}
         </Button>
       </form>
+      <div className="flex">
+        <button
+          onClick={() => {
+            overlay.open(({ unmount, isOpen, close }) => {
+              return (
+                <FindIdModal
+                  onClose={() => {
+                    close();
+                    unmount();
+                  }}
+                  isOpen={isOpen}
+                />
+              );
+            });
+          }}
+          className="text-button-2 flex-center h-[36px] w-[92px] cursor-pointer text-text-secondary"
+        >
+          아이디 찾기
+        </button>
+        <span className="flex-center h-[36px] w-[22px] text-text-secondary">
+          |
+        </span>
+        <button className="text-button-2 flex-center h-[36px] w-[92px] cursor-pointer text-text-secondary">
+          비밀번호 찾기
+        </button>
+      </div>
     </div>
   );
 }
