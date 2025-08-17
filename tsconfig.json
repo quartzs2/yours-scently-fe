@@ -28,7 +28,8 @@
       "@custom-types/*": ["types/*"],
       "@hooks/*": ["hooks/*"],
       "@store/*": ["store/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@actions/*": ["actions/*"]
     }
   },
   "include": [

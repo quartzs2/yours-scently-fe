@@ -4,7 +4,7 @@ import { EmailLoginSchema, emailLoginSchema } from "@app/login/schema";
 import FindIdModal from "@components/feature/auth/find-id/FindIdModal";
 import { useActionState, useTransition, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { emailLogin } from "@app/login/actions";
+import { emailLoginAction } from "@app/login/actions";
 import Input from "@components/ui/input/Input";
 import Logo from "@assets/logo/logo-gray.svg";
 import Button from "@components/ui/Button";
@@ -14,7 +14,7 @@ import { overlay } from "overlay-kit";
 import Link from "next/link";
 
 export default function LoginPage() {
-  const [state, formAction] = useActionState(emailLogin, {
+  const [state, formAction] = useActionState(emailLoginAction, {
     success: false,
     message: "",
   });
