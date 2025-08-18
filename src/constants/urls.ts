@@ -10,6 +10,7 @@ export const URLS = {
   HOME: "/",
 };
 
+export const API_BASE_URL_LOCAL = "/api/v1";
 export const API_BASE_URL = "https://www.yours-scently.store/api/v1";
 
 export const API_URLS = {

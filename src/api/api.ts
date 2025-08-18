@@ -1,4 +1,4 @@
-import { API_BASE_URL, URLS } from "@constants/urls";
+import { API_BASE_URL_LOCAL, API_BASE_URL, URLS } from "@constants/urls";
 import { TOKEN_COOKIE_NAME } from "@constants/auth";
 import ky from "ky";
 
@@ -6,7 +6,8 @@ const isServer = typeof window === "undefined";
 
 // 인증이 필요 없는 요청을 위한 인스턴스
 export const publicApi = ky.create({
-  prefixUrl: API_BASE_URL,
+  prefixUrl: isServer ? API_BASE_URL : API_BASE_URL_LOCAL,
+  redirect: "manual",
 });
 
 // 인증이 필요한 요청을 위한 인스턴스
