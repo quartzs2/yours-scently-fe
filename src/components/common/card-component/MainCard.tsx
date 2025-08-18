@@ -12,7 +12,7 @@ import { cn } from "@utils/cn";
 const FALLBACK_IMAGE = "/fallback-image.svg";
 
 type Props = {
-  item: Omit<MainCardProps, "handleHeartChange">;
+  item?: Omit<MainCardProps, "handleHeartChange">;
   onCheckChange?: (checked: boolean) => void;
   onCardClick?: () => void; // 선택: 카드 전체 클릭 이동용
   checked?: boolean;
