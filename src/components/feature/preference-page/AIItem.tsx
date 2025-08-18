@@ -39,7 +39,7 @@ const AIItem = ({
         />
 
         {/* 추천 향수 */}
-        <div className="flex h-[120px] min-w-[160px] flex-1 items-center justify-center gap-[8px] border-l border-[#E5E5E5]">
+        <div className="flex h-[120px] min-w-[160px] flex-1 items-center justify-center gap-[8px] border-l border-border-default">
           <div>
             <span className="text-[14px] leading-[120%] font-semibold tracking-[-0.03em] text-text-secondary">
               추천 향수
@@ -49,7 +49,7 @@ const AIItem = ({
         </div>
 
         {/* 추천 이유 */}
-        <div className="flex h-[120px] min-w-[160px] flex-1 items-center justify-center gap-[8px] border-l border-[#E5E5E5]">
+        <div className="flex h-[120px] min-w-[160px] flex-1 items-center justify-center gap-[8px] border-l border-border-default">
           <div>
             <span className="text-[14px] leading-[120%] font-semibold tracking-[-0.03em] text-text-secondary">
               추천 이유
@@ -59,7 +59,7 @@ const AIItem = ({
         </div>
 
         {/* 진단일 */}
-        <div className="flex h-[120px] min-w-[120px] items-center justify-center border-l border-[#E5E5E5] px-6">
+        <div className="flex h-[120px] min-w-[120px] items-center justify-center border-l border-border-default px-6">
           <div>
             <span className="tracking -[-0.03em] self-start text-[14px] leading-[120%] font-semibold text-text-secondary">
               진단일
@@ -69,7 +69,7 @@ const AIItem = ({
         </div>
 
         {/* 버튼 */}
-        <div className="flex h-[120px] min-w-[120px] flex-col items-center justify-center gap-[8px] border-l border-[#E5E5E5] px-4">
+        <div className="flex h-[120px] min-w-[120px] flex-col items-center justify-center gap-[8px] border-l border-border-default px-4">
           <div className="flex flex-col gap-[8px]">
             <Button
               onClick={() => console.log("구매하기")}
