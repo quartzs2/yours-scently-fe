@@ -28,12 +28,23 @@ export default function WishlistPage() {
           전체상품({totalCount})
         </span>
         <div className="mx-[12px] h-[16px] w-px bg-text-disabled" />
-        <span className="text-subtitle-2 text-text-disabled">선택삭제</span>
+        <button
+          className="text-subtitle-2 text-text-disabled"
+          type="button"
+          disabled
+        >
+          선택삭제
+        </button>
 
-        <button className="text-button-1 ml-auto text-text-primary">
+        <button
+          className="text-button-1 ml-auto text-text-primary"
+          type="button"
+        >
           최신순
         </button>
-        <button className="text-button-1 ml-2 text-text-primary">필터</button>
+        <button className="text-button-1 ml-2 text-text-primary" type="button">
+          필터
+        </button>
       </div>
 
       {/* 찜 목록 */}
@@ -43,21 +54,20 @@ export default function WishlistPage() {
           const isSelected = selectedIds.includes(id);
 
           return (
-            <div key={id}>
-              <MainCard
-                item={{
-                  imageUrl: product.product_img_url,
-                  // isLiked는 UI 기본값일 뿐, 실제 체크 여부는 isSelected로 관리
-                  isLiked: product.is_liked,
-                  price: product.price,
-                  name: product.name,
-                  tags: product.tags,
-                  id,
-                }}
-                onCheckChange={(checked) => toggleSelect(id, checked)}
-                checked={isSelected}
-              />
-            </div>
+            <MainCard
+              item={{
+                imageUrl: product.product_img_url,
+                // isLiked는 UI 기본값일 뿐, 실제 체크 여부는 isSelected로 관리
+                isLiked: product.is_liked,
+                price: product.price,
+                name: product.name,
+                tags: product.tags,
+                id,
+              }}
+              onCheckChange={(checked) => toggleSelect(id, checked)}
+              checked={isSelected}
+              key={id}
+            />
           );
         })}
       </div>
