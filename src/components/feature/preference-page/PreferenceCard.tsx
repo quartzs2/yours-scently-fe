@@ -25,11 +25,9 @@ const PreferenceCard = ({
   type,
   id,
 }: PreferenceItemCardProps) => {
-  const [imgSrc, setImgSrc] = useState(imageUrl || FALLBACK_IMAGE);
-
-  useEffect(() => {
-    setImgSrc(imageUrl && imageUrl.trim() !== "" ? imageUrl : FALLBACK_IMAGE);
-  }, [imageUrl]);
+  const [imgSrc, setImgSrc] = useState(
+    imageUrl && imageUrl.trim() !== "" ? imageUrl : FALLBACK_IMAGE,
+  );
 
   return (
     <div className="mr-2 flex w-[362px] max-w-md items-center justify-between gap-2 rounded-md">

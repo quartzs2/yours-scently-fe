@@ -3,33 +3,39 @@ import Button from "@components/ui/Button";
 import React from "react";
 
 interface AIItemProps {
+  handleCheckboxChange: (id: number) => void;
   description: string;
+  isChecked: boolean;
   reason: string;
   brand: string;
   image: string;
   name: string;
   date: string;
+  id: number;
 }
 
 const AIItem = ({
+  handleCheckboxChange,
   description,
+  isChecked,
   reason,
   brand,
   image,
   name,
   date,
+  id,
 }: AIItemProps) => {
   return (
     <div>
       <div className="flex w-full items-center justify-between rounded-[4px]">
         <PreferenceCard
-          handleCheckboxChange={(checked) => console.log("체크 상태:", checked)}
-          isChecked={true}
+          handleCheckboxChange={handleCheckboxChange}
+          isChecked={isChecked}
           imageUrl={image}
           brand={brand}
           name={name}
           type="AI"
-          id={2}
+          id={id}
         />
 
         {/* 추천 향수 */}
@@ -38,9 +44,7 @@ const AIItem = ({
             <span className="text-[14px] leading-[120%] font-semibold tracking-[-0.03em] text-text-secondary">
               추천 향수
             </span>
-            <p className="text-button-1 text-text-primary">
-              딥포레스트 우디 EDT
-            </p>
+            <p className="text-button-1 text-text-primary">{name}</p>
           </div>
         </div>
 
@@ -57,7 +61,7 @@ const AIItem = ({
         {/* 진단일 */}
         <div className="flex h-[120px] min-w-[120px] items-center justify-center border-l border-[#E5E5E5] px-6">
           <div>
-            <span className="self-start text-[14px] leading-[120%] font-semibold tracking-[-0.03em] text-text-secondary">
+            <span className="tracking -[-0.03em] self-start text-[14px] leading-[120%] font-semibold text-text-secondary">
               진단일
             </span>
             <p className="text-body-1 text-text-primary">{date}</p>
@@ -86,7 +90,7 @@ const AIItem = ({
       </div>
 
       {/* 추천 설명 */}
-      <div className="bg-bg-subtle px-[16px] py-[12px] text-center align-middle font-[SUIT] text-[20px] leading-[130%] font-semibold tracking-[-0.03em] text-primary-main">
+      <div className="bg-bg-subtle px-[16px] py-[12px] text-center align-middle text-[20px] leading-[130%] font-semibold tracking-[-0.03em] text-primary-main">
         {description}
       </div>
     </div>

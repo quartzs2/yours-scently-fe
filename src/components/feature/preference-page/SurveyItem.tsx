@@ -4,25 +4,39 @@ import { Tag } from "@components/ui/tabs";
 import React from "react";
 
 interface SurveyItemProps {
+  handleCheckboxChange: (id: number) => void;
+  description: string;
+  isChecked: boolean;
   mood: string[];
   note: string[];
   brand: string;
   name: string;
   date: string;
+  id: number;
 }
 
-const SurveyItem = ({ brand, name, mood, note, date }: SurveyItemProps) => {
+const SurveyItem = ({
+  handleCheckboxChange,
+  description,
+  isChecked,
+  brand,
+  name,
+  mood,
+  note,
+  date,
+  id,
+}: SurveyItemProps) => {
   return (
     <div>
       <div className="flex w-full items-center justify-between rounded-[4px]">
         <PreferenceCard
-          handleCheckboxChange={(checked) => console.log("체크 상태:", checked)}
+          handleCheckboxChange={handleCheckboxChange}
           imageUrl="/images/product.png"
-          isChecked={true}
+          isChecked={isChecked}
           brand={brand}
           name={name}
           type="설문"
-          id={1}
+          id={id}
         />
 
         {/* 감정 키워드 */}
@@ -86,8 +100,7 @@ const SurveyItem = ({ brand, name, mood, note, date }: SurveyItemProps) => {
 
       {/* 추천 설명 */}
       <div className="bg-bg-subtle px-[16px] py-[12px] text-center align-middle font-[SUIT] text-[20px] leading-[130%] font-semibold tracking-[-0.03em] text-primary-main">
-        당신이 선택한 감정 키워드를 바탕으로, 잔잔한 우디 노트에 머스크의
-        포근함을 더한 이 향을 추천드려요.
+        {description}
       </div>
     </div>
   );
