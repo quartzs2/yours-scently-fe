@@ -1,8 +1,14 @@
+import type { MainCardProps } from "@custom-types/MainCard.type";
+
 import CloseQuoteIcon from "@assets/icons/ai-search-modal/icon-close-quote.svg";
 import OpenQuoteIcon from "@assets/icons/ai-search-modal/icon-open-quote.svg";
-import aiRecommendation from "@api/recommendations/aiRecommendation";
+import { postAiRecommendation } from "@api/recommendations/aiRecommendation";
+import CardSwiper from "@components/common/card-swiper/CardSwiper";
+import MainCard from "@components/common/card-component/MainCard";
 import { useQuery } from "@tanstack/react-query";
+import { Tag } from "@components/ui/tabs";
 import Icon from "@components/ui/Icon";
+import { useState } from "react";
 
 type AISearchResultProps = {
   text: string;
@@ -10,9 +16,11 @@ type AISearchResultProps = {
 
 const AISearchResult = ({ text }: AISearchResultProps) => {
   const { isLoading, isError, data } = useQuery({
-    queryFn: () => aiRecommendation({ text }),
+    queryFn: () => postAiRecommendation({ text }),
     queryKey: ["ai-search-result", text],
+    enabled: Boolean(text),
   });
+  const [isTagDeletable, setIsTagDeletable] = useState(false);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -26,22 +34,48 @@ const AISearchResult = ({ text }: AISearchResultProps) => {
     return <div>데이터가 없습니다.</div>;
   }
 
+  //  TODO: 실제 내용으로 변경 필요
+  const tags = ["포근한", "은은한", "부드러운", "파우더리한"];
+
+  const { recommendations, description } = data;
+  const items: MainCardProps[] = recommendations.map((scentData) => {
+    const { perfume, context } = scentData;
+    const { image_url: imageUrl, price, name, id } = perfume;
+    const tags = context.split(",").map((tag) => tag.trim());
+
+    return {
+      handleHeartChange: () => {},
+      price: Number(price),
+      isLiked: false,
+      id: String(id),
+      imageUrl,
+      tags,
+      name,
+    };
+  });
+
   return (
     <div className="mb-3 h-[550px] w-full overflow-y-scroll border-t border-border-default">
       {/* 추천 이유 표시 */}
       <section className="mx-auto mt-[112px] flex w-[876px] gap-2 text-text-primary">
         <Icon As={OpenQuoteIcon} />
         <div className="text-subtitle-2 w-[810px] text-center break-keep">
-          {/* TODO: 실제 API 연결 */}
-          당신이 선택한 ‘포근하고 은은한’ 분위기를 바탕으로, 부드러운 머스크와
-          파우더리한 노트가 어우러진 이 향을 추천드려요.
+          {description}
         </div>
         <Icon As={CloseQuoteIcon} />
       </section>
       {/* 추천 향수 표시 */}
-      <section className="mt-[80px] h-[508px]">
-        {/* TODO: 내용 추가 필요 */}
-        임시 내용
+      <section className="mt-[80px] flex h-[508px] flex-col gap-4 pl-[48px]">
+        <div className="text-subtitle-1 text-text-primary">추천 향수</div>
+        <CardSwiper
+          withNavigation={false}
+          withPagination={false}
+          spaceBetween={4}
+          autoplay={true}
+          items={items}
+        >
+          <MainCard />
+        </CardSwiper>
       </section>
       {/* 최근 검색어 */}
       <section className="px-[48px]">
@@ -51,12 +85,27 @@ const AISearchResult = ({ text }: AISearchResultProps) => {
         <div className="mt-[64px]">
           <div className="flex items-center justify-between text-text-secondary">
             <div className="text-subtitle-2">최근 검색어</div>
-            {/* TODO: 삭제 버튼 추가 필요 */}
-            <div className="text-body-1">삭제</div>
+            <button
+              onClick={() => {
+                setIsTagDeletable(!isTagDeletable);
+              }}
+              className="text-body-1 cursor-pointer"
+            >
+              삭제
+            </button>
           </div>
           <div className="mt-[23px] mb-[121px] h-[64px]">
-            {/* TODO: 태그 추가 필요 */}
-            태그 추가 필요
+            <div className="overflow-x-auto">
+              {tags.map((tag) => (
+                <Tag
+                  deletable={isTagDeletable}
+                  onDelete={() => {}}
+                  className="mr-4"
+                  text={tag}
+                  key={tag}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
