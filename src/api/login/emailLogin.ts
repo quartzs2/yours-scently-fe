@@ -2,6 +2,11 @@ import { API_URLS } from "@constants/urls";
 import { publicApi } from "@api/api";
 
 type EmailLoginResponse = {
+  user: {
+    nickname: string;
+    email: string;
+    id: number;
+  };
   refresh_token: string;
   access_token: string;
 };

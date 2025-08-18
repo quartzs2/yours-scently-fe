@@ -1,8 +1,31 @@
 import CloseQuoteIcon from "@assets/icons/ai-search-modal/icon-close-quote.svg";
 import OpenQuoteIcon from "@assets/icons/ai-search-modal/icon-open-quote.svg";
+import aiRecommendation from "@api/recommendations/aiRecommendation";
+import { useQuery } from "@tanstack/react-query";
 import Icon from "@components/ui/Icon";
 
-const AISearchResult = () => {
+type AISearchResultProps = {
+  text: string;
+};
+
+const AISearchResult = ({ text }: AISearchResultProps) => {
+  const { isLoading, isError, data } = useQuery({
+    queryFn: () => aiRecommendation({ text }),
+    queryKey: ["ai-search-result", text],
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
+
+  if (!data) {
+    return <div>데이터가 없습니다.</div>;
+  }
+
   return (
     <div className="mb-3 h-[550px] w-full overflow-y-scroll border-t border-border-default">
       {/* 추천 이유 표시 */}
@@ -16,7 +39,7 @@ const AISearchResult = () => {
         <Icon As={CloseQuoteIcon} />
       </section>
       {/* 추천 향수 표시 */}
-      <section className="mt-[120px] h-[508px]">
+      <section className="mt-[80px] h-[508px]">
         {/* TODO: 내용 추가 필요 */}
         임시 내용
       </section>

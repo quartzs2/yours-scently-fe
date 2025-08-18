@@ -6,7 +6,7 @@ import { TRIGGER_ID } from "@constants/triggers";
 import Dialog from "@components/common/Dialog";
 import { Z_INDEX } from "@constants/zIndex";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@utils/cn";
 
 const PLACEHOLDERS = [
@@ -19,10 +19,9 @@ const PLACEHOLDERS = [
 ];
 
 export default function AISearchModal() {
+  const PLACEHOLDER_INDEX = Math.floor(Math.random() * PLACEHOLDERS.length);
   const router = useRouter();
-  const [placeholder] = useState(
-    () => PLACEHOLDERS[Math.floor(Math.random() * PLACEHOLDERS.length)],
-  );
+  const [placeholder] = useState(() => PLACEHOLDERS[PLACEHOLDER_INDEX]);
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearchValue = useDebounce({ value: searchValue });
   const isTyping = searchValue !== debouncedSearchValue;
@@ -33,12 +32,30 @@ export default function AISearchModal() {
     router.back();
   };
 
+  useEffect(() => {
+    const originalStyle = {
+      overflowY: document.body.style.overflowY,
+      position: document.body.style.position,
+      width: document.body.style.width,
+    };
+
+    Object.assign(document.body.style, {
+      overflowY: "scroll",
+      position: "fixed",
+      width: "100%",
+    });
+
+    return () => {
+      Object.assign(document.body.style, originalStyle);
+    };
+  }, []);
+
   return (
     <Dialog
       className={cn(
         "border border-border-default bg-bg-default",
         "absolute top-[120px] left-[50%] translate-x-[-50%] rounded-2xl p-0",
-        "xl:min-w-[var(--width-container-md)]",
+        "xl:min-w-[var(--width-container-xl)]",
         { "border-primary-main": isTyping },
       )}
       triggerId={TRIGGER_ID.AI_SEARCH_ICON_TRIGGER}
@@ -57,7 +74,7 @@ export default function AISearchModal() {
         </div>
         {/* 검색 결과 */}
         {/* TODO: AISearchResult의 prop은 나중에 연결할 때 추가 */}
-        {isResultOpen && <AISearchResult />}
+        {isResultOpen && <AISearchResult text={debouncedSearchValue} />}
       </div>
     </Dialog>
   );
