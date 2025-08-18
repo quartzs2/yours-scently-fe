@@ -11,3 +11,11 @@ export type SurveyRecommendationResult = {
   reason: string;
   score: number;
 };
+
+export type RecommendationData = {
+  [key: string]: unknown;
+  intensity?: string;
+  keyword?: string;
+  usage?: string;
+  mood?: string;
+};

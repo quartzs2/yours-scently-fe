@@ -22,6 +22,7 @@ export const API_URLS = {
   SIGN_UP_EMAIL_SEND_CODE: "auth/signup/email/send-code/",
   SIGN_UP_NICKNAME_CHECK: "auth/signup/nickname-check/",
   SIGN_UP_EMAIL_VERIFY: "auth/signup/email/verify/",
+  RECOMMENDATION_REASON: "recommendation/reason/",
   AI_RECOMMENDATION: "recommendation/ai/",
   FIND_EMAIL: "auth/account/find-email/",
   EMAIL_LOGIN: "auth/login/email/",
