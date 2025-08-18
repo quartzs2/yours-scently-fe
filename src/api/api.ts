@@ -1,7 +1,5 @@
 import { API_BASE_URL, URLS } from "@constants/urls";
 import { TOKEN_COOKIE_NAME } from "@constants/auth";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 import ky from "ky";
 
 const isServer = typeof window === "undefined";
@@ -19,6 +17,7 @@ export const api = publicApi.extend({
         let token: undefined | string;
 
         if (isServer) {
+          const { cookies } = await import("next/headers");
           const cookieStore = await cookies();
           token = cookieStore.get(TOKEN_COOKIE_NAME.ACCESS_TOKEN)?.value;
         } else {
@@ -41,6 +40,7 @@ export const api = publicApi.extend({
           console.error("인증 에러, 로그인 페이지로 이동합니다.");
 
           if (isServer) {
+            const { redirect } = await import("next/navigation");
             redirect(URLS.LOGIN);
           } else {
             window.location.href = URLS.LOGIN;

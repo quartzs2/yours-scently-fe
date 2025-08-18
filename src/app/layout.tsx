@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
-import OverlayProvider from "@components/common/OverlayProvider";
+import QueryClientProvider from "@components/common/QueryClientProvider";
 import "@app/globals.css";
+import OverlayProvider from "@components/common/OverlayProvider";
 import { TOKEN_COOKIE_NAME } from "@constants/auth";
 import Header from "@components/common/Header";
 import Footer from "@components/common/Footer";
@@ -35,12 +36,14 @@ export default async function RootLayout({
   return (
     <html className={suit.className} lang="ko">
       <body>
-        <OverlayProvider>
-          <Header isLoggedIn={isLoggedIn} />
-          {children}
-          {modal}
-          <Footer />
-        </OverlayProvider>
+        <QueryClientProvider>
+          <OverlayProvider>
+            <Header isLoggedIn={isLoggedIn} />
+            {children}
+            {modal}
+            <Footer />
+          </OverlayProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
