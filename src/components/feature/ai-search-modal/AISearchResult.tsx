@@ -16,6 +16,32 @@ type AISearchResultProps = {
 
 const AISearchResult = ({ text }: AISearchResultProps) => {
   const { isLoading, isError, data } = useQuery({
+    select: (data) => {
+      if (!data) {
+        return { description: "", items: [] };
+      }
+
+      const items: MainCardProps[] = data.recommendations.map((scentData) => {
+        const { perfume, context } = scentData;
+        const { image_url: imageUrl, price, name, id } = perfume;
+        const tags = context.split(",").map((tag) => tag.trim());
+
+        return {
+          handleHeartChange: () => {},
+          price: Number(price),
+          isLiked: false,
+          id: String(id),
+          imageUrl,
+          tags,
+          name,
+        };
+      });
+
+      return {
+        description: data.description,
+        items,
+      };
+    },
     queryFn: () => postAiRecommendation({ text }),
     queryKey: ["ai-search-result", text],
     enabled: Boolean(text),
@@ -37,22 +63,7 @@ const AISearchResult = ({ text }: AISearchResultProps) => {
   //  TODO: 실제 내용으로 변경 필요
   const tags = ["포근한", "은은한", "부드러운", "파우더리한"];
 
-  const { recommendations, description } = data;
-  const items: MainCardProps[] = recommendations.map((scentData) => {
-    const { perfume, context } = scentData;
-    const { image_url: imageUrl, price, name, id } = perfume;
-    const tags = context.split(",").map((tag) => tag.trim());
-
-    return {
-      handleHeartChange: () => {},
-      price: Number(price),
-      isLiked: false,
-      id: String(id),
-      imageUrl,
-      tags,
-      name,
-    };
-  });
+  const { description, items } = data || { description: "", items: [] };
 
   return (
     <div className="mb-3 h-[550px] w-full overflow-y-scroll border-t border-border-default">
@@ -87,7 +98,7 @@ const AISearchResult = ({ text }: AISearchResultProps) => {
             <div className="text-subtitle-2">최근 검색어</div>
             <button
               onClick={() => {
-                setIsTagDeletable(!isTagDeletable);
+                setIsTagDeletable((prev) => !prev);
               }}
               className="text-body-1 cursor-pointer"
             >
