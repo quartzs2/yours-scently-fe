@@ -4,13 +4,13 @@ import {
   type RegisterSchema,
   registerSchema,
 } from "@app/login/@modal/(.)register/schema";
-import BirthDateSection from "@components/feature/register/BirthDateSection";
-import NicknameSection from "@components/feature/register/NicknameSection";
-import PasswordSection from "@components/feature/register/PasswordSection";
-import GenderSection from "@components/feature/register/GenderSection";
-import EmailSection from "@components/feature/register/EmailSection";
-import PhoneSection from "@components/feature/register/PhoneSection";
-import NameSection from "@components/feature/register/NameSection";
+import BirthDateSection from "@components/feature/auth/register/BirthDateSection";
+import NicknameSection from "@components/feature/auth/register/NicknameSection";
+import PasswordSection from "@components/feature/auth/register/PasswordSection";
+import GenderSection from "@components/feature/auth/register/GenderSection";
+import EmailSection from "@components/feature/auth/register/EmailSection";
+import PhoneSection from "@components/feature/auth/register/PhoneSection";
+import NameSection from "@components/feature/auth/register/NameSection";
 import { register } from "@app/login/@modal/(.)register/actions";
 import { useActionState, useTransition, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";

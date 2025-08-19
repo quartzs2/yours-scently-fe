@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 
-import Header from "@components/common/Header";
+import QueryClientProvider from "@components/common/QueryClientProvider";
 import "@app/globals.css";
+import OverlayProvider from "@components/common/OverlayProvider";
+import { TOKEN_COOKIE_NAME } from "@constants/auth";
+import Header from "@components/common/Header";
 import Footer from "@components/common/Footer";
 import localFont from "next/font/local";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   description: "취향에 맞는 향수를 추천해주는 향수 쇼핑몰",
@@ -19,24 +23,27 @@ const suit = localFont({
   ],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  subModal,
   modal,
 }: Readonly<{
   children: React.ReactNode;
-  subModal: React.ReactNode;
   modal: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const isLoggedIn = cookieStore.has(TOKEN_COOKIE_NAME.ACCESS_TOKEN);
+
   return (
     <html className={suit.className} lang="ko">
       <body>
-        {/* TODO: 로그인 상태 처리 로직 추가 후 수정 */}
-        <Header isLoggedIn={true} />
-        {children}
-        {modal}
-        {subModal}
-        <Footer />
+        <QueryClientProvider>
+          <OverlayProvider>
+            <Header isLoggedIn={isLoggedIn} />
+            {children}
+            {modal}
+            <Footer />
+          </OverlayProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );

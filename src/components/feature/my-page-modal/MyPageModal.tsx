@@ -1,9 +1,9 @@
 "use client";
 
+import { getNicknameFromCookies, logout } from "@actions/actions";
 import { TRIGGER_ID } from "@constants/triggers";
 import Dialog from "@components/common/Dialog";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";
 import { URLS } from "@constants/urls";
 import { cn } from "@utils/cn";
@@ -11,18 +11,28 @@ import { cn } from "@utils/cn";
 const DISTANCE_FROM_ICON = 40;
 const MODAL_WIDTH = 296;
 
-export default function MyPageModal() {
-  const router = useRouter();
+type MyPageModalProps = {
+  onClose: () => void;
+  isOpen: boolean;
+};
 
-  const handleClose = () => {
-    router.back();
-  };
-
+export default function MyPageModal({ onClose, isOpen }: MyPageModalProps) {
+  const [nickname, setNickname] = useState<undefined | string>();
   const [modalPosition, setModalPosition] = useState({
     opacity: 0,
     left: 0,
     top: 0,
   });
+
+  useEffect(() => {
+    const fetchNickname = async () => {
+      const nicknameCookie = await getNicknameFromCookies();
+      if (nicknameCookie) {
+        setNickname(nicknameCookie.value);
+      }
+    };
+    fetchNickname();
+  }, []);
 
   useEffect(() => {
     const updatePosition = () => {
@@ -49,9 +59,7 @@ export default function MyPageModal() {
     return () => window.removeEventListener("resize", updatePosition);
   }, []);
 
-  useEffect(() => {
-    router.prefetch(URLS.MY_PAGE);
-  }, [router]);
+  if (!isOpen) return null;
 
   return (
     <Dialog
@@ -66,22 +74,22 @@ export default function MyPageModal() {
         position: "absolute",
       }}
       triggerId={TRIGGER_ID.MY_PAGE_ICON_TRIGGER}
-      onClose={handleClose}
+      onClose={onClose}
     >
       <div className="flex flex-col gap-6">
-        {/* TODO: 로그인 기능 추가 후 유저 이름 표시 */}
-        <div className="text-button-1 flex justify-center">유어스 센틀리님</div>
+        <div className="text-button-1 flex justify-center">{nickname}님</div>
         <div className="flex gap-2">
-          <Button
-            onClick={() => {
-              window.location.href = URLS.MY_PAGE;
-            }}
-            aria-label="마이 페이지 이동"
-          >
+          <Button aria-label="마이 페이지 이동" href={URLS.MY_PAGE}>
             마이 페이지
           </Button>
-          {/* TODO: 로그아웃 기능 추가 후 동작 추가 */}
-          <Button aria-label="로그아웃" theme="light">
+          <Button
+            onClick={() => {
+              onClose();
+              logout();
+            }}
+            aria-label="로그아웃"
+            theme="light"
+          >
             로그아웃
           </Button>
         </div>

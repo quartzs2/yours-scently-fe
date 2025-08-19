@@ -6,3 +6,10 @@ export const emailLoginSchema = z.object({
 });
 
 export type EmailLoginSchema = z.infer<typeof emailLoginSchema>;
+
+export const findEmailSchema = z.object({
+  phoneNumber: z.string().min(1, "휴대전화 번호를 입력해주세요."),
+  name: z.string().min(1, "이름을 입력해주세요."),
+});
+
+export type FindEmailSchema = z.infer<typeof findEmailSchema>;

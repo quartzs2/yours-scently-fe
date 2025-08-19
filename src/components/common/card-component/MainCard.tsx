@@ -1,3 +1,4 @@
+// MainCard.tsx
 "use client";
 
 import type { MainCardProps } from "@custom-types/MainCard.type";
@@ -10,13 +11,19 @@ import { cn } from "@utils/cn";
 
 const FALLBACK_IMAGE = "/fallback-image.svg";
 
-const MainCard = ({
-  handleHeartChange,
-  item,
-}: {
-  handleHeartChange?: MainCardProps["handleHeartChange"];
+type Props = {
   item?: Omit<MainCardProps, "handleHeartChange">;
-}) => {
+  onCheckChange?: (checked: boolean) => void;
+  onCardClick?: () => void; // 선택: 카드 전체 클릭 이동용
+  checked?: boolean;
+};
+
+const MainCard = ({
+  checked = false,
+  onCheckChange,
+  onCardClick,
+  item,
+}: Props) => {
   const [imgSrc, setImgSrc] = useState(item?.imageUrl);
 
   useEffect(() => {
@@ -26,16 +33,21 @@ const MainCard = ({
   if (!item) return null;
 
   return (
-    <div className="flex w-full max-w-[308px] flex-col">
+    <div
+      className="flex w-[308px] cursor-pointer flex-col"
+      role={onCardClick ? "button" : undefined}
+      tabIndex={onCardClick ? 0 : -1}
+      onClick={onCardClick}
+    >
       {/* 이미지 & 하트 */}
       <div className="relative mb-2 aspect-square w-full overflow-hidden rounded-2xl border border-border-default">
         <Checkbox
           className="absolute top-[8px] right-[8px] z-10 m-1 h-[24px] w-[24px]"
-          onChange={(e) => handleHeartChange && handleHeartChange(e)}
-          checked={item.isLiked || false}
+          onChange={(e) => onCheckChange?.(e.target.checked)}
+          id={`heart-${item.id}`}
+          checked={checked}
           type="heart"
           name="heart"
-          id="heart"
         />
         <Image
           className={cn(
@@ -52,13 +64,11 @@ const MainCard = ({
 
       {/* 카드 하단 부분 */}
       <div className="flex flex-grow flex-col justify-between rounded-2xl border border-border-default bg-bg-default">
-        {/* 태그 */}
         <div className="flex flex-wrap gap-1 px-3 py-2">
           {item.tags.map((tag, i) => (
             <Tag key={`${tag}-${i}`} text={tag} size="sm" />
           ))}
         </div>
-        {/* 본문 */}
         <div className="min-h-[72px] px-3 pb-4">
           <h3 className="text-body-1 truncate">{item.name}</h3>
           <p className="text-body-1">{item.price.toLocaleString()}원</p>

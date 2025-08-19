@@ -5,9 +5,10 @@ import ReviewCard from "@components/common/review-card/ReviewCard";
 // import는 알파벳 순서로 정렬
 import MainCard from "@components/common/card-component/MainCard";
 import MypageCard from "@components/feature/my-page/MypageCard";
-import { cardMockData } from "@app/my-page/mocks/mockCard";
+import { mockLiked } from "@app/liked-page/mocks/mockLiked";
 import { ChevronRight } from "lucide-react";
 import Icon from "@components/ui/Icon";
+import { useState } from "react";
 
 type OrderStatusItem = {
   key: "delivered" | "pending" | "shipped" | "ready" | "paid";
@@ -23,6 +24,18 @@ export default function MyPage() {
     { key: "shipped", label: "배송중", count: 3 },
     { key: "delivered", label: "배송완료", count: 5 },
   ];
+
+  const likedProducts = mockLiked[0]?.results ?? [];
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  const toggleSelect = (id: string, checked: boolean) => {
+    setSelectedIds((prev) =>
+      checked ? [...prev, id] : prev.filter((pid) => pid !== id),
+    );
+  };
+
+  const totalCount = likedProducts.length;
+
   return (
     <div className="flex min-h-screen flex-col sm:mx-[80px] lg:mx-[320px]">
       <span className="text-subtitle-1 mt-[80px] mb-[32px] w-full text-text-primary">
@@ -88,11 +101,27 @@ export default function MyPage() {
           <p className="text-subtitle-2 text-text-secondary">더보기 &gt;</p>
         </div>
         <div className="mb-12 flex gap-2 overflow-hidden">
-          {cardMockData.map((card) => (
-            <div className="shrink-0" key={card.id}>
-              <MainCard handleHeartChange={() => {}} item={card} />
-            </div>
-          ))}
+          {likedProducts.map((product) => {
+            const id = product.product_id.toString();
+            const isSelected = selectedIds.includes(id);
+
+            return (
+              <div key={id}>
+                <MainCard
+                  item={{
+                    imageUrl: product.product_img_url,
+                    isLiked: product.is_liked,
+                    price: product.price,
+                    name: product.name,
+                    tags: product.tags,
+                    id,
+                  }}
+                  onCheckChange={(checked) => toggleSelect(id, checked)}
+                  checked={isSelected}
+                />
+              </div>
+            );
+          })}
         </div>
 
         {/* 나의 리뷰 */}

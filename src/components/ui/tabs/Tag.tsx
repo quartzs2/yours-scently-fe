@@ -23,6 +23,7 @@ const tagVariants = cva(
 
 export type TagProps = {
   onDelete?: () => void;
+  className?: string;
   text: string;
 } & VariantProps<typeof tagVariants>;
 
@@ -39,11 +40,17 @@ export type TagProps = {
  * @example
  * <Tag text="Example" deletable onDelete={() => alert("삭제됨")} size="lg" />
  */
-export const Tag = ({ deletable, onDelete, text, size }: TagProps) => {
+export const Tag = ({
+  deletable,
+  className,
+  onDelete,
+  text,
+  size,
+}: TagProps) => {
   return (
-    <div className={cn(tagVariants({ deletable, size }))}>
+    <div className={cn(tagVariants({ deletable, size }), className)}>
       <span className={cn({ "mr-1": deletable })}>{text}</span>
-      {deletable && size === TAG_SIZE_LG && onDelete && (
+      {deletable && onDelete && (
         <IconButton
           iconClassName="w-4 h-4"
           onClick={onDelete}
