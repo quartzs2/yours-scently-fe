@@ -39,14 +39,6 @@ const nextConfig: NextConfig = {
 
     return config;
   },
-  async rewrites() {
-    return [
-      {
-        destination: "https://www.yours-scently.store/api/v1/:path*",
-        source: "/api/v1/:path*",
-      },
-    ];
-  },
   turbopack: {
     rules: {
       "*.svg": {

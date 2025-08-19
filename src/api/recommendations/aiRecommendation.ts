@@ -1,5 +1,5 @@
-import { API_URLS } from "@constants/urls";
-import { api } from "@api/api";
+import { INTERNAL_API_URLS, API_URLS } from "@constants/urls";
+import api, { internalApi } from "@api/api";
 
 export type AiRecommendationResponse = {
   recommendations: Recommendation[];
@@ -26,7 +26,7 @@ type AiRecommendationProps = {
   text: string;
 };
 
-const aiRecommendation = async ({ text }: AiRecommendationProps) => {
+const aiRecommendationApi = async ({ text }: AiRecommendationProps) => {
   const data = await api
     .post(API_URLS.AI_RECOMMENDATION, {
       json: {
@@ -38,4 +38,17 @@ const aiRecommendation = async ({ text }: AiRecommendationProps) => {
   return data;
 };
 
-export default aiRecommendation;
+/** 클라이언트에서 route handler 호출 시 사용 */
+export const postAiRecommendation = async ({ text }: AiRecommendationProps) => {
+  const data = await internalApi
+    .post(INTERNAL_API_URLS.AI_RECOMMENDATIONS, {
+      json: {
+        text,
+      },
+    })
+    .json<AiRecommendationResponse>();
+
+  return data;
+};
+
+export default aiRecommendationApi;

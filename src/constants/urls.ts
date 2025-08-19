@@ -10,7 +10,6 @@ export const URLS = {
   HOME: "/",
 };
 
-export const API_BASE_URL_LOCAL = "/api/v1";
 export const API_BASE_URL = "https://www.yours-scently.store/api/v1";
 
 export const API_URLS = {
@@ -21,6 +20,10 @@ export const API_URLS = {
   FIND_EMAIL: "auth/account/find-email/",
   EMAIL_LOGIN: "auth/login/email/",
   SIGN_UP: "auth/signup/",
+};
+
+export const INTERNAL_API_URLS = {
+  AI_RECOMMENDATIONS: "/api/ai-recommendations",
 };
 
 export const IMAGES = {
