@@ -8,20 +8,20 @@ import DetailSwiper from "@components/feature/detail/DetailSwiper";
 import CardSwiper from "@components/common/card-swiper/CardSwiper";
 import ReviewListCard from "@components/common/ReviewlistCard";
 import CartModal from "@components/feature/detail/CartModal";
-import { useEffect, useState, useRef, use } from "react";
 import TabScroll from "@components/ui/tabs/TabScroll";
 import Checkbox from "@components/ui/input/Checkbox";
+import { useEffect, useState, useRef } from "react";
 import data from "@app/detail/[id]/mock/mock.json";
 import Button from "@components/ui/Button";
 import { IMAGES } from "@constants/urls";
 import useScroll from "@hooks/useScroll";
 import Image from "next/image";
 
-type DetailPageProps = {
-  params: Promise<{
-    id: string;
-  }>;
-};
+// type DetailPageProps = {
+//   params: Promise<{
+//     id: string;
+//   }>;
+// };
 
 const POSITION = {
   ACTION_BAR: "actionBar",
@@ -32,10 +32,10 @@ const MAX_HEIGHT = "600px" as const;
 
 type PositionType = (typeof POSITION)[keyof typeof POSITION];
 
-const DetailPage = ({ params }: DetailPageProps) => {
-  const { id } = use(params);
+const DetailPage = () => {
+  // const { id } = use(params);
 
-  const [mockData, setMockData] = useState(data);
+  const [mockData] = useState(data);
 
   const [tab, setTab] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -257,7 +257,7 @@ const DetailPage = ({ params }: DetailPageProps) => {
               key={item.id}
             >
               <ReviewListCard
-                imageUrl={`/mock/best-review/perfume${item.id}.png`}
+                imageUrls={[`/mock/best-review/perfume${item.id}.png`]}
                 review="향이 오래가서 좋아요!"
                 date="2025-08-01"
                 timeAgo="3시간 전"

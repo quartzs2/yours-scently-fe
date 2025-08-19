@@ -1,8 +1,7 @@
 "use client";
 
 import FieldRow from "@components/feature/privacy-page/FieldRow";
-import { DeliveryAddress } from "@custom-types/user";
-import { User } from "@custom-types/user";
+import { DeliveryAddress, User } from "@custom-types/user";
 
 type Props = {
   DeleteButton: React.ReactNode;

@@ -38,7 +38,9 @@ const ReviewListCard = ({
           {sources.length === 1 ? (
             // 1장일 때
             <Image
-              onError={(e) => ((e.currentTarget as any).src = FALLBACK_IMAGE)}
+              onError={(e) =>
+                ((e.currentTarget as HTMLImageElement).src = FALLBACK_IMAGE)
+              }
               className="object-cover"
               src={sources[0]}
               sizes="170px"
@@ -52,7 +54,8 @@ const ReviewListCard = ({
                 <div className="relative h-full w-full" key={i}>
                   <Image
                     onError={(e) =>
-                      ((e.currentTarget as any).src = FALLBACK_IMAGE)
+                      ((e.currentTarget as HTMLImageElement).src =
+                        FALLBACK_IMAGE)
                     }
                     className="object-cover"
                     alt={`리뷰 이미지 ${i + 1}`}

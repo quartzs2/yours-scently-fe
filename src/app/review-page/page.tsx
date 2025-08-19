@@ -38,10 +38,10 @@ export default function MyReviewsPage() {
   };
 
   // 전체 선택 / 해제
-  const toggleAll = () => {
-    const allSelected = reviews.every((r) => r.isChecked);
-    setReviews((prev) => prev.map((r) => ({ ...r, isChecked: !allSelected })));
-  };
+  // const toggleAll = () => {
+  //   const allSelected = reviews.every((r) => r.isChecked);
+  //   setReviews((prev) => prev.map((r) => ({ ...r, isChecked: !allSelected })));
+  // };
 
   return (
     <div className="width-container-md M min- mx-auto max-w-[var(--width-container)] py-[40px] sm:max-w-[var(--width-container-sm)] md:max-w-[var(--width-container-md)] md:px-0">

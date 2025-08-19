@@ -1,7 +1,7 @@
 "use client";
 
 import Checkbox from "@components/ui/input/Checkbox";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 const FALLBACK_IMAGE = "/fallback-image.svg";

@@ -80,18 +80,10 @@ const SurveyItem = ({
         {/* 버튼 */}
         <div className="flex h-[120px] min-w-[120px] flex-col items-center justify-center gap-[8px] border-l border-border-default px-4">
           <div className="flex flex-col gap-[8px]">
-            <Button
-              onClick={() => console.log("구매하기")}
-              theme="dark"
-              size="lg"
-            >
+            <Button onClick={() => {}} theme="dark" size="lg">
               구매하기
             </Button>
-            <Button
-              onClick={() => console.log("삭제하기")}
-              theme="light"
-              size="lg"
-            >
+            <Button onClick={() => {}} theme="light" size="lg">
               삭제하기
             </Button>
           </div>

@@ -1,12 +1,11 @@
 "use client";
 
 import FieldRow from "@components/feature/privacy-page/FieldRow";
+import { DeliveryAddress, User } from "@custom-types/user";
 import PhoneInput from "@components/ui/input/PhoneInput";
 import { useEffect, useState, useMemo } from "react";
-import { DeliveryAddress } from "@custom-types/user";
 import Input from "@components/ui/input/Input";
 import Button from "@components/ui/Button";
-import { User } from "@custom-types/user";
 
 const GENDER = {
   FEMALE: "여성",
@@ -231,7 +230,7 @@ export default function PrivacyEdit({
             />
             <Button
               className="h-[48px] w-[112px] border border-border-default text-text-primary"
-              onClick={() => console.log("비밀번호 변경 클릭")}
+              onClick={() => {}}
               theme="light"
             >
               비밀번호 변경

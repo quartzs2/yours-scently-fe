@@ -1,5 +1,4 @@
-import { DeliveryAddress } from "@custom-types/user";
-import { User } from "@custom-types/user";
+import { DeliveryAddress, User } from "@custom-types/user";
 
 export const mockUserApi: User = {
   createdAt: "2025-07-01T12:00:00",

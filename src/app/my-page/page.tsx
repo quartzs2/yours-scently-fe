@@ -5,10 +5,8 @@ import ReviewCard from "@components/common/review-card/ReviewCard";
 import CardSwiper from "@components/common/card-swiper/CardSwiper";
 import MainCard from "@components/common/card-component/MainCard";
 import MypageCard from "@components/feature/my-page/MypageCard";
-import { mockLiked } from "@app/liked-page/mocks/mockLiked";
 import { ChevronRight } from "lucide-react";
 import Icon from "@components/ui/Icon";
-import { useState } from "react";
 import Link from "next/link";
 
 import { cardMockData } from "./mocks/mockCard";
@@ -28,16 +26,16 @@ export default function MyPage() {
     { key: "delivered", label: "배송완료", count: 5 },
   ];
 
-  const likedProducts = mockLiked[0]?.results ?? [];
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  // const likedProducts = mockLiked[0]?.results ?? [];
+  // const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  const toggleSelect = (id: string, checked: boolean) => {
-    setSelectedIds((prev) =>
-      checked ? [...prev, id] : prev.filter((pid) => pid !== id),
-    );
-  };
+  // const toggleSelect = (id: string, checked: boolean) => {
+  //   setSelectedIds((prev) =>
+  //     checked ? [...prev, id] : prev.filter((pid) => pid !== id),
+  //   );
+  // };
 
-  const totalCount = likedProducts.length;
+  // const totalCount = likedProducts.length;
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-[1024px] flex-col">
