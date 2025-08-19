@@ -53,7 +53,7 @@ export default function MyReviewsPage() {
       <div className="space-y-[32px] pt-4">
         {reviews.map((review) => (
           <div
-            className="flex items-start gap-2 border-t border-border-default"
+            className="flex items-start gap-2 border-t border-border-default first:border-t-0"
             key={review.id}
           >
             <input
