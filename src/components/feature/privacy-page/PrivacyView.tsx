@@ -23,7 +23,7 @@ export default function PrivacyView({
   const defaultAddress = addresses.find((a) => a.isDefault);
 
   return (
-    <div className="mx-auto max-w-[1340px] px-4 pt-[72px] pb-[120px]">
+    <div className="width-container-md M min- mx-auto max-w-[var(--width-container)] py-[40px] sm:max-w-[var(--width-container-sm)] md:max-w-[var(--width-container-md)] md:px-0">
       {/* 타이틀 & 수정 버튼 */}
       <div className="mb-[60px] flex items-start justify-between">
         <h2 className="text-subtitle-1 h-[48px] w-[160px] text-text-primary">

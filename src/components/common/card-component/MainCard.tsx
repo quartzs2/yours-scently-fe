@@ -34,7 +34,7 @@ const MainCard = ({
 
   return (
     <div
-      className="flex w-[308px] cursor-pointer flex-col"
+      className="flex w-full cursor-pointer flex-col"
       role={onCardClick ? "button" : undefined}
       tabIndex={onCardClick ? 0 : -1}
       onClick={onCardClick}

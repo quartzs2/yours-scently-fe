@@ -45,7 +45,7 @@ export default function MyReviewsPage() {
 
   return (
     <div className="width-container-md M min- mx-auto max-w-[var(--width-container)] py-[40px] sm:max-w-[var(--width-container-sm)] md:max-w-[var(--width-container-md)] md:px-0">
-      <h2 className="text-subtitle-1 mb-[24px] text-text-primary">
+      <h2 className="text-subtitle-1 mb-[36px] text-text-primary">
         내가 작성한 리뷰({reviews.length})
       </h2>
 
@@ -67,8 +67,10 @@ export default function MyReviewsPage() {
         ))}
       </div>
 
+      <div className="flex items-start gap-2 border-t border-border-default"></div>
+
       {/* 하단 버튼 */}
-      <div className="mt-[40px] flex justify-center gap-[16px]">
+      <div className="mt-[80px] flex justify-center gap-[16px]">
         <Button
           onClick={() => setReviews((prev) => prev.filter((r) => !r.isChecked))}
           theme="light"

@@ -33,7 +33,11 @@ const MypageCard = ({
       {/* 우측 상단 아이콘 */}
       <div className="flex justify-between text-primary-main">
         <span />
-        <IconButton aria-label="프로필 수정 링크" As={Settings} href="/" />
+        <IconButton
+          aria-label="프로필 수정 링크"
+          href="/privacy-page"
+          As={Settings}
+        />
       </div>
 
       <div>
@@ -60,7 +64,7 @@ const MypageCard = ({
       {/* 우측 상단 버튼 */}
       <div className="absolute top-4 right-4 z-10">
         <IconButton
-          href="/recommendation-list"
+          href="/preference-page"
           aria-label="추천 페이지 링크"
           As={List}
         />
