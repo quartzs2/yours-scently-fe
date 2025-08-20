@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 import { RuleSetRule } from "webpack";
 
+import { IMAGE_DOMAIN } from "./src/constants/urls";
+
 const nextConfig: NextConfig = {
   webpack: (config) => {
     // Grab the existing rule that handles SVG imports
@@ -48,7 +50,7 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    domains: ["kr.object.ncloudstorage.com"],
+    domains: IMAGE_DOMAIN ? [IMAGE_DOMAIN] : [],
   },
 };
 
