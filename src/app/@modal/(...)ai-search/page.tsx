@@ -62,7 +62,8 @@ export default function AISearchModal() {
       zIndex={Z_INDEX.MODAL}
       onClose={handleClose}
     >
-      <div className="flex flex-col items-center">
+      {/* TODO: 반응형 처리 */}
+      <div className="flex w-[1280px] flex-col items-center">
         <div className="flex h-[80px] w-full items-center">
           <input
             className="text-subtitle-2 w-full text-center text-text-primary outline-none placeholder:text-text-disabled"
@@ -73,7 +74,6 @@ export default function AISearchModal() {
           />
         </div>
         {/* 검색 결과 */}
-        {/* TODO: AISearchResult의 prop은 나중에 연결할 때 추가 */}
         {isResultOpen && <AISearchResult text={debouncedSearchValue} />}
       </div>
     </Dialog>

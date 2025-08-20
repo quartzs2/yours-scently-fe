@@ -33,7 +33,6 @@ export const fetchProducts = async (
       .json();
     return res;
   } catch (error) {
-    console.error("fetchProducts 에러:", error);
     throw error;
   }
 };
@@ -49,8 +48,7 @@ export const searchProducts = async (
       .json();
 
     return res.results;
-  } catch (error) {
-    console.error("searchProducts 에러:", error);
+  } catch {
     return [];
   }
 };
