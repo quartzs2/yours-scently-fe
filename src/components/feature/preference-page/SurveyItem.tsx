@@ -31,7 +31,7 @@ const SurveyItem = ({
       <div className="flex w-full items-center justify-between rounded-[4px]">
         <PreferenceCard
           handleCheckboxChange={handleCheckboxChange}
-          imageUrl="/images/product.png"
+          image_url="/images/product.png"
           isChecked={isChecked}
           brand={brand}
           name={name}

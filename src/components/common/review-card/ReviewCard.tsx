@@ -12,22 +12,22 @@ const ReviewCard = ({
   productImage,
   productPrice,
   productName,
-  imageUrl,
+  image_url,
   timeAgo,
   rating,
   review,
   writer,
   date,
 }: ReviewCardProps) => {
-  const [mainImgSrc, setMainImgSrc] = useState(imageUrl || FALLBACK_IMAGE);
+  const [mainImgSrc, setMainImgSrc] = useState(image_url || FALLBACK_IMAGE);
   const [productImgSrc, setProductImgSrc] = useState(
     productImage || FALLBACK_IMAGE,
   );
 
   useEffect(() => {
-    setMainImgSrc(imageUrl || FALLBACK_IMAGE);
+    setMainImgSrc(image_url || FALLBACK_IMAGE);
     setProductImgSrc(productImage || FALLBACK_IMAGE);
-  }, [imageUrl, productImage]);
+  }, [image_url, productImage]);
 
   const displayTime = useMemo(() => {
     const match = timeAgo.match(/(\d+)\s*(시간|일)/);

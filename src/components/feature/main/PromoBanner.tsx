@@ -9,7 +9,7 @@ import Image from "next/image";
 
 const sampleCards: Omit<MainCardProps, "handleHeart">[] = [
   {
-    imageUrl: "/mock/best-review/sample1.png",
+    image_url: "/mock/best-review/sample1.png",
     tags: ["시트러스", "프레시", "젠더리스"],
     name: "CK ONE",
     isLiked: false,
@@ -17,7 +17,7 @@ const sampleCards: Omit<MainCardProps, "handleHeart">[] = [
     id: "1",
   },
   {
-    imageUrl: "/mock/best-review/sample2.png",
+    image_url: "/mock/best-review/sample2.png",
     name: "Acqua di Gio Pour Homme",
     tags: ["아쿠아틱", "시트러스", "쿨린"],
     isLiked: true,
@@ -25,7 +25,7 @@ const sampleCards: Omit<MainCardProps, "handleHeart">[] = [
     id: "2",
   },
   {
-    imageUrl: "/mock/best-review/sample3.png",
+    image_url: "/mock/best-review/sample3.png",
     name: "Wood Sage & Sea Salt",
     tags: ["프레쉬", "머린", "우디"],
     isLiked: false,

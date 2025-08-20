@@ -31,7 +31,7 @@ const AIItem = ({
         <PreferenceCard
           handleCheckboxChange={handleCheckboxChange}
           isChecked={isChecked}
-          imageUrl={image}
+          image_url={image}
           brand={brand}
           name={name}
           type="AI"

@@ -7,7 +7,7 @@ import Image from "next/image";
 type CartItemCardProps = {
   handleCheckboxChange: (id: number) => void;
   isChecked: boolean;
-  imageUrl?: string;
+  image_url?: string;
   tags?: string[];
   brand: string;
   name: string;
@@ -18,7 +18,7 @@ const FALLBACK_IMAGE = "/fallback-image.svg";
 
 /** ReviewCard 컴포넌트
  *
- * @param imageUrl - 상품 이미지의 URL
+ * @param image_url - 상품 이미지의 URL
  * @param tags - 상품과 관련된 태그 목록
  * @param review - 사용자가 작성한 리뷰 본문
  * @param brand - 상품의 브랜드명
@@ -29,7 +29,7 @@ const FALLBACK_IMAGE = "/fallback-image.svg";
  *
  * @example
  * <CartCard
- *   imageUrl="/images/product.png"
+ *   image_url="/images/product.png"
  *   tags={"아름다움", "향기로움"}
  *   review="향이 오래간다."
  *   brand="브랜드"
@@ -44,16 +44,18 @@ const CartCard = ({
   handleCheckboxChange,
   tags = [],
   isChecked,
-  imageUrl,
+  image_url,
   brand,
   name,
   id,
 }: CartItemCardProps) => {
-  const [imgSrc, setImgSrc] = useState(imageUrl || FALLBACK_IMAGE);
+  const [imgSrc, setImgSrc] = useState(image_url || FALLBACK_IMAGE);
 
   useEffect(() => {
-    setImgSrc(imageUrl && imageUrl.trim() !== "" ? imageUrl : FALLBACK_IMAGE);
-  }, [imageUrl]);
+    setImgSrc(
+      image_url && image_url.trim() !== "" ? image_url : FALLBACK_IMAGE,
+    );
+  }, [image_url]);
   return (
     <div className="flex w-full max-w-md items-start gap-3 rounded-md p-3">
       {/* 이미지 + 체크박스*/}

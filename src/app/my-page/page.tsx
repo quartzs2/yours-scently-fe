@@ -49,7 +49,7 @@ export default function MyPage() {
 
         <MypageCard
           description="당신이 선택한 '포근하고 은은한 분위기'를 바탕으로, 부드러운 머스크와 파우더리한 노트가 어우러진 이 향을 추천드려요."
-          imageUrl="/globe.svg"
+          image_url="/globe.svg"
           title="N°5 L’Eau"
           date="2025-07-22"
           type="perfume"
@@ -57,7 +57,7 @@ export default function MyPage() {
         />
         <MypageCard
           description="당신이 선택한 '포근하고 은은한 분위기'를 바탕으로, 부드러운 머스크와 파우더리한 노트가 어우러진 이 향을 추천드려요."
-          imageUrl="/globe.svg"
+          image_url="/globe.svg"
           title="N°5 L’Eau"
           date="2025-07-22"
           type="perfume"
