@@ -2,6 +2,7 @@
 
 import type { MainCardProps } from "@custom-types/MainCard.type";
 
+import { URLS } from "@constants/urls";
 import Image from "next/image";
 import { cn } from "@utils/cn";
 import Link from "next/link";
@@ -17,16 +18,19 @@ const DetailSwiper = ({
   }
 
   return (
-    <Link className="flex h-[100px] items-center" href={`/detail/${item.id}`}>
+    <Link
+      className="flex h-[100px] items-center"
+      href={`${URLS.DETAIL}/${item.id}`}
+    >
       <div className="relative h-25 w-25">
         <Image
           className={cn(
             "rounded-2xl border border-border-default",
-            item.imageUrl
+            item.image_url
               ? "h-[100px] w-[100px] object-contain"
               : "object-cover",
           )}
-          src={item.imageUrl ?? FALLBACK_IMAGE}
+          src={item.image_url ?? FALLBACK_IMAGE}
           alt={item.name}
           sizes="100px"
           priority

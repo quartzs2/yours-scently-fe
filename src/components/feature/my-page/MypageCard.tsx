@@ -8,8 +8,8 @@ import Image from "next/image";
 type MypageCardProps = {
   type: "perfume" | "user";
   description?: string;
+  image_url?: string;
   nickname?: string;
-  imageUrl?: string;
   title?: string;
   brand?: string;
   date?: string;
@@ -19,14 +19,14 @@ const FALLBACK_IMAGE = "/fallback-image.svg";
 
 const MypageCard = ({
   description,
+  image_url,
   nickname,
-  imageUrl,
   title,
   brand,
   type,
   date,
 }: MypageCardProps) => {
-  const [imgSrc, setImgSrc] = useState(imageUrl);
+  const [imgSrc, setImgSrc] = useState(image_url);
 
   return type === "user" ? (
     // 유저 카드

@@ -9,7 +9,7 @@ const FALLBACK_IMAGE = "/fallback-image.svg";
 type PreferenceItemCardProps = {
   handleCheckboxChange: (id: number) => void;
   isChecked: boolean;
-  imageUrl?: string;
+  image_url?: string;
   brand: string;
   name: string;
   type: string;
@@ -19,14 +19,14 @@ type PreferenceItemCardProps = {
 const PreferenceCard = ({
   handleCheckboxChange,
   isChecked,
-  imageUrl,
+  image_url,
   brand,
   name,
   type,
   id,
 }: PreferenceItemCardProps) => {
   const [imgSrc, setImgSrc] = useState(
-    imageUrl && imageUrl.trim() !== "" ? imageUrl : FALLBACK_IMAGE,
+    image_url && image_url.trim() !== "" ? image_url : FALLBACK_IMAGE,
   );
 
   return (

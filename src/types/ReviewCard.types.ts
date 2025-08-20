@@ -2,7 +2,7 @@ export type ReviewCardProps = {
   productImage: string;
   productPrice: string;
   productName: string;
-  imageUrl: string;
+  image_url: string;
   timeAgo: string;
   rating: number;
   review: string;

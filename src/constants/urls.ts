@@ -31,6 +31,7 @@ export const API_URLS = {
   SIGN_UP: "auth/signup/",
   PRODUCTS: "products/",
   SEARCH: "search/",
+  DETAIL: "detail/",
 };
 
 export const INTERNAL_API_URLS = {
@@ -38,6 +39,7 @@ export const INTERNAL_API_URLS = {
   SURVEY_RECOMMENDATION_REASON: "/api/recommendation/reason",
   SURVEY_RECOMMENDATION: "/api/recommendation/survey",
   AI_RECOMMENDATIONS: "/api/ai-recommendations",
+  SEARCH: "/api/products/search",
   PRODUCTS: "/api/products",
 };
 

@@ -24,11 +24,11 @@ const MainCard = ({
   onCardClick,
   item,
 }: Props) => {
-  const [imgSrc, setImgSrc] = useState(item?.imageUrl);
+  const [imgSrc, setImgSrc] = useState(item?.image_url);
 
   useEffect(() => {
-    setImgSrc(item?.imageUrl);
-  }, [item?.imageUrl]);
+    setImgSrc(item?.image_url);
+  }, [item?.image_url]);
 
   if (!item) return null;
 
@@ -51,7 +51,7 @@ const MainCard = ({
         />
         <Image
           className={cn(
-            item.imageUrl ? "object-contain" : "object-cover",
+            item.image_url ? "object-contain" : "object-cover",
             "z-0",
           )}
           onError={() => setImgSrc(FALLBACK_IMAGE)}

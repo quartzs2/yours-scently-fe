@@ -1,6 +1,6 @@
 export type MainCardProps = {
   handleHeartChange?: (checked: boolean) => void;
-  imageUrl?: string;
+  image_url?: string;
   isLiked?: boolean;
   tags: string[];
   price: number;

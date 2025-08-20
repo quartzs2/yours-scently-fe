@@ -4,7 +4,7 @@ import { StarRating, Tag } from "@components/ui/tabs";
 import Image from "next/image";
 
 type ReviewListCardProps = {
-  imageUrls?: string[];
+  image_urls?: string[];
   tags?: string[];
   timeAgo: string;
   rating: number;
@@ -16,14 +16,14 @@ type ReviewListCardProps = {
 const FALLBACK_IMAGE = "/fallback-image.svg";
 
 const ReviewListCard = ({
+  image_urls,
   tags = [],
-  imageUrls,
   timeAgo,
   review,
   writer,
   date,
 }: ReviewListCardProps) => {
-  const sources = (imageUrls ?? []).filter(Boolean); // 최대 2장까지만 처리
+  const sources = (image_urls ?? []).filter(Boolean); // 최대 2장까지만 처리
   const hasImages = sources.length > 0;
 
   return (

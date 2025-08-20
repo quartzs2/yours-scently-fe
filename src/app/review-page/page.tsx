@@ -93,7 +93,7 @@ function toListCardProps(review: Review) {
   const timeAgo = "방금 전"; // TODO: 경과시간 계산 로직
 
   return {
-    imageUrls: review.images ?? [],
+    image_urls: review.images ?? [],
     tags: review.tags ?? [],
     review: review.content,
     rating: review.rating,

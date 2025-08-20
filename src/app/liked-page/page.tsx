@@ -56,7 +56,7 @@ export default function WishlistPage() {
           return (
             <MainCard
               item={{
-                imageUrl: product.product_img_url,
+                image_url: product.product_img_url,
                 // isLiked는 UI 기본값일 뿐, 실제 체크 여부는 isSelected로 관리
                 isLiked: product.is_liked,
                 price: product.price,

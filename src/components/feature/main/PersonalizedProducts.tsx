@@ -8,7 +8,7 @@ import MainCard from "@components/common/card-component/MainCard";
 export default function PersonalizedProducts() {
   const items: MainCardProps[] = [
     {
-      imageUrl: "/mock/best-review/perfume1.png",
+      image_url: "/mock/best-review/perfume1.png",
       tags: ["몽환적", "고급스러움", "100mL"],
       handleHeartChange: () => {},
       name: "Baccarat Rouge 540",
@@ -17,7 +17,7 @@ export default function PersonalizedProducts() {
       id: "1",
     },
     {
-      imageUrl: "/mock/best-review/perfume2.png",
+      image_url: "/mock/best-review/perfume2.png",
       name: "Coco Mademoiselle(오 드 퍼퓸)",
       tags: ["여성스러움", "세련됨", "50mL"],
       handleHeartChange: () => {},
@@ -26,7 +26,7 @@ export default function PersonalizedProducts() {
       id: "2",
     },
     {
-      imageUrl: "/mock/best-review/perfume3.png",
+      image_url: "/mock/best-review/perfume3.png",
       tags: ["상쾌함", "남성미", "100mL"],
       handleHeartChange: () => {},
       name: "Sauvage(소바쥬)",
@@ -35,7 +35,7 @@ export default function PersonalizedProducts() {
       id: "3",
     },
     {
-      imageUrl: "/mock/best-review/perfume4.png",
+      image_url: "/mock/best-review/perfume4.png",
       tags: ["우디", "부드러움", "100mL"],
       handleHeartChange: () => {},
       name: "Santal 33",
@@ -44,7 +44,7 @@ export default function PersonalizedProducts() {
       id: "4",
     },
     {
-      imageUrl: "/mock/best-review/perfume5.png",
+      image_url: "/mock/best-review/perfume5.png",
       tags: ["자유로움", "따뜻함", "100mL"],
       handleHeartChange: () => {},
       name: "Gypsy Water",
