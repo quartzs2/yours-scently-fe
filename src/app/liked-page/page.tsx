@@ -19,7 +19,7 @@ export default function WishlistPage() {
   const totalCount = likedProducts.length;
 
   return (
-    <div className="width-container-md mx-auto px-4 pt-20 pb-24">
+    <div className="width-container-md M min- mx-auto max-w-[var(--width-container)] py-[40px] sm:max-w-[var(--width-container-sm)] md:max-w-[var(--width-container-md)] md:px-0">
       <h1 className="text-subtitle-1 text-primary mb-[48px]">찜한 목록</h1>
 
       {/* 상단 컨트롤 */}

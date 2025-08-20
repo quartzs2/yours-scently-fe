@@ -1,0 +1,55 @@
+export const mockReview = [
+  {
+    reviews: [
+      {
+        images: [
+          "/mock/best-review/perfume1.png",
+          "/mock/best-review/perfume5.png",
+        ],
+        created_at: "2025-08-01T15:00:00Z",
+        product_name: "아쿠아 디 지오",
+        tags: ["은은해요", "좋아요"],
+        content: "잔향이 좋았어요",
+        product_id: 3,
+        rating: 4,
+        id: 10,
+      },
+      {
+        created_at: "2025-08-02T10:20:00Z",
+        content: "여름에 쓰기 딱 좋아요!",
+        product_name: "시트러스 블룸",
+        tags: ["상큼해요", "데일리"],
+        product_id: 4,
+        images: [""],
+        rating: 5,
+        id: 11,
+      },
+      {
+        images: ["/mock/best-review/perfume3.png"],
+        content: "처음은 강하지만 시간이 지나면 매력적이에요.",
+        created_at: "2025-08-03T18:45:00Z",
+        tags: ["진해요", "고급스러움"],
+        product_name: "우드 인텐스",
+        product_id: 5,
+        rating: 3,
+        id: 12,
+      },
+      {
+        images: [
+          "/mock/best-review/perfume4.png",
+          "/mock/best-review/perfume5.png",
+        ],
+        created_at: "2025-08-04T09:15:00Z",
+        content: "잔향이 오래가고 기분이 편안해집니다.",
+        product_name: "머스크 소프트",
+        tags: ["포근해요", "부드러움"],
+        product_id: 6,
+        rating: 5,
+        id: 13,
+      },
+    ],
+    size: 10,
+    total: 6,
+    page: 1,
+  },
+];

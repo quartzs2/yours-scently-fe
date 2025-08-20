@@ -1,6 +1,7 @@
 import IconButton from "@components/ui/IconButton";
 import { Settings, List } from "lucide-react";
 import { Tag } from "@components/ui/tabs";
+import { URLS } from "@constants/urls";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -33,7 +34,11 @@ const MypageCard = ({
       {/* 우측 상단 아이콘 */}
       <div className="flex justify-between text-primary-main">
         <span />
-        <IconButton aria-label="프로필 수정 링크" As={Settings} href="/" />
+        <IconButton
+          aria-label="프로필 수정 링크"
+          href={URLS.PRIVACY}
+          As={Settings}
+        />
       </div>
 
       <div>
@@ -60,7 +65,7 @@ const MypageCard = ({
       {/* 우측 상단 버튼 */}
       <div className="absolute top-4 right-4 z-10">
         <IconButton
-          href="/recommendation-list"
+          href={URLS.PRIFERENCE}
           aria-label="추천 페이지 링크"
           As={List}
         />

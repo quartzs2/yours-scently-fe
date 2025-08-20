@@ -43,7 +43,7 @@ const ReviewCard = ({
   }, [timeAgo, date]);
 
   return (
-    <div className="h-full w-[280px] space-y-2 overflow-hidden rounded-xl border border-border-default">
+    <div className="h-full w-full space-y-2 overflow-hidden rounded-xl border border-border-default">
       {/* 리뷰 이미지 */}
       <div className="relative h-[214px] w-full">
         <Image
@@ -86,8 +86,8 @@ const ReviewCard = ({
               fill
             />
           </div>
-          <div className="min-w-0">
-            <div className="text-primary text-text-body-2 truncate">
+          <div>
+            <div className="text-primary text-text-body-2 line-clamp-1">
               {productName}
             </div>
             <div className="text-text-button-1 font-semibold">
