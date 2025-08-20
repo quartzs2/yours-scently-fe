@@ -66,9 +66,9 @@ const AISearchResult = ({ text }: AISearchResultProps) => {
   const { description, items } = data || { description: "", items: [] };
 
   return (
-    <div className="mb-3 h-[550px] w-full overflow-y-scroll border-t border-border-default">
+    <div className="mb-3 h-[550px] w-full max-w-[1280px] overflow-y-scroll border-t border-border-default">
       {/* 추천 이유 표시 */}
-      <section className="mx-auto mt-[112px] flex w-[876px] gap-2 text-text-primary">
+      <section className="mx-auto mt-[112px] flex w-full max-w-[1216px] items-center justify-center gap-2 text-text-primary">
         <Icon As={OpenQuoteIcon} />
         <div className="text-subtitle-2 w-[810px] text-center break-keep">
           {description}
@@ -76,7 +76,7 @@ const AISearchResult = ({ text }: AISearchResultProps) => {
         <Icon As={CloseQuoteIcon} />
       </section>
       {/* 추천 향수 표시 */}
-      <section className="mt-[80px] flex h-[508px] flex-col gap-4 pl-[48px]">
+      <section className="mt-[80px] flex h-[508px] w-full max-w-[1216px] flex-col gap-4 pl-[48px]">
         <div className="text-subtitle-1 text-text-primary">추천 향수</div>
         <CardSwiper
           withNavigation={false}
@@ -89,7 +89,7 @@ const AISearchResult = ({ text }: AISearchResultProps) => {
         </CardSwiper>
       </section>
       {/* 최근 검색어 */}
-      <section className="px-[48px]">
+      <section className="w-full max-w-[1216px] px-[48px]">
         {/* 수평선 */}
         <div className="mt-[64px] h-[1px] w-full bg-border-default" />
         {/* 최근 검색어 목록 */}
@@ -105,7 +105,7 @@ const AISearchResult = ({ text }: AISearchResultProps) => {
               삭제
             </button>
           </div>
-          <div className="mt-[23px] mb-[121px] h-[64px]">
+          <div className="mt-[23px] mb-[121px] h-[64px] w-full">
             <div className="overflow-x-auto">
               {tags.map((tag) => (
                 <Tag
