@@ -1,9 +1,13 @@
 export const URLS = {
   REGISTER_MODAL: "/login/register",
   MY_PAGE_MODAL: "/my-page-modal",
+  PRIFERENCE: "/preference-page",
+  PRIVACY: "/privacy-page",
   AI_SEARCH: "/ai-search",
   PROMOTION: "/promotion",
+  REVIEW: "/review-page",
   PRODUCTS: "/products",
+  LIKED: "/liked-page",
   MY_PAGE: "/my-page",
   SURVEY: "/survey",
   DETAIL: "/detail",

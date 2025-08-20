@@ -49,7 +49,7 @@ export default function MyScentPage() {
   const totalCount = surveyData.length + aiData.length;
 
   return (
-    <div className="width-container-md M min- mx-auto max-w-[var(--width-container)] py-[40px] sm:max-w-[var(--width-container-sm)] md:max-w-[var(--width-container-md)] md:px-0">
+    <div className="width-container-md min- mx-auto max-w-[var(--width-container)] py-[40px] sm:max-w-[var(--width-container-sm)] md:max-w-[var(--width-container-md)] md:px-0">
       {/* 타이틀 */}
       <h2 className="text-subtitle-1 mb-[48px] text-text-primary">
         나의 향기 취향

@@ -7,6 +7,7 @@ import MainCard from "@components/common/card-component/MainCard";
 import MypageCard from "@components/feature/my-page/MypageCard";
 import { ChevronRight } from "lucide-react";
 import Icon from "@components/ui/Icon";
+import { URLS } from "@constants/urls";
 import Link from "next/link";
 
 import { cardMockData } from "./mocks/mockCard";
@@ -104,7 +105,7 @@ export default function MyPage() {
               <h2 className="text-subtitle-1 font-semibold">찜한 목록</h2>
               <Link
                 className="text-subtitle-2 text-text-secondary"
-                href="/liked-page"
+                href={URLS.LIKED}
               >
                 더보기 &gt;
               </Link>
@@ -127,7 +128,7 @@ export default function MyPage() {
           <h2 className="text-subtitle-1 font-semibold">내가 쓴 리뷰</h2>
           <Link
             className="text-subtitle-2 text-text-secondary"
-            href="review-page"
+            href={URLS.REVIEW}
           >
             더보기 &gt;
           </Link>

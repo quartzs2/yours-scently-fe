@@ -1,7 +1,7 @@
 "use client";
 
+import { StarRating } from "@components/ui/tabs";
 import { Tag } from "@components/ui/tabs";
-import { Star } from "lucide-react";
 import Image from "next/image";
 
 type ReviewListCardProps = {
@@ -74,16 +74,7 @@ const ReviewListCard = ({
       <div className="text-body-1 flex flex-grow flex-col">
         {/* 별점/태그/작성자 */}
         <div className="text-primary flex items-center">
-          <div className="flex space-x-1 text-system-warning">
-            {Array.from({ length: 5 }, (_, i) => (
-              <Star
-                fill={i < rating ? "currentColor" : "none"}
-                className="h-[24px] w-[24px]"
-                strokeWidth={1.5}
-                key={i}
-              />
-            ))}
-          </div>
+          <StarRating rating={4.5} />
 
           <div className="flex flex-wrap gap-2 px-3 py-2">
             {tags.map((tag, i) => (
