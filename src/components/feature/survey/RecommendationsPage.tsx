@@ -1,5 +1,7 @@
 "use client";
+import { postSurveyRecommendationReason } from "@api/survey/recommendationReason";
 import { postSurveyRecommendation } from "@api/survey/recommendation";
+import { fetchProductData } from "@api/product/fetchProductData";
 import { useQuery } from "@tanstack/react-query";
 import { SurveyData } from "@app/survey/page";
 import Button from "@components/ui/Button";
@@ -23,37 +25,77 @@ const noteLabelMap: Record<string, string> = {
 export default function RecommendationsPage({
   surveyData,
 }: RecommendationsPageProps) {
-  // console.log("RecommendationPage: ", surveyData); // 제거된 console.log
-
-  const { isLoading, isError, data } = useQuery({
+  const recommendationQuery = useQuery({
     queryFn: () => postSurveyRecommendation({ recommendationData: surveyData }),
-    queryKey: ["survey-recommendation"],
+    queryKey: ["survey-recommendation", surveyData],
   });
 
-  if (isLoading) {
+  const reasonQuery = useQuery({
+    queryFn: () => {
+      if (!recommendationQuery.data) {
+        return null;
+      }
+
+      return postSurveyRecommendationReason({
+        recommendationData: {
+          ...surveyData,
+          perfume_id: recommendationQuery.data.id,
+        },
+      });
+    },
+    queryKey: [
+      "survey-recommendation-reason",
+      surveyData,
+      recommendationQuery.data?.id,
+    ],
+    enabled: !!recommendationQuery.data,
+  });
+
+  const productQuery = useQuery({
+    queryFn: () => {
+      if (!recommendationQuery.data) {
+        return null;
+      }
+
+      return fetchProductData({ id: recommendationQuery.data.id });
+    },
+    queryKey: ["product", recommendationQuery.data?.id],
+    enabled: !!recommendationQuery.data,
+  });
+
+  if (
+    recommendationQuery.isLoading ||
+    reasonQuery.isLoading ||
+    productQuery.isLoading
+  ) {
     return <div>Loading...</div>;
   }
 
-  if (isError) {
+  if (
+    recommendationQuery.isError ||
+    reasonQuery.isError ||
+    productQuery.isError
+  ) {
     return <div>Error</div>;
   }
 
-  if (!data) {
+  if (!recommendationQuery.data || !reasonQuery.data || !productQuery.data) {
     return <div>데이터가 없습니다</div>;
   }
 
-  // 사용하지 않는 변수들을 제거하여 경고를 없앱니다.
-  const { main_accords, name } = data;
+  const { main_accords, name } = recommendationQuery.data;
+  const { reason } = reasonQuery.data;
+  const { product_img_url } = productQuery.data.data;
 
   return (
     <div className="bg-background-default flex w-full justify-center px-4 pt-[80px]">
       <div className="flex w-full max-w-lg flex-col items-center gap-8">
         <Image
           className="w-48 sm:w-56"
+          src={product_img_url}
           height={192}
           width={192}
           alt={name}
-          src={``} // TODO: 이미지 어떻게 가져오는지 확인
           priority
         />
         <div className="flex flex-col items-center gap-2">
@@ -67,11 +109,7 @@ export default function RecommendationsPage({
           </div>
         </div>
         <div className="text-body-1 relative mb-6 w-full max-w-[810px] px-4 text-center leading-relaxed break-keep whitespace-normal text-text-primary sm:px-6">
-          <p>당신이 선택한 ‘{surveyData.mood}’ 분위기를 바탕으로,</p>
-          <p className="mt-1">
-            {/* TODO: API 연결 후 추가 */}
-            이유 추가 필요
-          </p>
+          {reason}
         </div>
         <div className="flex w-full flex-wrap items-center justify-center gap-3">
           <Button

@@ -4,10 +4,12 @@ import {
   ACCOUNT_DELETE_CONFIRM,
   ACCOUNT_DELETE_SUCCESS,
 } from "@constants/messages";
+import {
+  mockAddresses,
+  mockUserApi,
+} from "@app/privacy-page/mocks/userMockData";
 import PrivacyEdit from "@components/feature/privacy-page/PrivacyEdit";
 import PrivacyView from "@components/feature/privacy-page/PrivacyView";
-import { mockAddresses } from "@app/privacy-page/mocks/userMockData";
-import { mockUserApi } from "@app/privacy-page/mocks/userMockData";
 import { DeliveryAddress, User } from "@custom-types/user";
 import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";

@@ -1,7 +1,6 @@
 "use client";
 
-import { StarRating } from "@components/ui/tabs";
-import { Tag } from "@components/ui/tabs";
+import { StarRating, Tag } from "@components/ui/tabs";
 import Image from "next/image";
 
 type ReviewListCardProps = {
@@ -20,7 +19,6 @@ const ReviewListCard = ({
   tags = [],
   imageUrls,
   timeAgo,
-  rating,
   review,
   writer,
   date,
