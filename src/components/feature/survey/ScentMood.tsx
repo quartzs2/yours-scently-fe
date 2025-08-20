@@ -3,16 +3,17 @@
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import Checkbox from "@components/ui/input/Checkbox";
 import IconButton from "@components/ui/IconButton";
-import { useState } from "react";
+import { SurveyData } from "@app/survey/page";
+import { useEffect, useState } from "react";
 import { cn } from "@utils/cn";
 
 export type ScentMoodProps = {
+  setSurveyData: React.Dispatch<React.SetStateAction<SurveyData>>;
   onBack: () => void;
   onNext: () => void;
 };
 
 const QUESTION_TEXT = "Q. 어떤 분위기의 향을 선호하시나요?";
-
 const moodOptions = [
   "상쾌한 느낌",
   "따뜻하고 포근한 느낌",
@@ -21,17 +22,28 @@ const moodOptions = [
   "신비롭고 매혹적인 느낌",
 ];
 
-export default function ScentMood({ onBack, onNext }: ScentMoodProps) {
+export default function ScentMood({
+  setSurveyData,
+  onBack,
+  onNext,
+}: ScentMoodProps) {
   const [selected, setSelected] = useState<number | null>(null);
 
   const handleChange =
     (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.checked) {
-        setSelected(index);
-      } else {
-        setSelected(null);
-      }
+      setSelected(event.target.checked ? index : null);
     };
+
+  useEffect(() => {
+    // setSurveyData가 변경될 때도 이 effect가 다시 실행되도록 의존성에 추가합니다.
+    if (selected === null) {
+      return;
+    }
+    setSurveyData((prevData) => ({
+      ...prevData,
+      mood: moodOptions[selected],
+    }));
+  }, [selected, setSurveyData]); // setSurveyData 추가
 
   return (
     <div className="flex w-full max-w-xl flex-col items-center gap-10 px-4">

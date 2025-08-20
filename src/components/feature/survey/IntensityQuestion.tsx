@@ -3,18 +3,17 @@
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import Checkbox from "@components/ui/input/Checkbox";
 import IconButton from "@components/ui/IconButton";
-import { useState } from "react";
+import { SurveyData } from "@app/survey/page";
+import { useEffect, useState } from "react";
 import { cn } from "@utils/cn";
 
 export type IntensityQuestionProps = {
+  setSurveyData: React.Dispatch<React.SetStateAction<SurveyData>>;
   onBack: () => void;
   onNext: () => void;
-  options?: string[];
-  question?: string;
 };
 
 const defaultQuestion = "Q. 평소에 어떤 향의 강도를 선호하시나요?";
-
 const defaultOptions = [
   "은은한 향을 좋아해요",
   "적당한 향이 좋아요",
@@ -22,32 +21,34 @@ const defaultOptions = [
 ];
 
 export default function IntensityQuestion({
-  question,
-  options,
+  setSurveyData,
   onBack,
   onNext,
 }: IntensityQuestionProps) {
   const [selected, setSelected] = useState<number | null>(null);
 
-  const displayQuestion =
-    question && question.trim() !== "" ? question : defaultQuestion;
-
-  const displayOptions =
-    options && options.length > 0 ? options : defaultOptions;
-
   const handleChange = (index: number) => () => {
     setSelected((prev) => (prev === index ? null : index));
   };
+
+  useEffect(() => {
+    if (selected === null) {
+      return;
+    }
+    setSurveyData((prevData) => ({
+      ...prevData,
+      intensity: defaultOptions[selected],
+    }));
+  }, [selected, setSurveyData]);
 
   return (
     <div className="bg-background-default flex h-screen w-full items-center justify-center">
       <div className="flex flex-col items-center gap-10">
         <b className="text-subtitle-2 text-center font-bold text-text-primary">
-          {displayQuestion}
+          {defaultQuestion}
         </b>
-
         <div className="flex flex-col gap-4">
-          {displayOptions.map((text, index) => (
+          {defaultOptions.map((text, index) => (
             <label
               className="flex cursor-pointer items-center gap-3"
               htmlFor={`intensity-option-${index}`}
@@ -65,14 +66,12 @@ export default function IntensityQuestion({
             </label>
           ))}
         </div>
-
         <div className="mt-8 flex w-full max-w-xs justify-between">
           <IconButton
             className="text-text-primary"
             onClick={onBack}
             As={ChevronLeft}
             aria-label="이전"
-            iconSize={24}
           />
           <IconButton
             className={cn({
@@ -83,7 +82,6 @@ export default function IntensityQuestion({
             disabled={selected === null}
             As={ChevronRight}
             aria-label="다음"
-            iconSize={24}
           />
         </div>
       </div>
