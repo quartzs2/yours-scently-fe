@@ -24,17 +24,17 @@ const MainCard = ({
   onCardClick,
   item,
 }: Props) => {
-  const [imgSrc, setImgSrc] = useState(item?.imageUrl);
+  const [imgSrc, setImgSrc] = useState(item?.image_url);
 
   useEffect(() => {
-    setImgSrc(item?.imageUrl);
-  }, [item?.imageUrl]);
+    setImgSrc(item?.image_url);
+  }, [item?.image_url]);
 
   if (!item) return null;
 
   return (
     <div
-      className="flex w-full cursor-pointer flex-col"
+      className="flex w-[308px] cursor-pointer flex-col"
       role={onCardClick ? "button" : undefined}
       tabIndex={onCardClick ? 0 : -1}
       onClick={onCardClick}
@@ -51,7 +51,7 @@ const MainCard = ({
         />
         <Image
           className={cn(
-            item.imageUrl ? "object-contain" : "object-cover",
+            item.image_url ? "object-contain" : "object-cover",
             "z-0",
           )}
           onError={() => setImgSrc(FALLBACK_IMAGE)}
