@@ -3,8 +3,10 @@ export const URLS = {
   MY_PAGE_MODAL: "/my-page-modal",
   AI_SEARCH: "/ai-search",
   PROMOTION: "/promotion",
+  PRODUCTS: "/products",
   MY_PAGE: "/my-page",
   SURVEY: "/survey",
+  DETAIL: "/detail",
   LOGIN: "/login",
   CART: "/cart",
   HOME: "/",
@@ -20,10 +22,13 @@ export const API_URLS = {
   FIND_EMAIL: "auth/account/find-email/",
   EMAIL_LOGIN: "auth/login/email/",
   SIGN_UP: "auth/signup/",
+  PRODUCTS: "products/",
+  SEARCH: "search/",
 };
 
 export const INTERNAL_API_URLS = {
   AI_RECOMMENDATIONS: "/api/ai-recommendations",
+  PRODUCTS: "/api/products",
 };
 
 export const IMAGES = {
@@ -36,3 +41,5 @@ export const IMAGES = {
   DETAIL_MAIN: "/mock/detail/detail-main.png",
   MAIN_BANNER: "/images/main-banner-img.png",
 };
+
+export const IMAGE_DOMAIN = "kr.object.ncloudstorage.com";
