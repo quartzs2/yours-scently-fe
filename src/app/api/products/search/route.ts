@@ -23,7 +23,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ ...res, results: filteredByName });
   } catch (error) {
-    console.error("❌ Failed to search products:", error);
+    console.error("Failed to search products:", error);
     return NextResponse.json({ error: "오류" }, { status: 500 });
   }
 }

@@ -23,7 +23,6 @@ const ProductPage = () => {
   const observerRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [_error, setError] = useState<string | null>(null);
   const [totalItemsCount, setTotalItemsCount] = useState(0);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
@@ -126,43 +125,41 @@ const ProductPage = () => {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1024px] pt-20 pb-40">
-        {isInitialLoading && (
-          <div className="py-20 text-center">
-            <Loader2 className="mx-auto h-6 w-6 animate-spin" />
-            <p>상품을 불러오는 중...</p>
-          </div>
-        )}
+      {isInitialLoading && (
+        <div className="py-20 text-center">
+          <Loader2 className="mx-auto h-6 w-6 animate-spin" />
+          <p>상품을 불러오는 중...</p>
+        </div>
+      )}
 
-        {!isInitialLoading && finalItems.length === 0 && (
-          <div className="text-subtitle-1 py-15 text-center">
-            {debouncedQuery
-              ? "검색 결과가 없습니다."
-              : "상품이 존재하지 않습니다."}
-          </div>
-        )}
+      {!isInitialLoading && finalItems.length === 0 && (
+        <div className="text-subtitle-1 py-15 text-center">
+          {debouncedQuery
+            ? "검색 결과가 없습니다."
+            : "상품이 존재하지 않습니다."}
+        </div>
+      )}
 
-        {!isInitialLoading && finalItems.length > 0 && (
-          <div className="grid grid-cols-4 gap-x-2 gap-y-8">
-            {finalItems.map((item) => (
-              <Link
-                href={`${URLS.PRODUCTS}${URLS.DETAIL}/${item.id}`}
-                key={item.id}
-              >
-                <MainCard item={item} />
-              </Link>
-            ))}
-            {isLoading && (
-              <div className="col-span-4 flex justify-center">
-                <Loader2 className="text-muted-foreground h-6 w-6 animate-spin" />
-                <span className="text-muted-foreground ml-2">
-                  더 많은 상품을 불러오는 중...
-                </span>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+      {!isInitialLoading && finalItems.length > 0 && (
+        <div className="grid grid-cols-4 gap-x-2 gap-y-8">
+          {finalItems.map((item) => (
+            <Link
+              href={`${URLS.PRODUCTS}${URLS.DETAIL}/${item.id}`}
+              key={item.id}
+            >
+              <MainCard item={item} />
+            </Link>
+          ))}
+          {isLoading && (
+            <div className="col-span-4 flex justify-center">
+              <Loader2 className="text-muted-foreground h-6 w-6 animate-spin" />
+              <span className="text-muted-foreground ml-2">
+                더 많은 상품을 불러오는 중...
+              </span>
+            </div>
+          )}
+        </div>
+      )}
       <div ref={observerRef} className="h-10" />
     </div>
   );

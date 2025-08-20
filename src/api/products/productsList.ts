@@ -34,7 +34,7 @@ export const fetchProducts = async (
     return res;
   } catch (error) {
     console.error("fetchProducts 에러:", error);
-    return { previous: "", results: [], next: "", count: 0 };
+    throw error;
   }
 };
 
@@ -47,6 +47,7 @@ export const searchProducts = async (
         searchParams: { q: query },
       })
       .json();
+
     return res.results;
   } catch (error) {
     console.error("searchProducts 에러:", error);

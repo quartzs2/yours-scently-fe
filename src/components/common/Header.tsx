@@ -34,6 +34,7 @@ const Header = ({ isLoggedIn }: HeaderProps) => {
           {/* 헤더 좌측 섹션 */}
           <IconButton
             iconClassName={ICON_STYLE}
+            href={URLS.PRODUCTS}
             aria-label="메뉴 열기"
             As={Menu}
           />
