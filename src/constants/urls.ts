@@ -19,6 +19,7 @@ export const URLS = {
 export const API_BASE_URL = "https://www.yours-scently.store/api/v1";
 
 export const API_URLS = {
+  PRODUCT_DETAIL: (product_id: string | number) => `products/${product_id}`,
   SIGN_UP_EMAIL_SEND_CODE: "auth/signup/email/send-code/",
   SURVEY_RECOMMENDATION_REASON: "recommendation/reason/",
   SIGN_UP_NICKNAME_CHECK: "auth/signup/nickname-check/",
@@ -33,7 +34,8 @@ export const API_URLS = {
 };
 
 export const INTERNAL_API_URLS = {
-  SURVEY_RECOMMENDATION_REASON: "api/recommendation/reason",
+  PRODUCT_DETAIL: (product_id: string | number) => `/api/product/${product_id}`,
+  SURVEY_RECOMMENDATION_REASON: "/api/recommendation/reason",
   SURVEY_RECOMMENDATION: "/api/recommendation/survey",
   AI_RECOMMENDATIONS: "/api/ai-recommendations",
   PRODUCTS: "/api/products",

@@ -1,15 +1,16 @@
-import surveyRecommendationApi, {
-  SurveyRecommendationResult,
+import surveyRecommendationReasonApi, {
+  SurveyRecommendationReasonResult,
   RecommendationData,
-} from "@api/survey/recommendation";
+} from "@api/survey/recommendationReason";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
     const recommendationData: RecommendationData = await request.json();
-    const data: SurveyRecommendationResult = await surveyRecommendationApi({
-      recommendationData,
-    });
+    const data: SurveyRecommendationReasonResult =
+      await surveyRecommendationReasonApi({
+        recommendationData,
+      });
 
     return NextResponse.json(data);
   } catch (error) {
