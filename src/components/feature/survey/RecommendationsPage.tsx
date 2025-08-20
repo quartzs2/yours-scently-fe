@@ -1,7 +1,7 @@
 "use client";
 import { postSurveyRecommendationReason } from "@api/survey/recommendationReason";
 import { postSurveyRecommendation } from "@api/survey/recommendation";
-import { postFetchProductData } from "@api/product/fetchProductData";
+import { fetchProductData } from "@api/product/fetchProductData";
 import { useQuery } from "@tanstack/react-query";
 import { SurveyData } from "@app/survey/page";
 import Button from "@components/ui/Button";
@@ -31,13 +31,18 @@ export default function RecommendationsPage({
   });
 
   const reasonQuery = useQuery({
-    queryFn: () =>
-      postSurveyRecommendationReason({
+    queryFn: () => {
+      if (!recommendationQuery.data) {
+        return null;
+      }
+
+      return postSurveyRecommendationReason({
         recommendationData: {
           ...surveyData,
-          perfume_id: recommendationQuery.data!.id,
+          perfume_id: recommendationQuery.data.id,
         },
-      }),
+      });
+    },
     queryKey: [
       "survey-recommendation-reason",
       surveyData,
@@ -47,7 +52,13 @@ export default function RecommendationsPage({
   });
 
   const productQuery = useQuery({
-    queryFn: () => postFetchProductData({ id: recommendationQuery.data!.id }),
+    queryFn: () => {
+      if (!recommendationQuery.data) {
+        return null;
+      }
+
+      return fetchProductData({ id: recommendationQuery.data.id });
+    },
     queryKey: ["product", recommendationQuery.data?.id],
     enabled: !!recommendationQuery.data,
   });

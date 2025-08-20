@@ -2,10 +2,10 @@ import fetchProductDataApi from "@api/product/fetchProductData";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { product_id: string } },
+  _request: NextRequest,
+  { params }: { params: Promise<{ product_id: string }> },
 ) {
-  const { product_id } = params;
+  const { product_id } = await params;
 
   try {
     const data = await fetchProductDataApi({

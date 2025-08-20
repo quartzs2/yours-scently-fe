@@ -40,7 +40,7 @@ const fetchProductDataApi = async ({ id }: FetchProductDataProps) => {
 };
 
 /** 클라이언트에서 호출하는 api */
-export const postFetchProductData = async ({ id }: FetchProductDataProps) => {
+export const fetchProductData = async ({ id }: FetchProductDataProps) => {
   const data = await internalApi
     .get(INTERNAL_API_URLS.PRODUCT_DETAIL(id))
     .json<ProductData>();
