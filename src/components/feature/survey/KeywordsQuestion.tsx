@@ -3,10 +3,12 @@
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import Checkbox from "@components/ui/input/Checkbox";
 import IconButton from "@components/ui/IconButton";
-import { useState } from "react";
+import { SurveyData } from "@app/survey/page";
+import { useEffect, useState } from "react";
 import { cn } from "@utils/cn";
 
 type KeywordsQuestionProps = {
+  setSurveyData: React.Dispatch<React.SetStateAction<SurveyData>>;
   onBack: () => void;
   onNext: () => void;
 };
@@ -24,6 +26,7 @@ const keywords = [
 ];
 
 export default function KeywordsQuestion({
+  setSurveyData,
   onBack,
   onNext,
 }: KeywordsQuestionProps) {
@@ -36,6 +39,13 @@ export default function KeywordsQuestion({
         : [...prev, keyword],
     );
   };
+
+  useEffect(() => {
+    setSurveyData((prevData) => ({
+      ...prevData,
+      keyword: selectedKeywords,
+    }));
+  }, [selectedKeywords, setSurveyData]); // setSurveyData를 의존성 배열에 추가
 
   return (
     <div className="bg-background-default flex h-screen w-full items-center justify-center">

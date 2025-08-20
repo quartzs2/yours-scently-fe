@@ -23,7 +23,7 @@ const AISearchResult = ({ text }: AISearchResultProps) => {
 
       const items: MainCardProps[] = data.recommendations.map((scentData) => {
         const { perfume, context } = scentData;
-        const { image_url: imageUrl, price, name, id } = perfume;
+        const { image_url: image_url, price, name, id } = perfume;
         const tags = context.split(",").map((tag) => tag.trim());
 
         return {
@@ -31,7 +31,7 @@ const AISearchResult = ({ text }: AISearchResultProps) => {
           price: Number(price),
           isLiked: false,
           id: String(id),
-          imageUrl,
+          image_url,
           tags,
           name,
         };

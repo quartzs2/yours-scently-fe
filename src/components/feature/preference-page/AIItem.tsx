@@ -31,7 +31,7 @@ const AIItem = ({
         <PreferenceCard
           handleCheckboxChange={handleCheckboxChange}
           isChecked={isChecked}
-          imageUrl={image}
+          image_url={image}
           brand={brand}
           name={name}
           type="AI"
@@ -49,7 +49,7 @@ const AIItem = ({
         </div>
 
         {/* 추천 이유 */}
-        <div className="flex h-[120px] min-w-[160px] flex-1 items-center justify-center gap-[8px] border-l border-border-default">
+        <div className="flex h-[120px] min-w-[160px] flex-1 items-center justify-center gap-[8px] border-l border-border-default px-4">
           <div>
             <span className="text-[14px] leading-[120%] font-semibold tracking-[-0.03em] text-text-secondary">
               추천 이유
@@ -61,7 +61,7 @@ const AIItem = ({
         {/* 진단일 */}
         <div className="flex h-[120px] min-w-[120px] items-center justify-center border-l border-border-default px-6">
           <div>
-            <span className="tracking -[-0.03em] self-start text-[14px] leading-[120%] font-semibold text-text-secondary">
+            <span className="self-start text-[14px] leading-[120%] font-semibold tracking-[-0.03em] text-text-secondary">
               진단일
             </span>
             <p className="text-body-1 text-text-primary">{date}</p>
@@ -71,18 +71,10 @@ const AIItem = ({
         {/* 버튼 */}
         <div className="flex h-[120px] min-w-[120px] flex-col items-center justify-center gap-[8px] border-l border-border-default px-4">
           <div className="flex flex-col gap-[8px]">
-            <Button
-              onClick={() => console.log("구매하기")}
-              theme="dark"
-              size="lg"
-            >
+            <Button onClick={() => {}} theme="dark" size="md">
               구매하기
             </Button>
-            <Button
-              onClick={() => console.log("삭제하기")}
-              theme="light"
-              size="lg"
-            >
+            <Button onClick={() => {}} theme="light" size="md">
               삭제하기
             </Button>
           </div>
@@ -90,7 +82,7 @@ const AIItem = ({
       </div>
 
       {/* 추천 설명 */}
-      <div className="bg-bg-subtle px-[16px] py-[12px] text-center align-middle text-[20px] leading-[130%] font-semibold tracking-[-0.03em] text-primary-main">
+      <div className="mt-4 bg-bg-subtle px-[16px] py-[12px] text-center align-middle text-[20px] leading-[130%] font-semibold tracking-[-0.03em] text-primary-main">
         {description}
       </div>
     </div>
