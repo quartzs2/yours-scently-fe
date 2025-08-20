@@ -1,91 +1,92 @@
 "use client";
-
-import type { RecommendationData } from "@custom-types/Survey";
-
-import { useSurveyRecommendation } from "@hooks/useSurveyRecommendation";
+import { postSurveyRecommendation } from "@api/survey/recommendation";
+import { useQuery } from "@tanstack/react-query";
+import { SurveyData } from "@app/survey/page";
 import Button from "@components/ui/Button";
 import Tag from "@components/ui/tabs/Tag";
 import { URLS } from "@constants/urls";
-import { useState } from "react";
 import Image from "next/image";
+
+type RecommendationsPageProps = {
+  surveyData: SurveyData;
+};
 
 const noteLabelMap: Record<string, string> = {
   vanilla: "바닐라",
   citrus: "시트러스",
+  floral: "플로럴",
   musk: "머스크",
   amber: "앰버",
   rose: "로즈",
 };
 
-export default function RecommendationsPage() {
-  const [payload] = useState<RecommendationData>({
-    intensity: "적당한 향이 좋아요",
-    mood: "로맨틱하고 부드러운 느낌",
-    keyword: "사랑스러운",
-    usage: "특별한 날",
+export default function RecommendationsPage({
+  surveyData,
+}: RecommendationsPageProps) {
+  // console.log("RecommendationPage: ", surveyData); // 제거된 console.log
+
+  const { isLoading, isError, data } = useQuery({
+    queryFn: () => postSurveyRecommendation({ recommendationData: surveyData }),
+    queryKey: ["survey-recommendation"],
   });
 
-  const {
-    result: recommendation,
-    loading: isLoading,
-    error: isError,
-  } = useSurveyRecommendation(payload);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  if (isLoading)
-    return <p className="py-20 text-center text-text-secondary">로딩 중...</p>;
-  if (isError)
-    return (
-      <p className="py-20 text-center text-red-500">데이터 불러오기 오류</p>
-    );
-  if (!recommendation)
-    return (
-      <p className="py-20 text-center text-text-secondary">
-        추천 결과가 없습니다.
-      </p>
-    );
+  if (isError) {
+    return <div>Error</div>;
+  }
 
-  const { survey_result, perfume_name, reason } = recommendation;
+  if (!data) {
+    return <div>데이터가 없습니다</div>;
+  }
+
+  // 사용하지 않는 변수들을 제거하여 경고를 없앱니다.
+  const { main_accords, name } = data;
 
   return (
     <div className="bg-background-default flex w-full justify-center px-4 pt-[80px]">
       <div className="flex w-full max-w-lg flex-col items-center gap-8">
         <Image
-          src={`/survey/${perfume_name.replace(/\s/g, "")}.png`}
           className="w-48 sm:w-56"
-          alt={perfume_name}
           height={192}
           width={192}
+          alt={name}
+          src={``} // TODO: 이미지 어떻게 가져오는지 확인
           priority
         />
-
         <div className="flex flex-col items-center gap-2">
           <div className="text-caption flex flex-wrap justify-center gap-2 text-text-secondary">
-            {survey_result.suitable_notes.map((note) => (
+            {main_accords.map((note) => (
               <Tag text={noteLabelMap[note] || note} key={note} size="sm" />
             ))}
           </div>
           <div className="text-subtitle-1 mt-2 text-center font-medium text-text-primary">
-            {perfume_name}
+            {name}
           </div>
         </div>
-
         <div className="text-body-1 relative mb-6 w-full max-w-[810px] px-4 text-center leading-relaxed break-keep whitespace-normal text-text-primary sm:px-6">
-          <div className="mt-4">
-            <p>
-              당신이 선택한 ‘{survey_result.analyzed_mood}’ 분위기를 바탕으로,
-            </p>
-            <p className="mt-1">{reason}</p>
-          </div>
+          <p>당신이 선택한 ‘{surveyData.mood}’ 분위기를 바탕으로,</p>
+          <p className="mt-1">
+            {/* TODO: API 연결 후 추가 */}
+            이유 추가 필요
+          </p>
         </div>
-
         <div className="flex w-full flex-wrap items-center justify-center gap-3">
           <Button
             className="text-body-1 rounded-full border border-primary-main bg-bg-default px-6 py-2 text-primary-main"
             href={URLS.HOME}
+            shape="pill"
+            size="xl"
           >
             홈으로 돌아가기
           </Button>
-          <Button className="text-body-1 rounded-full bg-primary-main px-6 py-3 text-white">
+          <Button
+            className="text-body-1 rounded-full bg-primary-main px-6 py-3 text-white"
+            shape="pill"
+            size="xl"
+          >
             상품 상세보기
           </Button>
         </div>

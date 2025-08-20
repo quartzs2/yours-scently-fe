@@ -1,25 +1,58 @@
-import type {
-  SurveyRecommendationResult,
-  RecommendationData,
-} from "@custom-types/Survey";
+import { INTERNAL_API_URLS, API_URLS } from "@constants/urls";
+import api, { internalApi } from "@api/api";
 
-// src/api/survey/recommendation.ts
-import { api } from "@api/api";
+export type SurveyRecommendationResult = {
+  main_accords: string[];
+  history_id: number;
+  intensity: string;
+  brand: string;
+  score: number;
+  name: string;
+  id: number;
+};
 
-// 서버 액션
-export async function recommendationAction(
-  recommendationData: RecommendationData,
-): Promise<SurveyRecommendationResult> {
-  try {
-    const data = await api
-      .post("survey/recommendation-reason", {
-        json: recommendationData,
-      })
-      .json<SurveyRecommendationResult>();
+export type RecommendationData = {
+  [key: string]: unknown;
+  intensity?: string;
+  keyword?: string[];
+  usage?: string;
+  mood?: string;
+};
 
-    return data;
-  } catch (error) {
-    console.error("추천 API 호출 실패:", error);
-    throw new Error("추천 결과를 불러오는 중 오류가 발생했습니다.");
-  }
-}
+type SurveyRecommendationApiProps = {
+  recommendationData: RecommendationData;
+};
+
+/** 서버로 요청 보내는 api */
+const surveyRecommendationApi = async ({
+  recommendationData,
+}: SurveyRecommendationApiProps) => {
+  const parsedData = {
+    ...recommendationData,
+    keyword: Array.isArray(recommendationData?.keyword)
+      ? recommendationData.keyword[0]
+      : undefined,
+  };
+  const data = await api
+    .post(API_URLS.SURVEY_RECOMMENDATION, {
+      json: parsedData,
+    })
+    .json<SurveyRecommendationResult>();
+
+  return data;
+};
+
+/** 클라이언트에서 route handler 호출 시 사용 */
+export const postSurveyRecommendation = async ({
+  recommendationData,
+}: SurveyRecommendationApiProps) => {
+  const data = await internalApi
+    .post(INTERNAL_API_URLS.SURVEY_RECOMMENDATION, {
+      json: recommendationData,
+    })
+    .json<SurveyRecommendationResult>();
+
+  return data;
+};
+
+export default surveyRecommendationApi;

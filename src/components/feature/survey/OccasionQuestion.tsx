@@ -3,38 +3,45 @@
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import Checkbox from "@components/ui/input/Checkbox";
 import IconButton from "@components/ui/IconButton";
-import { useState } from "react";
+import { SurveyData } from "@app/survey/page";
+import { useEffect, useState } from "react";
 import { cn } from "@utils/cn";
 
 export type OccasionQuestionProps = {
+  setSurveyData: React.Dispatch<React.SetStateAction<SurveyData>>;
   onBack: () => void;
   onNext: () => void;
 };
 
 const QUESTION_TEXT = "Q. 어떤 상황에서 향을 사용하고 싶으신가요?";
-
 const occasions = [
   { main: "매일 부담 없이 사용하는", sub: "데일리용" },
-  { main: "업무나 공부에 몰입하고 싶은", sub: "집중할 때" },
   { main: "편안하게 휴식하고 싶은", sub: "잠들기 전" },
   { main: "땀을 씻어내고 상쾌해지고 싶은", sub: "운동 후" },
   { main: "인상 깊은 순간을 만들고 싶은", sub: "특별한 날" },
 ];
 
 export default function OccasionQuestion({
+  setSurveyData,
   onBack,
   onNext,
 }: OccasionQuestionProps) {
   const [selected, setSelected] = useState<number | null>(null);
 
-  const handleChange =
-    (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.checked) {
-        setSelected(index);
-      } else {
-        setSelected(null);
-      }
-    };
+  const handleChange = (index: number) => () => {
+    setSelected((prev) => (prev === index ? null : index));
+  };
+
+  useEffect(() => {
+    // setSurveyData가 변경될 때도 이 effect가 다시 실행되도록 의존성에 추가합니다.
+    if (selected === null) {
+      return;
+    }
+    setSurveyData((prevData) => ({
+      ...prevData,
+      usage: occasions[selected].sub,
+    }));
+  }, [selected, setSurveyData]); // setSurveyData 추가
 
   return (
     <div className="bg-background-default flex h-screen w-full items-center justify-center">
@@ -42,7 +49,6 @@ export default function OccasionQuestion({
         <b className="text-subtitle-2 text-center font-bold text-text-primary">
           {QUESTION_TEXT}
         </b>
-
         <div className="flex flex-col gap-4">
           {occasions.map((item, index) => {
             const isSelected = selected === index;
@@ -75,7 +81,6 @@ export default function OccasionQuestion({
             );
           })}
         </div>
-
         <div className="mt-8 flex w-full max-w-xs justify-between">
           <IconButton
             iconClassName="h-6 w-6 text-text-primary"

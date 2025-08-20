@@ -20,9 +20,10 @@ export const API_BASE_URL = "https://www.yours-scently.store/api/v1";
 
 export const API_URLS = {
   SIGN_UP_EMAIL_SEND_CODE: "auth/signup/email/send-code/",
+  SURVEY_RECOMMENDATION_REASON: "recommendation/reason/",
   SIGN_UP_NICKNAME_CHECK: "auth/signup/nickname-check/",
   SIGN_UP_EMAIL_VERIFY: "auth/signup/email/verify/",
-  RECOMMENDATION_REASON: "recommendation/reason/",
+  SURVEY_RECOMMENDATION: "recommendation/survey/",
   AI_RECOMMENDATION: "recommendation/ai/",
   FIND_EMAIL: "auth/account/find-email/",
   EMAIL_LOGIN: "auth/login/email/",
@@ -32,6 +33,8 @@ export const API_URLS = {
 };
 
 export const INTERNAL_API_URLS = {
+  SURVEY_RECOMMENDATION_REASON: "api/recommendation/reason",
+  SURVEY_RECOMMENDATION: "/api/recommendation/survey",
   AI_RECOMMENDATIONS: "/api/ai-recommendations",
   PRODUCTS: "/api/products",
 };
