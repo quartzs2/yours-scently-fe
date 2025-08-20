@@ -7,6 +7,7 @@ import {
 import PrivacyEdit from "@components/feature/privacy-page/PrivacyEdit";
 import PrivacyView from "@components/feature/privacy-page/PrivacyView";
 import { mockAddresses } from "@app/privacy-page/mocks/userMockData";
+import { mockUserApi } from "@app/privacy-page/mocks/userMockData";
 import { DeliveryAddress, User } from "@custom-types/user";
 import { useRouter } from "next/navigation";
 import Button from "@components/ui/Button";
@@ -23,7 +24,7 @@ export default function PrivacyPage() {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>(MODE.VIEW);
 
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(mockUserApi);
   const [addresses, setAddresses] = useState<DeliveryAddress[]>(mockAddresses);
 
   const handleDeleteAccount = async () => {

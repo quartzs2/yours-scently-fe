@@ -80,10 +80,10 @@ const SurveyItem = ({
         {/* 버튼 */}
         <div className="flex h-[120px] min-w-[120px] flex-col items-center justify-center gap-[8px] border-l border-border-default px-4">
           <div className="flex flex-col gap-[8px]">
-            <Button onClick={() => {}} theme="dark" size="lg">
+            <Button onClick={() => {}} theme="dark" size="md">
               구매하기
             </Button>
-            <Button onClick={() => {}} theme="light" size="lg">
+            <Button onClick={() => {}} theme="light" size="md">
               삭제하기
             </Button>
           </div>
@@ -91,7 +91,7 @@ const SurveyItem = ({
       </div>
 
       {/* 추천 설명 */}
-      <div className="bg-bg-subtle px-[16px] py-[12px] text-center align-middle font-[SUIT] text-[20px] leading-[130%] font-semibold tracking-[-0.03em] text-primary-main">
+      <div className="mt-4 bg-bg-subtle px-[16px] py-[12px] text-center align-middle font-[SUIT] text-[20px] leading-[130%] font-semibold tracking-[-0.03em] text-primary-main">
         {description}
       </div>
     </div>

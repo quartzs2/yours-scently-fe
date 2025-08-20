@@ -1,7 +1,7 @@
 "use client";
 
+import ReviewSwiper from "@components/common/review-swiper/ReviewSwiper";
 import { mockReviewCards } from "@app/my-page/mocks/mockReviewCard";
-import ReviewCard from "@components/common/review-card/ReviewCard";
 import CardSwiper from "@components/common/card-swiper/CardSwiper";
 import MainCard from "@components/common/card-component/MainCard";
 import MypageCard from "@components/feature/my-page/MypageCard";
@@ -73,14 +73,14 @@ export default function MyPage() {
         </div>
         <p className="text-subtitle-2 text-text-secondary">더보기 &gt;</p>
       </div>
-      <div className="flex max-h-[204px] w-full items-center justify-between overflow-x-auto rounded-xl bg-bg-subtle px-6 py-5 whitespace-nowrap shadow-sm">
+      <div className="flex max-h-[204px] w-full items-center justify-between rounded-xl bg-bg-subtle px-6 py-5 shadow-sm">
         {orderStatusData.map((status, index) => (
-          <div className="flex items-center gap-2 text-center" key={status.key}>
+          <div className="flex items-center text-center" key={status.key}>
             <div className="flex flex-col items-center">
-              <span className="text-subtitle-1 flex h-[64px] w-[160px] items-center justify-center text-text-secondary">
+              <span className="text-subtitle-1 flex h-[64px] w-[150px] items-center justify-center text-text-secondary">
                 {status.count}
               </span>
-              <span className="text-subtitle-2 flex h-[44px] w-[160px] items-center justify-center text-text-secondary">
+              <span className="text-subtitle-2 flex h-[44px] w-[150px] items-center justify-center text-text-secondary">
                 {status.label}
               </span>
             </div>
@@ -132,24 +132,18 @@ export default function MyPage() {
             더보기 &gt;
           </Link>
         </div>
-        <div className="flex gap-2 overflow-hidden">
-          {mockReviewCards.map((card) => (
-            <div className="w-full" key={card.id}>
-              <ReviewCard
-                productPrice={card.productPrice}
-                productImage={card.productImage}
-                productName={card.productName}
-                imageUrl={card.imageUrl}
-                timeAgo={card.timeAgo}
-                rating={card.rating}
-                review={card.review}
-                writer={card.writer}
-                date={card.date}
-                id={card.id}
-              />
-            </div>
-          ))}
-        </div>
+        <section className="relative flex h-auto flex-col items-center justify-center border-b border-border-default px-4 py-[80px] select-none">
+          <div className="w-full">
+            <ReviewSwiper
+              items={mockReviewCards}
+              withPagination={false}
+              slidesPerView={4.5}
+              spaceBetween={10}
+              className="mt-8"
+              autoplay={true}
+            />
+          </div>
+        </section>
       </main>
     </div>
   );

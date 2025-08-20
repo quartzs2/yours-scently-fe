@@ -50,10 +50,10 @@ export default function MyReviewsPage() {
       </h2>
 
       {/* 리뷰 카드 리스트 */}
-      <div className="space-y-[32px] pt-4">
+      <div className="pt-4">
         {reviews.map((review) => (
           <div
-            className="flex items-start gap-2 border-t border-border-default first:border-t-0"
+            className="flex items-start gap-2 border-b border-border-default py-4"
             key={review.id}
           >
             <input
@@ -70,7 +70,7 @@ export default function MyReviewsPage() {
       <div className="flex items-start gap-2 border-t border-border-default"></div>
 
       {/* 하단 버튼 */}
-      <div className="mt-[80px] flex justify-center gap-[16px]">
+      <div className="mt-[80px] mb-12 flex justify-center gap-[16px]">
         <Button
           onClick={() => setReviews((prev) => prev.filter((r) => !r.isChecked))}
           theme="light"
